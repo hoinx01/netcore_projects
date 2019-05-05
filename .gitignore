@@ -5,3 +5,11 @@
 /Hinox/Hinox.Data.Elasticsearch/obj/*
 **/obj/
 **/bin/
+/PetHub/Manager/.vs/PetHub.Manager/DesignTimeBuild/.dtbcache
+/PetHub/Manager/.vs/PetHub.Manager/v15/Server/sqlite3/db.lock
+/PetHub/Manager/.vs/PetHub.Manager/v15/Server/sqlite3/storage.ide
+/PetHub/Manager/.vs/PetHub.Manager/v15/Server/sqlite3/storage.ide-shm
+/PetHub/Manager/.vs/PetHub.Manager/v15/Server/sqlite3/storage.ide-wal
+/PetHub/Manager/.vs/PetHub.Manager/v16/Server/sqlite3/db.lock
+/PetHub/Manager/.vs/PetHub.Manager/v16/Server/sqlite3/storage.ide
+/PetHub/Manager/WebApp/node_modules/
