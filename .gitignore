@@ -1,0 +1,7 @@
+*.suo
+/Hinox/.vs/UnitTestBase/v15/Server/sqlite3
+/Hinox/Hinox.BackgroundService/obj
+/Hinox/Hinox.Data.Elasticsearch/bin/
+/Hinox/Hinox.Data.Elasticsearch/obj/*
+**/obj/
+**/bin/
