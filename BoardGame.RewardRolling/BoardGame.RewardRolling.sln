@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.RewardRolling.WebApp", "BoardGame.RewardRolling.WebApp\BoardGame.RewardRolling.WebApp.csproj", "{40110CDC-E64B-49CA-9ED6-4B4C084F3B23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGame.RewardRolling.WebApp", "BoardGame.RewardRolling.WebApp\BoardGame.RewardRolling.WebApp.csproj", "{40110CDC-E64B-49CA-9ED6-4B4C084F3B23}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hinox", "Hinox", "{FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hinox.Data.Mongo", "..\Hinox\Hinox.Data.Mongo\Hinox.Data.Mongo.csproj", "{B1D5B6D1-1139-4FE6-B623-9AD2EC1A1957}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.RewardRolling.Data.Mongo", "BoardGame.RewardRolling.Data.Mongo\BoardGame.RewardRolling.Data.Mongo.csproj", "{D78B37A8-C389-4873-8564-18FAEB0A896F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGame.RewardRolling.Data.Mongo", "BoardGame.RewardRolling.Data.Mongo\BoardGame.RewardRolling.Data.Mongo.csproj", "{D78B37A8-C389-4873-8564-18FAEB0A896F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hinox.Static", "..\Hinox\Hinox.Static\Hinox.Static.csproj", "{E22FF9B5-16EB-4384-89E2-E1F8D559D905}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.RewardRolling.Core", "BoardGame.RewardRolling.Core\BoardGame.RewardRolling.Core.csproj", "{804D42BD-8829-46DE-B973-693E0FCACE0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hinox.Mvc", "..\Hinox\Hinox.Mvc\Hinox.Mvc.csproj", "{AD88A426-9249-47AF-AE89-A0746DBBDEBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,14 @@ Global
 		{E22FF9B5-16EB-4384-89E2-E1F8D559D905}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E22FF9B5-16EB-4384-89E2-E1F8D559D905}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E22FF9B5-16EB-4384-89E2-E1F8D559D905}.Release|Any CPU.Build.0 = Release|Any CPU
+		{804D42BD-8829-46DE-B973-693E0FCACE0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{804D42BD-8829-46DE-B973-693E0FCACE0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{804D42BD-8829-46DE-B973-693E0FCACE0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{804D42BD-8829-46DE-B973-693E0FCACE0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD88A426-9249-47AF-AE89-A0746DBBDEBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD88A426-9249-47AF-AE89-A0746DBBDEBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD88A426-9249-47AF-AE89-A0746DBBDEBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD88A426-9249-47AF-AE89-A0746DBBDEBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +54,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B1D5B6D1-1139-4FE6-B623-9AD2EC1A1957} = {FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}
 		{E22FF9B5-16EB-4384-89E2-E1F8D559D905} = {FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}
+		{AD88A426-9249-47AF-AE89-A0746DBBDEBA} = {FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0BC3184-E015-4E74-B4CF-A638F4334615}
