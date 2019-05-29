@@ -3,7 +3,9 @@
     species: {
         filter: "/admin/pet_species.json",
         add: "/admin/pet_species.json",
-        getById: "/admin/pet_species/{id}.json"
+        getById: "/admin/pet_species/{id}.json",
+        update: "/admin/pet_species/{id}.json",
+        delete: "/admin/pet_species/{id}.json",
     }
 };
 

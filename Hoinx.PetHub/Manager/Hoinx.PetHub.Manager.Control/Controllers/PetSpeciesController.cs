@@ -9,6 +9,7 @@ using Hoinx.PetHub.Manager.Data.Mongo.Filters;
 using Hoinx.PetHub.Manager.Static.Constants;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,6 +30,8 @@ namespace Hoinx.PetHub.Manager.Control.Controllers
         public async Task<PetSpeciesFilterResult> Filter([FromQuery] PetSpeciesFilter filterModel)
         {
             var mdFilter = Mapper.Map<MdPetSpeciesFilter>(filterModel);
+            mdFilter.ExcludedStatuses = new List<string>() { "deleted" };
+
             var species = await petSpeciesDao.Filter(mdFilter);
             var speciesModels = species.Select(s => Mapper.Map<PetSpeciesModel>(s)).ToList();
 
@@ -54,11 +57,43 @@ namespace Hoinx.PetHub.Manager.Control.Controllers
             {
                 Name = model.Name,
                 Alias = model.Alias,
+                Status = "active",
                 CreatedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
             };
             await petSpeciesDao.AddAsync(species);
             return species;
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<MdPetSpecies> Update([FromRoute] long id, [FromBody] AddPetSpeciesModel model)
+        {
+            var species = await petSpeciesDao.GetByIdAsync(id);
+            if (species == null)
+                throw new NotFoundException(ApiErrorMessages.NotFound);
+
+            species.Name = model.Name;
+            species.Alias = model.Alias;
+            species.ModifiedAt = DateTime.UtcNow;
+
+            await petSpeciesDao.UpdateAsync(species);
+            return species;
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task Delete([FromRoute] long id)
+        {
+            var species = await petSpeciesDao.GetByIdAsync(id);
+            if (species == null || species.Status == "deleted")
+                throw new NotFoundException(ApiErrorMessages.NotFound);
+
+            species.Status = "deleted";
+            species.ModifiedAt = DateTime.UtcNow;
+
+            await petSpeciesDao.UpdateAsync(species);
+            return;
         }
 
         [HttpGet]

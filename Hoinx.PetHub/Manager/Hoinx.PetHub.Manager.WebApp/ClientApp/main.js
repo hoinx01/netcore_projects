@@ -21,10 +21,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
+Vue.config.devtools = process.env.NODE_ENV === 'development'
 
 
-
-new Vue({
+var app = new Vue({
     el: '#app',
     store: store,
     template: '<App/>',
@@ -43,3 +43,5 @@ new Vue({
         //    this.$router.push('/admin/login')
     }
 });
+
+window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = app.constructor;

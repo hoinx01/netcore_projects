@@ -1,5 +1,11 @@
 ﻿<template>
-    <b-modal id="popup-create-species" title="Tạo mới loài" size="lg" ref="popupCreateSpecies">
+    <b-modal 
+             :visible="visible"
+             id="popup-edit-species" 
+             :title="'Sửa ' + object.name" 
+             size="lg" 
+             ref="popupEditSpecies"
+             @hide="complete">
         <b-form style="width:60%" :novalidate="true">
             <b-form-group id="fieldset-horizontal"
                           label-cols-sm="2"
@@ -28,27 +34,33 @@
             <b-button variant="primary"
                       size="sm"
                       class="float-right"
-                      @click="addSpecies">
+                      @click="editSpecies">
                 OK
             </b-button>
         </div>
     </b-modal>
 </template>
 <script>
-    import speciesRepository from '../../Repositories/SpeciesRepository' 
+    import speciesRepository from '../../Repositories/SpeciesRepository'
+    import cloneDeep from 'lodash/cloneDeep';
+
     export default {
         name: 'popup-edit-species',
         props: {
-            speciesId: {
-                type: Number,
+            object: {
+                type: Object,
+                required: true
+            },
+            visible: {
+                type: Boolean,
                 required: true
             }
         },
         data() {
             return {
                 species: {
-                    name: '',
-                    alias:''
+                    id: this.object.id,
+                    name: this.object.name
                 },
                 validationMessages: {
                     name: {
@@ -66,9 +78,26 @@
             }
         },
         watch: {
-
+            //'speciesId': async function (newId, oldId) {
+            //    await this.getEditingSpecies();
+            //},
+            'object': function () {
+                this.species = cloneDeep(this.object);
+            },
+            'species.name': function () {
+                let editing = {
+                    id: this.species.id,
+                    name: this.species.name
+                }
+                this.$emit('object-changed', editing);
+            }
         },
         methods: {
+            async getEditingSpecies() {
+                let species = await speciesRepository.getById(this.speciesId);
+                this.$set(this.species, 'id', species.id);
+                this.$set(this.species, 'name', species.name);
+            },
             generateAlias() {
                 let ascii = this.species.name.normalize('NFD')
                     .replace(/[\u0300-\u036f]/g, '')
@@ -78,17 +107,22 @@
                 ascii = ascii.replace(/[-]{2,}/g, '-');
                 return ascii;
             },
-            async addSpecies() {
+            async editSpecies(event) {
+                
                 let species = this.species;
                 species.alias = this.alias;
+                species.id = this.object.id;
                 try {
-                    var addedSpecies = await speciesRepository.add(species);
-                    this.$emit("species-added", addedSpecies);
-                    this.$refs.popupCreateSpecies.hide();
+                    console.log('click edit')
+                    var updatedSpecies = await speciesRepository.update(species);
+                    this.$emit("success", updatedSpecies);
                 }
                 catch (error) {
-                    console.log(error.messages);
+                    this.$emit("failed", updatedSpecies);
                 }
+            },
+            complete() {
+                this.$emit('completed');
             }
         },
         async created() {

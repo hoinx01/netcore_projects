@@ -9,6 +9,9 @@ namespace Hoinx.PetHub.Manager.Data.Mongo.Filters
     public class MdPetSpeciesFilter : BaseMdPagingFilter<MdPetSpecies>
     {
         public List<long> Ids { get; set; }
+        public List<string> Statuses { get; set; }
+        public List<string> ExcludedStatuses { get; set; }
+
         public override MdFilterSpecification<MdPetSpecies> GenerateFilterSpecification()
         {
             var mdFilterDefinition = new MdFilterSpecification<MdPetSpecies>();
@@ -17,6 +20,12 @@ namespace Hoinx.PetHub.Manager.Data.Mongo.Filters
             var andFilterDefinitions = new List<FilterDefinition<MdPetSpecies>>();
             if (!Ids.IsBlank())
                 andFilterDefinitions.Add(Builders<MdPetSpecies>.Filter.AnyIn("_id", Ids));
+
+            if (!Statuses.IsBlank())
+                andFilterDefinitions.Add(Builders<MdPetSpecies>.Filter.AnyIn("Status", Statuses));
+
+            if (!ExcludedStatuses.IsBlank())
+                andFilterDefinitions.Add(Builders<MdPetSpecies>.Filter.Nin("Status", ExcludedStatuses));
 
             if (andFilterDefinitions.Count > 0)
                 mdFilterDefinition.Filter = filterDefinitionBuilder.And(andFilterDefinitions);

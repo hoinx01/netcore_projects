@@ -1,5 +1,6 @@
 ﻿import { jsonUrls } from './UrlConstants'
 import baseRepository from './BaseRepository'
+import String from '../Utils/StringExtensions'
 
 const speciesRepository = {
     async filter(filterRequest) {
@@ -20,9 +21,26 @@ const speciesRepository = {
             return Promise.reject(exception);
         }
     },
+    async update(species) {
+        try {
+           
+            var updateResult = await baseRepository.put(String.formatUnicorn(jsonUrls.species.update, { id: species.id }), species);
+        }
+        catch (exception) {
+            return Promise.reject(exception);
+        }
+    },
+    async delete(species) {
+        try {
+            var deleteResult = await baseRepository.delete(String.formatUnicorn(jsonUrls.species.delete, { id: species.id }));
+        }
+        catch (exception) {
+            return Promise.reject(exception);
+        }
+    },
     async getById(id) {
         try {
-            var result = await baseRepository.post(jsonUrls.species.getById.formatUnicorn({id: id}));
+            var result = await baseRepository.get(String.formatUnicorn(jsonUrls.species.getById, {id: id}));
             return Promise.resolve(result);
         }
         catch (exception) {

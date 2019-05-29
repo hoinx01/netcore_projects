@@ -1,6 +1,6 @@
 ﻿export default {
     editing: {
-        id: null,
+        id: 0,
         name: '',
         alias: ''
     },
@@ -14,7 +14,7 @@
             pagination: {
                 count: 0,
                 page: 1,
-                limit: 20
+                limit: 10
             }
         }
     }

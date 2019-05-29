@@ -39,6 +39,26 @@ const baseRepository = {
             return Promise.reject(exception.response.data);
         }
     },
+    async put(url, data, requestOptions = null) {
+        let options = this.setRequestOptions(requestOptions);
+        try {
+            let response = await axios.put(url, data, options);
+            return this.processRequestResponse(response);
+        }
+        catch (exception) {
+            return Promise.reject(exception.response.data);
+        }
+    },
+    async delete(url, data = null, requestOptions = null) {
+        let options = this.setRequestOptions(requestOptions);
+        try {
+            let response = await axios.delete(url, data, options);
+            return this.processRequestResponse(response);
+        }
+        catch (exception) {
+            return Promise.reject(exception.response.data);
+        }
+    },
     setRequestOptions(requestOptions) {
         if (!requestOptions || requestOptions == null)
             requestOptions = {};

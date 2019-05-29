@@ -1,5 +1,11 @@
 ﻿<template>
-    <b-modal id="popup-create-species" title="Tạo mới loài" size="lg" ref="popupCreateSpecies">
+    <b-modal 
+             id="popup-create-species" 
+             title="Tạo mới loài" 
+             size="lg" 
+             ref="popupCreateSpecies" 
+             :visible="visible"
+             @hide="complete">
         <b-form style="width:60%" :novalidate="true">
             <b-form-group id="fieldset-horizontal"
                           label-cols-sm="2"
@@ -28,7 +34,8 @@
             <b-button variant="primary"
                       size="sm"
                       class="float-right"
-                      @click="addSpecies">
+                      v-on:click="addSpecies"
+                      >
                 OK
             </b-button>
         </div>
@@ -36,8 +43,15 @@
 </template>
 <script>
     import speciesRepository from '../../Repositories/SpeciesRepository' 
+
     export default {
         name: 'popup-create-species',
+        props: {
+            visible: {
+                type: Boolean,
+                required: true
+            }
+        },
         data() {
             return {
                 species: {
@@ -59,6 +73,14 @@
                 return this.species.name.trim().length >= 1;
             }
         },
+        watch: {
+            'species.name': function () {
+                let creating = {
+                    name: this.species.name
+                }
+                this.$emit('creating-object-change', creating);
+            }
+        },
         methods: {
             generateAlias() {
                 let ascii = this.species.name.normalize('NFD')
@@ -74,12 +96,14 @@
                 species.alias = this.alias;
                 try {
                     var addedSpecies = await speciesRepository.add(species);
-                    this.$emit("species-added", addedSpecies);
-                    this.$refs.popupCreateSpecies.hide();
+                    this.$emit('success', addedSpecies);
                 }
                 catch (error) {
-                    console.log(error.messages);
+                    this.$emit('failed', error);
                 }
+            },
+            complete() {
+                this.$emit('completed');
             }
         }
     }

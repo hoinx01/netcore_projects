@@ -1,72 +1,97 @@
 ﻿using AutoMapper;
 using Hinox.Mvc.Controllers;
 using Hinox.Mvc.Exceptions;
-using Hinox.Mvc.Models;
-using Hoinx.PetHub.Manager.Control.Models.Breed;
+using Hoinx.PetHub.Manager.Control.Models.Species;
 using Hoinx.PetHub.Manager.Data.Mongo.Dao.Interfaces;
 using Hoinx.PetHub.Manager.Data.Mongo.Entities;
-using Hoinx.PetHub.Manager.Data.Mongo.Filters;
+using Hoinx.PetHub.Manager.Static.Constants;
+using Hoinx.PetHub.Manager.Static.Enumerations;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hoinx.PetHub.Manager.Control.Controllers
 {
     [ApiController]
-    [Route("admin/pet_breeds")]
+    [Route("admin/pet_species/{speciesId}/breeds")]
     public class PetBreedController : BaseRestController
     {
-        private readonly IMdPetBreedDao petBreedDao;
+        private readonly IMdPetSpeciesDao speciesDao;
         public PetBreedController(
-            IMdPetBreedDao petBreedDao
+            IMdPetSpeciesDao speciesDao
             )
         {
-            this.petBreedDao = petBreedDao;
+            this.speciesDao = speciesDao;
         }
 
         [HttpPost]
-        public async Task<BreedModel> Add([FromBody] AddBreedModel model)
+        public async Task<BreedModel> Add([FromRoute] long speciesId, [FromBody] AddBreedModel model)
         {
+            var species = await speciesDao.GetByIdAsync(speciesId);
+            if (species == null || species.Status.Equals(SpeciesStatus.Deleted.Name))
+                throw new NotFoundException(ApiErrorMessages.NotFound);
+
+            if (species.Breeds == null)
+                species.Breeds = new List<MdPetBreed>();
+
+            var nameDuplicated = species.Breeds.Count(c => c.Name.Equals(model.Name)) > 0;
+            if (nameDuplicated)
+                throw new UnprocessableEntityException("name: đã tồn tại");
+
+            var aliasDuplicated = species.Breeds.Count(c => c.Alias.Equals(model.Alias)) > 0;
+            if (aliasDuplicated)
+                throw new UnprocessableEntityException("alias: đã tồn tại");
+
             var mdBreed = Mapper.Map<MdPetBreed>(model);
             mdBreed.CreatedAt = DateTime.UtcNow;
             mdBreed.ModifiedAt = DateTime.UtcNow;
+            mdBreed.Status = BreedStatus.Active.Name;
 
-            await petBreedDao.AddAsync(mdBreed);
+            species.Breeds.Add(mdBreed);
+            species.ModifiedAt = DateTime.UtcNow;
 
-            var result = Mapper.Map<BreedModel>(mdBreed);
-            return result;
-        }
-        public async Task<BreedModel> GetById([FromRoute] long id)
-        {
-            var mdBreed = await petBreedDao.GetByIdAsync(id);
-            if (mdBreed == null)
-                throw new NotFoundException("Không tìm thấy đối tượng");
+            await speciesDao.UpdateAsync(species);
 
             var result = Mapper.Map<BreedModel>(mdBreed);
             return result;
         }
 
-        public async Task<BreedFilterResult> Filter([FromQuery] BreedFilterModel model)
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<BreedModel> Update([FromRoute] long speciesId, [FromRoute] long id, [FromBody] UpdateBreedModel model)
         {
-            var mdFilter = Mapper.Map<MdBreedFilter>(model);
-            var species = await petBreedDao.Filter(mdFilter);
-            var speciesModels = species.Select(s => Mapper.Map<BreedModel>(s)).ToList();
+            var species = await speciesDao.GetByIdAsync(speciesId);
+            if (species == null || species.Status.Equals(SpeciesStatus.Deleted.Name))
+                throw new NotFoundException(ApiErrorMessages.NotFound);
 
-            var count = await petBreedDao.Count(mdFilter);
+            if (species.Breeds == null)
+                species.Breeds = new List<MdPetBreed>();
 
-            var result = new BreedFilterResult()
-            {
-                Breeds = speciesModels,
-                Pagination = new PaginationModel()
-                {
-                    Count = count,
-                    Page = model.Page,
-                    Limit = model.Limit
-                }
-            };
+            var mdBreed = species.Breeds.FirstOrDefault(f => f.Id == id);
+            if(mdBreed == null || mdBreed.Status.Equals(BreedStatus.Deleted.Name))
+                throw new NotFoundException(ApiErrorMessages.NotFound);
+
+            var nameDuplicated = species.Breeds.Count(c => c.Name.Equals(model.Name) && c.Id != id) > 0;
+            if (nameDuplicated)
+                throw new UnprocessableEntityException("name: đã tồn tại");
+
+            var aliasDuplicated = species.Breeds.Count(c => c.Alias.Equals(model.Alias) && c.Id != id) > 0;
+            if (aliasDuplicated)
+                throw new UnprocessableEntityException("alias: đã tồn tại");
+
+            mdBreed.Name = model.Name;
+            mdBreed.Alias = model.Alias;
+            mdBreed.ModifiedAt = DateTime.UtcNow;
+
+            await speciesDao.UpdateAsync(species);
+
+            var result = Mapper.Map<BreedModel>(mdBreed);
             return result;
         }
+
+
     }
 }

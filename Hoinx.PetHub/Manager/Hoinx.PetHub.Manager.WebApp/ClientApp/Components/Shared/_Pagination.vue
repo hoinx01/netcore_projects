@@ -1,11 +1,11 @@
 ﻿<template>
     <div class="list-pagination">
         <div id="page-size-selection">
-            <b-form-input id="page-size-input" v-model="pageSize"></b-form-input>
+            <b-form-input id="page-size-input" v-model="currentPageSize"></b-form-input>
             <b-form-select 
                            id="page-size-select" 
                            v-if="displayPageSizeSelection" 
-                           :value="pageSize" 
+                           v-model="currentPageSize" 
                            :options="pageSizeOptions" 
                            @input="changePageSize">
 
@@ -19,7 +19,7 @@
                       prev-text="Prev"
                       next-text="Next"
                       last-text="Last"
-                      v-model="pageIndex" 
+                      v-model="currentPageIndex" 
                       @input="changePageIndex">
 
         </b-pagination>
@@ -37,7 +37,9 @@
                     { value: 20, text: '20' },
                     { value: 50, text: '50' },
                     { value: 100, text: '100' }
-                ]
+                ],
+                currentPageIndex: this.pageIndex,
+                currentPageSize: this.pageSize
             }
         },
         props: {
@@ -64,7 +66,7 @@
         },
         methods: {
             changePageIndex: function (pageIndex) {
-                this.$emit('page-change', pageIndex)
+                this.$emit('page-index-change', pageIndex)
             },
             changePageSize: function (pageSize) {
                 this.$emit('page-size-change', pageSize);

@@ -2,7 +2,7 @@
 import VueRouter from 'vue-router';
 
 import Home from './Pages/Home.vue'
-import SpeciesIndex from './Pages/SpeciesIndex.vue'
+import SpeciesIndex from './Pages/Species.vue'
 
 
 
