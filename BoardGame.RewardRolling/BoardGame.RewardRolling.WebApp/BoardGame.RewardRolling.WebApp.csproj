@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Hinox\Hinox.Mvc\Hinox.Mvc.csproj" />
+    <ProjectReference Include="..\..\Hinox\Hinox.Office\Hinox.Office.csproj" />
+    <ProjectReference Include="..\BoardGame.RewardRolling.Data.Mongo\BoardGame.RewardRolling.Data.Mongo.csproj" />
   </ItemGroup>
 
 

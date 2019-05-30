@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGame.RewardRolling.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hinox.Static", "..\Hinox\Hinox.Static\Hinox.Static.csproj", "{E22FF9B5-16EB-4384-89E2-E1F8D559D905}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.RewardRolling.Core", "BoardGame.RewardRolling.Core\BoardGame.RewardRolling.Core.csproj", "{804D42BD-8829-46DE-B973-693E0FCACE0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGame.RewardRolling.Core", "BoardGame.RewardRolling.Core\BoardGame.RewardRolling.Core.csproj", "{804D42BD-8829-46DE-B973-693E0FCACE0E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hinox.Mvc", "..\Hinox\Hinox.Mvc\Hinox.Mvc.csproj", "{AD88A426-9249-47AF-AE89-A0746DBBDEBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hinox.Office", "..\Hinox\Hinox.Office\Hinox.Office.csproj", "{3622A587-A629-4F83-A444-EBFE347612BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{AD88A426-9249-47AF-AE89-A0746DBBDEBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD88A426-9249-47AF-AE89-A0746DBBDEBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD88A426-9249-47AF-AE89-A0746DBBDEBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3622A587-A629-4F83-A444-EBFE347612BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3622A587-A629-4F83-A444-EBFE347612BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3622A587-A629-4F83-A444-EBFE347612BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3622A587-A629-4F83-A444-EBFE347612BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{B1D5B6D1-1139-4FE6-B623-9AD2EC1A1957} = {FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}
 		{E22FF9B5-16EB-4384-89E2-E1F8D559D905} = {FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}
 		{AD88A426-9249-47AF-AE89-A0746DBBDEBA} = {FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}
+		{3622A587-A629-4F83-A444-EBFE347612BC} = {FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0BC3184-E015-4E74-B4CF-A638F4334615}

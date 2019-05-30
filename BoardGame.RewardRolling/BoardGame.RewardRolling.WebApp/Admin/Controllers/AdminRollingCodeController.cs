@@ -1,8 +1,16 @@
-﻿using BoardGame.RewardRolling.WebApp.Admin.Models.RollingCode;
+﻿using BoardGame.RewardRolling.Core.Statics;
+using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
+using BoardGame.RewardRolling.Data.Mongo.Entities;
+using BoardGame.RewardRolling.WebApp.Admin.Models.RollingCode;
 using Hinox.Mvc.Controllers;
+using Hinox.Office.Utils;
+using Hinox.Static.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using NLog;
+using NPOI.SS.UserModel;
+using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
@@ -15,6 +23,14 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
     public class AdminRollingCodeController : BaseRestController
     {
         private readonly Logger logger = LogManager.GetLogger("UploadFile");
+        private readonly IMdRollingCodeDao mdRollingCodeDao;
+
+        public AdminRollingCodeController(
+            IMdRollingCodeDao mdRollingCodeDao
+            )
+        {
+            this.mdRollingCodeDao = mdRollingCodeDao;
+        }
 
         [HttpPost]
         public async Task<UploadCodeResultModel> UploadFile([FromForm] IFormFile file, [FromForm] string type)
@@ -49,8 +65,66 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
 
 
             var workbook = new XSSFWorkbook(fullPath);
-            var sheet = workbook.GetSheet("");
+            var sheet = workbook.GetSheetAt(0);
 
+            Dictionary<string, string> columnNameCodeFieldNameMap = new Dictionary<string, string>(); //settings
+            var codeColumnHeaderRange = new CellRangeAddress(1,1,1,1); //settings
+            var keyColumnName = ""; //settings
+            var codePropertyColumnIndicates = ExcelUtils.GetFieldColumnIndex<ExcelRollingCodeModel>(sheet, codeColumnHeaderRange, columnNameCodeFieldNameMap);
+            var keyColumnIndex = codePropertyColumnIndicates.FirstOrDefault(f => f.Property.Name.ToLower() == columnNameCodeFieldNameMap[keyColumnName].ToLower()).ColumnIndex;
+            var firstRow = 2; //settings
+            var maxBlankRow = 10; //settings
+
+            var excelCodes = new List<ExcelRollingCodeModel>();
+
+            int blankRow = 0;
+            for (int i = firstRow; i <= sheet.LastRowNum; i++)
+            {
+                var row = sheet.GetRow(i);
+                var code = ExcelUtils.ReadObjectFromRow<ExcelRollingCodeModel>(row, codePropertyColumnIndicates, keyColumnIndex);
+
+                if(code == null)
+                {
+                    blankRow++;
+                    if (blankRow == maxBlankRow)
+                        break;
+                }
+                else
+                {
+                    blankRow = 0;
+                    code.RowIndex = i;
+                    code.DisplayedRowIndex = i + 1;
+                    excelCodes.Add(code);
+                }
+            }
+
+            var rewardCodes = excelCodes
+                .Where(w => !string.IsNullOrWhiteSpace(w.RewardCode))
+                .Select(s => s.RewardCode)
+                .ToList();
+
+            
+
+            foreach(var excelCode in excelCodes)
+            {
+                var errors = ObjectUtils.ValidateObject(excelCode);
+                var mdCode = new MdRollingCode()
+                {
+                    Id = ObjectId.GenerateNewId(),
+                    Serial = excelCode.Serial,
+                    CreatedAt = DateTime.UtcNow,
+                    ActivatedAt = DateTime.UtcNow,
+                    Status = RollingCodeStatus.Active.Id
+                };
+                try
+                {
+                    await mdRollingCodeDao.AddAsync(mdCode);
+                }
+                catch(Exception e)
+                {
+
+                }
+            }
 
             return new UploadCodeResultModel();
         }
