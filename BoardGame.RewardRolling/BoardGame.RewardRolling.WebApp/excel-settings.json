@@ -1,0 +1,25 @@
+﻿{
+  "ExcelFileLayouts": {
+    "ImportRollingCode": {
+      "SheetIndex": 0,
+      "KeyColumnName": "Mã Serial",
+      "ColumnNameFieldNameMap": {
+        "STT": "Index",
+        "Mã Serial": "Serial",
+        "Mã quà tặng": "RewardCode",
+        "Xác suất": "RewardRate"
+      },
+      "CodeHeaderRange": {
+        "FirstRow": 0,
+        "LastRow": 0,
+        "FirstColumn": 0,
+        "LastColumn": 3
+      },
+      "FirstDataRow": 1,
+      "MaxBlankRow": 10
+    }
+  },
+  "ExportCustomer": {
+
+  }
+}

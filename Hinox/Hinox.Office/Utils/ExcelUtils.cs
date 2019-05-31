@@ -68,7 +68,7 @@ namespace Hinox.Office.Utils
             var detectedPropertyNames = result.Select(s => s.Property.Name.ToLower()).ToList();
             foreach(var key in columnNameFieldNameMap.Keys)
             {
-                if(detectedPropertyNames.Contains(key.Trim().ToLower()))
+                if(detectedPropertyNames.Contains(columnNameFieldNameMap[key].Trim().ToLower()))
                     continue;
                 missingColumnNames.Add(key);
             }
@@ -93,48 +93,81 @@ namespace Hinox.Office.Utils
             foreach (var propertyColumnIndex in propertyColumnIndices)
             {
                 var cell = row.GetCell(propertyColumnIndex.ColumnIndex);
-                SetObjectPropertyValueFromCell(initialValue, cell, propertyColumnIndex.Property);
+                try
+                {
+                    SetObjectPropertyValueFromCell(initialValue, cell, propertyColumnIndex.Property);
+                }
+                catch(Exception e)
+                {
+                    throw;
+                }
             }
             return initialValue;
         }
 
         public static void SetObjectPropertyValueFromCell<T>(T obj, ICell cell, PropertyInfo property)
         {
-            var propertyDataType = property.DeclaringType;
-            var cellTypeDataType = CellTypeDataType.List.FirstOrDefault(f => f.DataType.Equals(propertyDataType));
-            if (cellTypeDataType == null)
-                throw new Exception("Missing celltype when convert from " + propertyDataType.Name);
+            if (cell == null)
+                return;
 
-            var cellType = cellTypeDataType.CellType;
+            var propertyDataType = property.PropertyType;
 
-            if (propertyDataType == typeof(int))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (int)cell.NumericCellValue);
-            if (propertyDataType == typeof(int?))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (int?) cell.NumericCellValue);
-            if (propertyDataType == typeof(long))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (long)cell.NumericCellValue);
-            if (propertyDataType == typeof(long?))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (long?)cell.NumericCellValue);
-            if (propertyDataType == typeof(byte))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (byte)cell.NumericCellValue);
-            if (propertyDataType == typeof(byte?))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (byte?)cell.NumericCellValue);
-            if (propertyDataType == typeof(decimal))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (decimal)cell.NumericCellValue);
-            if (propertyDataType == typeof(decimal?))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (decimal?)cell.NumericCellValue);
-            if (propertyDataType == typeof(bool))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (bool)cell.BooleanCellValue);
-            if (propertyDataType == typeof(bool?))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (bool?)cell.BooleanCellValue);
-            if (propertyDataType == typeof(string))
-                property.SetValue(obj, cellType == CellType.Blank ? default : cell.StringCellValue);
-            if (propertyDataType == typeof(DateTime))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (DateTime) cell.DateCellValue);
-            if (propertyDataType == typeof(DateTime?))
-                property.SetValue(obj, cellType == CellType.Blank ? default : (DateTime?)cell.DateCellValue);
+            var cellType = cell.CellType;
+
+            object cellValue = null;
+            if(cellType == CellType.Boolean)
+                cellValue = cell.BooleanCellValue;
+            else if (cellType == CellType.Numeric)
+                cellValue = cell.NumericCellValue;
+            else if (cellType == CellType.String)
+                cellValue = cell.StringCellValue;
+
+            var fieldValue = ConvertData(cellValue, propertyDataType);
+            property.SetValue(obj, fieldValue);
         }
 
+        public static object ConvertData(object inputValue, Type outputType)
+        {
+            if(inputValue == null)
+                return Activator.CreateInstance(outputType);
+
+            var inputType = inputValue.GetType();
+
+            if (outputType == typeof(int))
+                return Convert.ToInt32(inputValue);
+            else if (outputType == typeof(int?))
+                return new int?(Convert.ToInt32(inputValue));
+
+            else if (outputType == typeof(long))
+                return Convert.ToInt64(inputValue);
+            else if (outputType == typeof(long?))
+                return new long?(Convert.ToInt64(inputValue));
+
+            else if (outputType == typeof(decimal))
+                return Convert.ToDecimal(inputValue);
+            else if (outputType == typeof(decimal?))
+                return new decimal?(Convert.ToDecimal(inputValue));
+
+            else if (outputType == typeof(double))
+                return Convert.ToDouble(inputValue);
+            else if (outputType == typeof(double?))
+                return new double?(Convert.ToDouble(inputValue));
+
+            else if (outputType == typeof(string))
+                return Convert.ToString(inputValue);
+
+            else if (outputType == typeof(bool))
+                return Convert.ToBoolean(inputValue);
+            else if (outputType == typeof(bool?))
+                return new bool?(Convert.ToBoolean(inputValue));
+
+            else if (outputType == typeof(DateTime))
+                return Convert.ToDateTime(inputValue);
+            else if (outputType == typeof(DateTime?))
+                return new DateTime?(Convert.ToDateTime(inputValue));
+
+            throw new Exception(string.Format("Missing converter to convert from {0} to {1}", inputType.Name, outputType.Name));
+        }
         
     }
 

@@ -1,9 +1,11 @@
-﻿using BoardGame.RewardRolling.Core.Statics;
+﻿using BoardGame.RewardRolling.Core.Configurations.ExcelFileLayouts;
+using BoardGame.RewardRolling.Core.Statics;
 using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
 using BoardGame.RewardRolling.Data.Mongo.Entities;
 using BoardGame.RewardRolling.WebApp.Admin.Models.RollingCode;
 using Hinox.Mvc.Controllers;
 using Hinox.Office.Utils;
+using Hinox.Static.Application;
 using Hinox.Static.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -63,17 +65,23 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
                 await file.CopyToAsync(bits);
             }
 
+            var importedFileLayout = AppSettings.Get<ImportRollingCodeFileLayout>("ExcelFileLayouts:ImportRollingCode");
 
             var workbook = new XSSFWorkbook(fullPath);
-            var sheet = workbook.GetSheetAt(0);
+            var sheet = workbook.GetSheetAt(importedFileLayout.SheetIndex);
 
-            Dictionary<string, string> columnNameCodeFieldNameMap = new Dictionary<string, string>(); //settings
-            var codeColumnHeaderRange = new CellRangeAddress(1,1,1,1); //settings
-            var keyColumnName = ""; //settings
+            Dictionary<string, string> columnNameCodeFieldNameMap = importedFileLayout.ColumnNameFieldNameMap; //settings
+            var codeColumnHeaderRange = new CellRangeAddress(
+                importedFileLayout.CodeHeaderRange.FirstRow,
+                importedFileLayout.CodeHeaderRange.LastRow,
+                importedFileLayout.CodeHeaderRange.FirstColumn,
+                importedFileLayout.CodeHeaderRange.LastColumn
+            ); //settings
+            var keyColumnName = importedFileLayout.KeyColumnName; //settings
             var codePropertyColumnIndicates = ExcelUtils.GetFieldColumnIndex<ExcelRollingCodeModel>(sheet, codeColumnHeaderRange, columnNameCodeFieldNameMap);
             var keyColumnIndex = codePropertyColumnIndicates.FirstOrDefault(f => f.Property.Name.ToLower() == columnNameCodeFieldNameMap[keyColumnName].ToLower()).ColumnIndex;
-            var firstRow = 2; //settings
-            var maxBlankRow = 10; //settings
+            var firstRow = importedFileLayout.FirstDataRow; //settings
+            var maxBlankRow = importedFileLayout.MaxBlankRow; //settings
 
             var excelCodes = new List<ExcelRollingCodeModel>();
 

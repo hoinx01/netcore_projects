@@ -14,11 +14,32 @@ namespace BoardGame.RewardRolling.WebApp
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            RunWebHost(args);
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static void RunWebHost(string[] args)
+        {
+            Dictionary<string, string> runVariables = new Dictionary<string, string>();
+            foreach (var arg in args)
+            {
+                var argPaths = arg.Split("=");
+                if (argPaths.Length == 2)
+                    runVariables.Add(argPaths[0], argPaths[1]);
+            }
+            string profile = runVariables.GetValueOrDefault("profile", "dev");
+            Console.WriteLine("Running with profile: " + profile);
+
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", true)
+                .AddJsonFile("excel-settings.json", true)
+                .Build();
+
+            IWebHost webHost = WebHost.CreateDefaultBuilder(args)
+                .UseConfiguration(config)
+                .UseStartup<Startup>()
+                .UseKestrel()
+                .Build();
+            webHost.Run();
+        }
     }
 }

@@ -1,10 +1,12 @@
-﻿using Hinox.Data.Mongo.Dal.Entities;
+﻿using Hinox.Data.Mongo.Attributes;
+using Hinox.Data.Mongo.Dal.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BoardGame.RewardRolling.Data.Mongo.Entities
 {
+    [MdCollection(Name = "RollingCodes")]
     public class MdRollingCode : BaseObjectIdMongoEntity
     {
         public string Serial { get; set; }
