@@ -11,6 +11,7 @@ namespace BoardGame.RewardRolling.Data.Mongo.Entities
     {
         public string Serial { get; set; }
         public DateTime CreatedAt { get; set; }
+        public DateTime ModifiedAt { get; set; }
         public DateTime ActivatedAt { get; set; }
         public DateTime? ExpiredAt { get; set; }
         public DateTime? RolledAt { get; set; }

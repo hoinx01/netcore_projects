@@ -2,8 +2,10 @@
 using BoardGame.RewardRolling.Core.Statics;
 using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
 using BoardGame.RewardRolling.Data.Mongo.Entities;
+using BoardGame.RewardRolling.Data.Mongo.Filters;
 using BoardGame.RewardRolling.WebApp.Admin.Models.RollingCode;
 using Hinox.Mvc.Controllers;
+using Hinox.Mvc.Models;
 using Hinox.Office.Utils;
 using Hinox.Static.Application;
 using Hinox.Static.Utilities;
@@ -22,6 +24,7 @@ using System.Threading.Tasks;
 
 namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
 {
+    [Route("admin/rolling_codes")]
     public class AdminRollingCodeController : BaseRestController
     {
         private readonly Logger logger = LogManager.GetLogger("UploadFile");
@@ -35,6 +38,7 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
         }
 
         [HttpPost]
+        [Route("excel_files")]
         public async Task<UploadCodeResultModel> UploadFile([FromForm] IFormFile file, [FromForm] string type)
         {
             try
@@ -121,6 +125,7 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
                     Id = ObjectId.GenerateNewId(),
                     Serial = excelCode.Serial,
                     CreatedAt = DateTime.UtcNow,
+                    ModifiedAt = DateTime.UtcNow,
                     ActivatedAt = DateTime.UtcNow,
                     Status = RollingCodeStatus.Active.Id
                 };
@@ -135,6 +140,42 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
             }
 
             return new UploadCodeResultModel();
+        }
+
+        public async Task<RollingCodeFilterResult> Filter([FromQuery] RollingCodeFilterRequest filterModel)
+        {
+            var mdCodeFilter = new MdRollingCodeFilter()
+            {
+                Page = filterModel.Page,
+                Limit = filterModel.Limit
+            };
+            var count = await mdRollingCodeDao.Count(mdCodeFilter);
+            if (count == 0)
+                return new RollingCodeFilterResult()
+                {
+                    RollingCodes = new List<RollingCodeModel>(),
+                    Pagination = new PaginationModel()
+                    {
+                        Count = 0,
+                        Limit = filterModel.Limit,
+                        Page = filterModel.Page
+                    }
+                };
+
+            var codes = await mdRollingCodeDao.Filter(mdCodeFilter);
+            var codeModes = codes.Select(s => new RollingCodeModel(s)).ToList();
+
+            var result = new RollingCodeFilterResult()
+            {
+                RollingCodes = codeModes,
+                Pagination = new PaginationModel()
+                {
+                    Count = count,
+                    Limit = filterModel.Limit,
+                    Page = filterModel.Page
+                }
+            };
+            return result;
         }
     }
 }
