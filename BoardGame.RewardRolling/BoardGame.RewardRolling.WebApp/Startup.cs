@@ -7,6 +7,7 @@ using BoardGame.RewardRolling.Data.Mongo;
 using BoardGame.RewardRolling.Data.Mongo.Dao;
 using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
 using BoardGame.RewardRolling.WebApp.Middlewares;
+using BoardGame.RewardRolling.WebApp.Registrations;
 using Hinox.Data.Mongo;
 using Hinox.Static.Application;
 using Microsoft.AspNetCore.Builder;
@@ -42,8 +43,10 @@ namespace BoardGame.RewardRolling.WebApp
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSingleton<IMongoDbFactory, MongoDbFactory>();
-            services.AddSingleton<IMdRollingCodeDao, MdRollingCodeDao>();
+            DependencyRegistration.Register(services);
+            MapperInitiator.Init();
+
+            DependencyManager.SetServiceProvider(services.BuildServiceProvider());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
