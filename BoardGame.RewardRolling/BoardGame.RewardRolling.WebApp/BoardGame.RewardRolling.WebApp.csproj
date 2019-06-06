@@ -15,6 +15,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
@@ -36,6 +37,7 @@
     <ProjectReference Include="..\..\Hinox\Hinox.Office\Hinox.Office.csproj" />
     <ProjectReference Include="..\BoardGame.RewardRolling.Core\BoardGame.RewardRolling.Core.csproj" />
     <ProjectReference Include="..\BoardGame.RewardRolling.Data.Mongo\BoardGame.RewardRolling.Data.Mongo.csproj" />
+    <ProjectReference Include="..\BoardGame.RewardRolling.Service\BoardGame.RewardRolling.Service.csproj" />
   </ItemGroup>
 
 

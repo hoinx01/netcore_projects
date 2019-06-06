@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BoardGame.RewardRolling.Core\BoardGame.RewardRolling.Core.csproj" />
+    <ProjectReference Include="..\BoardGame.RewardRolling.Data.Mongo\BoardGame.RewardRolling.Data.Mongo.csproj" />
+  </ItemGroup>
+
 </Project>
