@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 
 namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
 {
-    [Route("admin/rolling_codes")]
+    [Route("admin/api/rolling_codes")]
     public class AdminRollingCodeController : BaseRestController
     {
         private readonly Logger logger = LogManager.GetLogger("UploadFile");

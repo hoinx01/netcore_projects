@@ -6,6 +6,9 @@
                     <router-link to="/admin/rolling_codes">Quản lý mã quà tặng</router-link>
                 </li>
                 <li>
+                    <router-link to="/admin/rewards">Quản lý quà tặng</router-link>
+                </li>
+                <li>
                     <router-link to="/admin/accounts">Quản lý giống PET</router-link>
                 </li>
                 <li>

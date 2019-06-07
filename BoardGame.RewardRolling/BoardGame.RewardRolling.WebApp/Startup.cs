@@ -9,6 +9,7 @@ using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
 using BoardGame.RewardRolling.WebApp.Middlewares;
 using BoardGame.RewardRolling.WebApp.Registrations;
 using Hinox.Data.Mongo;
+using Hinox.Mvc.Middlewares;
 using Hinox.Static.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -64,7 +65,7 @@ namespace BoardGame.RewardRolling.WebApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            app.UseMiddleware<ProcessExceptionMiddleware>();
             app.Use(async (context, next) =>
             {
                 await next();

@@ -50,4 +50,11 @@
     </Content>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Update="ClientApp\Repositories\RewardRepository.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

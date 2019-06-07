@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
 {
-    [Route("admin/rewards")]
+    [Route("admin/api/rewards")]
     public class AdminRewardController : BaseRestController
     {
         private readonly IRewardQueryService rewardQueryService;
@@ -69,7 +69,7 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
             return result;
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("{id}")]
         public async Task Delete([FromRoute] string id)
         {
