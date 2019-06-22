@@ -9,6 +9,9 @@
                     <router-link to="/admin/rewards">Quản lý quà tặng</router-link>
                 </li>
                 <li>
+                    <router-link to="/admin/campaigns">Quản lý đợt tặng quà</router-link>
+                </li>
+                <li>
                     <router-link to="/admin/accounts">Quản lý giống PET</router-link>
                 </li>
                 <li>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Hinox\Hinox.Mvc\Hinox.Mvc.csproj" />
+    <ProjectReference Include="..\BoardGame.RewardRolling.Core\BoardGame.RewardRolling.Core.csproj" />
+  </ItemGroup>
+
+</Project>

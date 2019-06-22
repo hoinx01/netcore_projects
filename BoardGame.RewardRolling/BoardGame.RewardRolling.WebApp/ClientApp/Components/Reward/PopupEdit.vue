@@ -2,7 +2,7 @@
     <b-modal id="popup-create-species"
              title="Tạo mới quà tặng"
              size="lg"
-             ref="popupCreateReward"
+             ref="popupEditReward"
              :visible="visible"
              @hide="complete">
         <b-form style="width:60%" :novalidate="true">
@@ -40,7 +40,7 @@
             <b-button variant="primary"
                       size="sm"
                       class="float-right"
-                      v-on:click="addReward">
+                      v-on:click="updateReward">
                 OK
             </b-button>
         </div>
@@ -51,23 +51,24 @@
     import rewardRepository from '../../Repositories/RewardRepository';
 
     export default {
-        name: 'popup-create-reward',
+        name: 'popup-update-reward',
         props: {
             visible: {
                 type: Boolean,
+                required: true
+            },
+            object: {
+                type: Object,
                 required: true
             }
         },
         data() {
             return {
-                reward: {
-                    name: '',
-                    cost:''
-                },
+                reward: cloneDeep(this.object),
                 validationMessages: {
                     name: {
                         invalidLength: 'Tên không được để trống',
-                       
+
                     },
                     cost: {
                         invalidRange: 'Giá trị quà tặng không được âm'
@@ -84,27 +85,23 @@
             }
         },
         watch: {
+            'object': function () {
+                this.reward = cloneDeep(this.object);
+            },
             'reward.name': function () {
-                let creatingObject = cloneDeep(this.reward);
-                this.$emit('creating-object-change', creatingObject);
+                let object = cloneDeep(this.reward);
+                this.$emit('editing-object-change', object);
             },
             'reward.cost': function () {
-                let creatingObject = cloneDeep(this.reward);
-                this.$emit('creating-object-change', creatingObject);
+                let object = cloneDeep(this.reward);
+                this.$emit('editing-object-change', object);
             }
         },
         methods: {
-            resetForm() {
-                this.reward = {
-                    name: '',
-                    cost: ''
-                }
-            },
-            async addReward() {
+            async updateReward() {
                 try {
-                    var addedObjects = await rewardRepository.add(this.reward);
-                    this.resetForm();
-                    this.$emit('success', addedObjects);
+                    var updateResult = await rewardRepository.update(this.reward);
+                    this.$emit('success', updateResult);
                 }
                 catch (error) {
                     console.log(error)

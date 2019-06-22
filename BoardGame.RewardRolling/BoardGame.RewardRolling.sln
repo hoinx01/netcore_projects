@@ -21,7 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hinox.Office", "..\Hinox\Hi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0720D679-9060-447C-A07F-7E244129F3EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.RewardRolling.Service", "BoardGame.RewardRolling.Service\BoardGame.RewardRolling.Service.csproj", "{0F9B2875-03EC-489A-AFC8-44FFC20FBB92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGame.RewardRolling.Service", "BoardGame.RewardRolling.Service\BoardGame.RewardRolling.Service.csproj", "{0F9B2875-03EC-489A-AFC8-44FFC20FBB92}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{B6F909E2-F96C-4843-A4FB-094049FA3365}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGame.RewardRolling.Domains.Campaign", "BoardGame.RewardRolling.Domains.Campaign\BoardGame.RewardRolling.Domains.Campaign.csproj", "{F18E6476-F527-453C-B3A9-73B6D771CABD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +65,10 @@ Global
 		{0F9B2875-03EC-489A-AFC8-44FFC20FBB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F9B2875-03EC-489A-AFC8-44FFC20FBB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F9B2875-03EC-489A-AFC8-44FFC20FBB92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F18E6476-F527-453C-B3A9-73B6D771CABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F18E6476-F527-453C-B3A9-73B6D771CABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F18E6476-F527-453C-B3A9-73B6D771CABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F18E6476-F527-453C-B3A9-73B6D771CABD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +79,7 @@ Global
 		{E22FF9B5-16EB-4384-89E2-E1F8D559D905} = {FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}
 		{AD88A426-9249-47AF-AE89-A0746DBBDEBA} = {FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}
 		{3622A587-A629-4F83-A444-EBFE347612BC} = {FB9A60F5-E647-435E-A0DA-9F51F54C7BAB}
+		{F18E6476-F527-453C-B3A9-73B6D771CABD} = {B6F909E2-F96C-4843-A4FB-094049FA3365}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0BC3184-E015-4E74-B4CF-A638F4334615}

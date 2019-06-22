@@ -2,6 +2,7 @@
 import Vuex from 'vuex'
 import rollingCode from './modules/rolling_code/store';
 import reward from './modules/reward/store';
+import campaign from './modules/campaign/store';
 
 
 
@@ -10,6 +11,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     modules: {
         rollingCode,
-        reward
+        reward,
+        campaign
     }
 })

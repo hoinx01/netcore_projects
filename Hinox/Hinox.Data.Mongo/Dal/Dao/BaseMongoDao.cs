@@ -39,6 +39,7 @@ namespace Hinox.Data.Mongo.Dal.Dao
             var filter = Builders<T>.Filter.Eq("_id", dto.Id);
             return await Collection.FindOneAndReplaceAsync(filter, dto);
         }
+
         public async Task<T> DeleteAsync(T dto)
         {
             var filter = Builders<T>.Filter.Eq("_id", dto.Id);

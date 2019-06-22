@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Hinox\Hinox.Data.Mongo\Hinox.Data.Mongo.csproj" />
+    <ProjectReference Include="..\BoardGame.RewardRolling.Domains.Campaign\BoardGame.RewardRolling.Domains.Campaign.csproj" />
   </ItemGroup>
 
 </Project>

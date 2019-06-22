@@ -23,7 +23,7 @@
                     <font-awesome-icon :icon="['fa', 'trash-alt']"
                                        @click="startDeleting(item.id)" />
                     <font-awesome-icon :icon="['fa', 'pencil-alt']"
-                                       @click="startEditing(item.id)" />
+                                       @click="startUpdating(item.id)" />
                 </div>
             </b-list-group-item>
 
@@ -41,13 +41,25 @@
         </div>
 
         <div>
-            <popup-create-reward
-                                 @creating-object-change="changeCreating"
+            <popup-create-reward @creating-object-change="changeCreating"
                                  @success="createSuccessfully"
                                  @completed="createCompletely"
                                  :visible="currentAction.name=='create'">
 
             </popup-create-reward>
+            <popup-update-reward @editing-object-change="changeUpdating"
+                                 @success="updateSuccessfully"
+                                 @completed="updateCompletely"
+                                 :visible="currentAction.name=='update'"
+                                 :object="updatingObject">
+
+            </popup-update-reward>
+            <popup-delete-reward :visible="currentAction.name=='delete'"
+                                  :object="deletingObject"
+                                  @success="deleteSuccessfully"
+                                  @completed="deleteCompletely">
+
+            </popup-delete-reward>
         </div>
     </div>
 </template>
@@ -55,17 +67,21 @@
     import cloneDeep from 'lodash/cloneDeep';
     import pagination from '../Components/Shared/_Pagination.vue';
     import PopupCreateReward from '../Components/Reward/PopupCreate.vue';
+    import PopupUpdateReward from '../Components/Reward/PopupEdit.vue';
+    import PopupDeleteReward from '../Components/Reward/PopupDelete.vue';
 
     export default {
         name: 'reward-manager',
         components: {
             pagination,
-            PopupCreateReward
+            PopupCreateReward,
+            PopupUpdateReward,
+            PopupDeleteReward
         },
         data() {
             return {
                 currentAction: {
-                    name: null,
+                    name: '',
                     status:'',
                     object: null
                 }
@@ -73,6 +89,7 @@
         },
         computed: {
             visibleRewards: function () {
+                console.log('call visibleRewards')
                 let elements = cloneDeep(this.$store.state.reward.filter.result.rewards);
                 if (this.currentAction.name == 'create') {
                     if (this.currentAction.object == null) {
@@ -84,15 +101,33 @@
                 }
                 elements.forEach((element) => {
                     element.actionStatus = 'stable';
-                    if (this.currentAction.name == 'edit') {
+                    if (this.currentAction.name == 'updating') {
                         if (this.currentAction.object.id == element.id) {
-                            element.actionStatus = 'editing';
+                            console.log('==')
+                            element.actionStatus = 'updating';
                             element.name = this.currentAction.object.name;
-                            element.alias = this.currentAction.object.alias;
+                            element.cost = this.currentAction.object.cost;
                         }
                     }
                 });
                 return elements;
+            },
+            updatingObject: function () {
+                if (this.currentAction.name != 'update') {
+                    return { id: 0, name: '', cost: ''};
+                }
+                else {
+                    let object = this.currentAction.object;
+                    return object;
+                }
+            },
+            deletingObject: function () {
+                if (this.currentAction.name != 'delete')
+                    return { id: 0, name: '', cost: ''};
+                else {
+                    let object = cloneDeep(this.currentAction.object);
+                    return object;
+                }
             },
             pagination() {
                 return this.$store.state.reward.filter.result.pagination;
@@ -136,14 +171,43 @@
                 this.currentAction.status = 'success';
             },
             createCompletely() {
+                this.currentAction.status = 'completed';
+                this.deaction();
+            },
+            startUpdating(rewardId) {
+                console.log(rewardId)
+                this.currentAction.name = 'update';
+                this.currentAction.status = 'continuous';
+                let object = this.$store.state.reward.filter.result.rewards.filter(f => f.id == rewardId)[0];
+                console.log(object)
+                this.currentAction.object = cloneDeep(object);
+            },
+            changeUpdating(reward) {
+                console.log(reward.name)
+                this.$set(this.currentAction, 'object', reward);
+            },
+            updateSuccessfully() {
+                this.currentAction.status = 'success';
+            },
+            updateCompletely() {
+                this.currentAction.status = 'completed';
+                this.deaction();
+            },
+            startDeleting(id) {
+                this.currentAction.name = 'delete';
+                this.currentAction.status = 'continuous';
+                let object = this.$store.state.reward.filter.result.rewards.filter(f => f.id == id)[0];
+                this.currentAction.object = cloneDeep(object);
+            },
+            deleteSuccessfully() {
+                this.$set(this.currentAction, 'status', 'success');
+            },
+            deleteFailed() {
 
             },
-            startEditing(rewardId) {
-
+            deleteCompletely() {
+                this.deaction();
             },
-            startDeleting(rewardId) {
-
-            }
         },
         async created() {
             this.$store.dispatch('reward/DO_FILTER');
