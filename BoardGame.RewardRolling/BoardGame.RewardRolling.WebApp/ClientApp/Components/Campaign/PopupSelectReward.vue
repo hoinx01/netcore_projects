@@ -3,7 +3,8 @@
              title="Chọn qua tặng"
              size="lg"
              ref="popupSelectReward"
-             :visible="visible">
+             :visible="visible"
+             @hide="complete">
         <div>
             <b-list-group class="router-view-content">
                 <b-list-group-item class="item-row">
@@ -19,8 +20,15 @@
                     <div class="col-name">{{item.name}}</div>
                     <div class="col-name">{{item.cost}}</div>
                     <div class="col-control">
-                        <font-awesome-icon :icon="['fa', 'trash-alt']" />
-                        <font-awesome-icon :icon="['fa', 'pencil-alt']"/>
+                        <font-awesome-icon 
+                                           :icon="['fa', 'plus']"
+                                           @click="selectReward(item)"
+                                           v-if="!rewardExists(item.id)"/>
+                        <font-awesome-icon 
+                                           :icon="['fa', 'trash-alt']" 
+                                           @click="removeReward(item)"
+                                           v-if="rewardExists(item.id)"/>
+
                     </div>
                 </b-list-group-item>
 
@@ -60,6 +68,10 @@
         props: {
             visible: {
                 type: Boolean,
+                required: true
+            },
+            currentRewardIds: {
+                type: Array,
                 required: true
             }
         },
@@ -106,10 +118,22 @@
             changePageSize(pageSize) {
 
             },
+            rewardExists(id) {
+                return this.currentRewardIds.includes(id);
+            },
+            selectReward(reward) {
+                this.$emit('reward-selected', reward);
+            },
+            removeReward(reward) {
+                this.$emit('reward-removed', reward);
+            },
             async doFilter() {
                 var filterResult = await rewardRepository.filter(this.filter.request);
                 console.log(filterResult);
                 this.filter.result = filterResult;
+            },
+            complete() {
+                this.$emit('completed');
             }
         }
 

@@ -13,9 +13,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faPencilAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTrashAlt, faPencilAlt)
+library.add(faTrashAlt, faPencilAlt, faPlus)
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 

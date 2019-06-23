@@ -1,34 +1,18 @@
 ﻿<template>
     <div>
-
-        <!--<svg height="800" width="800">
-        <g fill="green" stroke="green" stroke-width="5">
-            <image xlink:href="https://mdn.mozillademos.org/files/6457/mdn_logo_only_color.png" height="20" width="20" style="z-index:1000" />
-            <path d="M0,0 L0,100 C0,100  100,100 100,0 Z"></path>
-        </g>
-    </svg>-->
-
-        <!--<svg width="500" height="350">
-            <defs>
-                <clipPath id="myCircle">
-                    <circle cx="250" cy="145" r="125" fill="#FFFFFF" />
-                </clipPath>
-            </defs>
-            <image width="500" height="350" xlink:href="https://mdn.mozillademos.org/files/6457/mdn_logo_only_color.png" clip-path="url(#myCircle)" />
-        </svg>-->
-        <svg height="900" width="900">
-            <defs>
-                <path id="idPath" :d="root"></path>
-            </defs>
-            <g fill="green" stroke="green" stroke-width="5" id="g">
-                <use x="0" y="0" xlink:href="#idPath" transform="rotate(0)" fill="red"></use>
-                <use x="0" y="0" xlink:href="#idPath" transform="rotate(30)" fill="yellow"></use>
-
-            </g>
-            <!--<use xlink:href="#g" transform="rotate(20)"></use>-->
-        </svg>
-        <div>{{transforms}}</div>
+        <div id="wheel-container">
+            <div class="wheel">
+                <!--<div class="wheel_pointer">
+                </div>-->
+            </div>
+            <div>
+                <b-btn v-b-modal.upload_wheel class="upload-button">Upload Vòng quay</b-btn>
+                <b-btn v-b-modal.upload_wheel_pointer class="upload-button">Upload Kim</b-btn>
+                <b-btn>Quay thử</b-btn>
+            </div>
+        </div>
         
+
     </div>
 </template>
 <script>
@@ -99,3 +83,28 @@
         }
     }
 </script>
+<style scoped>
+    #wheel-container{
+        width:300px;
+        height:300px;
+        background-color:red;
+    }
+    .wheel{
+        width:300px;
+        height:300px;
+        border-radius: 150px;
+        background-color: yellow;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background-image: url(http://static.ekipvn.com/Sites/6637/Data/images/2014/3/v%C3%B2ng%20quay.jpg);
+        background-position: center;
+        background-size: cover;
+    }
+    .wheel_pointer{
+        width:100px;
+        height:100px;
+        border-radius: 50%;
+        background-color: white
+    }
+</style>

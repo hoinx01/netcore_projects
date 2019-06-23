@@ -1,51 +1,78 @@
 ﻿<template>
     <div class="router-view-column-flow">
         <div id="main-header" class="router-view-header">
-            <div><h1>Danh sách đợt tặng quà</h1></div>
+            <div><h1>Tạo mới đợt quà</h1></div>
         </div>
         <div id="main-content" class="router-view-content">
-            <b-form>
-                <div id="basic_data-container">
-                    <b-form-group id="fieldset-horizontal"
-                                  label-cols-sm="2"
-                                  label-cols-lg="2"
-                                  description="Tên"
-                                  label="Tên"
-                                  label-for="input-name">
-                        <b-form-input id="input-name"
-                                      v-model="campaign.name">
-                        </b-form-input>
-                    </b-form-group>
-                    <b-form-group id="fieldset-horizontal"
-                                  label-cols-sm="2"
-                                  label-cols-lg="2"
-                                  description="Ngày bắt đầu"
-                                  label="Ngày bắt đầu"
-                                  label-for="input-start-date">
-                        <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.startedAt"></datetime>
-                    </b-form-group>
-                    <b-form-group id="fieldset-horizontal"
-                                  label-cols-sm="2"
-                                  label-cols-lg="2"
-                                  description="Ngày kết thúc"
-                                  label="Ngày kết thúc"
-                                  label-for="input-start-date">
-                        <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.endedAt"></datetime>
-                    </b-form-group>
+            
+            <b-form class="create_campaign_form">
+                <div>
+                    <div id="basic_data-container">
+                        <b-form-group id="fieldset-horizontal"
+                                      label-cols-sm="2"
+                                      label-cols-lg="2"
+                                      description="Tên"
+                                      label="Tên"
+                                      label-for="input-name">
+                            <b-form-input id="input-name"
+                                          v-model="campaign.name">
+                            </b-form-input>
+                        </b-form-group>
+                        <b-form-group id="fieldset-horizontal"
+                                      label-cols-sm="2"
+                                      label-cols-lg="2"
+                                      description="Ngày bắt đầu"
+                                      label="Ngày bắt đầu"
+                                      label-for="input-start-date">
+                            <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.startedAt"></datetime>
+                        </b-form-group>
+                        <b-form-group id="fieldset-horizontal"
+                                      label-cols-sm="2"
+                                      label-cols-lg="2"
+                                      description="Ngày kết thúc"
+                                      label="Ngày kết thúc"
+                                      label-for="input-start-date">
+                            <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.endedAt"></datetime>
+                        </b-form-group>
 
-                </div>
-                <div id="list_reward-container">
-                    <div>Hiện có {{campaign.rewards.length}} đầu quà tặng</div>
-                    <b-btn @click="startSelectingReward">Thêm</b-btn>
-                    <div class="item-row"
-                         v-for="(item,index) in campaign.rewards"
-                         :key="index">
-                        <div class="col-index">{{index + 1}}</div>
-                        <div class="col-name">{{item.reward.name}}</div>
-                        <div class="col-name">{{item.rate}}%</div>
+                    </div>
+                    <div id="list_reward-container">
+                        <div class="list_reward-container-header">
+                            <div class="list_reward-container-title">Hiện có {{campaign.rewards.length}} đầu quà tặng</div>
+                            <b-btn size="sm" @click="startSelectingReward">Sửa</b-btn>
+                        </div>
+                        <div class="item-row">
+                            <div class="col-index">STT</div>
+                            <div class="col-name">Tên</div>
+                            <div class="col-rate">Tỉ lệ (%)</div>
+                            <div class="col-control"></div>
+                        </div>
+                        <div class="item-row"
+                             v-for="(item,index) in campaign.rewards"
+                             :key="index">
+                            <div class="col-index">{{index + 1}}</div>
+                            <div class="col-name">{{item.reward.name}}</div>
+                            <div class="col-rate">
+                                <input class="reward_rate-input"
+                                       v-model="item.rate" />
+                            </div>
+                            <div class="col-control">
+                                <font-awesome-icon :icon="['fa', 'trash-alt']"
+                                                   @click="removeReward(item.reward)" />
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div id="wheel-container"></div>
+                
+                <div id="wheel-container">
+                    <div class="wheel" v-bind:style="wheelStyle">
+                    </div>
+                    <div>
+                        <b-btn v-b-modal.upload_wheel class="upload-button">Upload Vòng quay</b-btn>
+                        <b-btn v-b-modal.upload_wheel_pointer class="upload-button">Upload Kim</b-btn>
+                        <b-btn @click="play">Quay thử</b-btn>
+                    </div>
+                </div>
             </b-form>
         </div>
         <div id="main-footer" class="router-view-footer">
@@ -53,21 +80,37 @@
         </div>
 
         <div id="popup-container">
-            <popup-select-reward :visible="selectReward.doing">
+            <popup-select-reward :visible="selectReward.doing"
+                                 :currentRewardIds="currentRewardIds"
+                                 @reward-selected="addReward"
+                                 @reward-removed="removeReward"
+                                 @completed="stopSelectingReward">
 
             </popup-select-reward>
+            <upload-image element-id="upload_wheel"
+                          :imageSizeConfig="{ratio:1,minHorizontal:200}"
+                          :cropperContainerConfig="{horizontal:200}"
+                          @uploaded="changeWheel">
+            </upload-image>
+            <upload-image element-id="upload_wheel_pointer"
+                          :imageSizeConfig="{ratio:1,minHorizontal:200}"
+                          :cropperContainerConfig="{horizontal:200}"
+                          @uploaded="changeWheelPointer">
+            </upload-image>
         </div>
     </div>
 </template>
 <script>
     import datetime from 'vuejs-datetimepicker';
     import PopupSelectReward from '../Components/Campaign/PopupSelectReward.vue';
+    import UploadImage from '../Components/Shared/_UploadImage.vue';
 
     export default {
         name: 'campaign-create',
         components: {
             datetime,
-            PopupSelectReward
+            PopupSelectReward,
+            UploadImage
         },
         data() {
             return {
@@ -75,17 +118,173 @@
                     name: '',
                     startedAt: '',
                     endedAt: '',
+                    wheel: {
+                        url: '',
+                        pointerUrl:''
+                    },
                     rewards:[]
                 },
                 selectReward: {
                     doing: false
+                },
+                wheelClass: {
+                    wheel: true,
+                    spin: false
+                },
+
+                wheelState: {
+                    degree: 0
                 }
             }
+        },
+        computed: {
+            currentRewardIds() {
+                return this.campaign.rewards.map(m => m.rewardId);
+            },
+            wheelStyle() {
+                return {
+                    transform: 'rotate(' + this.wheelState.degree.toString() + 'deg)'
+                }
+                
+            },
         },
         methods: {
             startSelectingReward() {
                 this.selectReward.doing = true;
+            },
+            stopSelectingReward() {
+                this.selectReward.doing = false;
+            },
+            addReward(reward) {
+                var campaignReward = {
+                    rewardId: reward.id,
+                    reward: reward,
+                    rate: 0,
+                    ordinal: this.campaign.rewards.length + 1
+                };
+                this.campaign.rewards.push(campaignReward);
+            },
+            removeReward(reward) {
+                this.campaign.rewards = this.campaign.rewards.filter(f => f.rewardId != reward.id);
+            },
+            changeWheel(url) {
+
+            },
+            changeWheelPointer(url) {
+
+            },
+            play() {
+                var degree = 1800;
+
+                var noY = 0;
+			
+			    var c = 0;
+                var n = 100;	
+                var velocity = 100;
+                var that = this;
+                var interval = setInterval(function () {
+				    c++;				
+                    if (c === n) { 
+					    clearInterval(interval);				
+				    }						
+                    if (c <= 10) {
+                        
+                    }
+                    else {
+                        if (velocity > 2)
+                            velocity -= 2;
+                    }
+                    that.wheelState.degree += velocity;
+					
+                }, 100);
+
             }
         }
     }
 </script>
+<style scoped>
+    .main-content{
+        max-width: 100%;
+    }
+    .form-group{
+        width: 100%;
+    }
+    .list_reward-container-header{
+        display:flex;
+
+    }
+    .list_reward-container-title{
+        margin-right: 10px;
+    }
+    .item-row{
+        display:flex
+    }
+    .col-index{
+        width: 50px;
+    }
+    .col-name{
+        width: 150px;
+    }
+    .col-rate{
+        width: 100px;
+    }
+    .reward_rate-input{
+        width:75px;
+    }
+    
+    .create_campaign_form{
+        display:flex;
+    }
+    #wheel-container{
+        width:300px;
+        height:300px;
+        background-color:red;
+    }
+    .wheel{
+        width:300px;
+        height:300px;
+        border-radius: 150px;
+        background-color: yellow;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background-image: url(http://static.ekipvn.com/Sites/6637/Data/images/2014/3/v%C3%B2ng%20quay.jpg);
+        background-position: center;
+        background-size: cover;
+    }
+    
+    .wheel_pointer{
+        width:100px;
+        height:100px;
+        border-radius: 50%;
+        background-color: white
+    }
+    @-webkit-keyframes hh {
+      0%, 100%{
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+      }
+
+      50%{
+        transform: rotate(7deg);
+        -webkit-transform: rotate(7deg);
+      }
+    }
+
+    @keyframes hh {
+       0%, 100%{
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+      }
+
+      50%{
+        transform: rotate(7deg);
+        -webkit-transform: rotate(7deg);
+      }
+    }
+
+    .spin {
+      -webkit-animation: hh 0.1s; /* Chrome, Safari, Opera */
+        animation: hh 0.1s;
+    }
+</style>

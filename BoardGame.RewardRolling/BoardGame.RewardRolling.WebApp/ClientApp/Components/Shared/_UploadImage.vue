@@ -55,7 +55,7 @@
 </template>
 <script>
     import VueCropper from 'vue-cropperjs';
-    import uploadClient from '../../Api/CmsBaseApi.js';
+    import uploadClient from '../../Repositories/FileStorage';
 
     export default {
         name: 'upload-image',
