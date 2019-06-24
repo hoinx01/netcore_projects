@@ -1,5 +1,5 @@
 ﻿const jsonUrls = {
-    upload: "/admin/files",
+    upload: "/admin/api/files",
     rollingCode: {
         filter: "/admin/api/rolling_codes.json",
         uploadExcelFile: "/admin/api/rolling_codes/excel_files.json"

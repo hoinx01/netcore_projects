@@ -68,9 +68,12 @@
                     <div class="wheel" v-bind:style="wheelStyle">
                     </div>
                     <div>
-                        <b-btn v-b-modal.upload_wheel class="upload-button">Upload Vòng quay</b-btn>
-                        <b-btn v-b-modal.upload_wheel_pointer class="upload-button">Upload Kim</b-btn>
+                        <upload-file label="Upload vòng quay" fileGroup="lucky-wheel-parts"></upload-file>
+                        <upload-file label="Upload tâm" fileGroup="lucky-wheel-parts"></upload-file>
+                        <upload-file label="Upload giá kim" fileGroup="lucky-wheel-parts"></upload-file>
+                        <upload-file label="Upload kim" fileGroup="lucky-wheel-parts"></upload-file>
                         <b-btn @click="play">Quay thử</b-btn>
+                        
                     </div>
                 </div>
             </b-form>
@@ -87,30 +90,20 @@
                                  @completed="stopSelectingReward">
 
             </popup-select-reward>
-            <upload-image element-id="upload_wheel"
-                          :imageSizeConfig="{ratio:1,minHorizontal:200}"
-                          :cropperContainerConfig="{horizontal:200}"
-                          @uploaded="changeWheel">
-            </upload-image>
-            <upload-image element-id="upload_wheel_pointer"
-                          :imageSizeConfig="{ratio:1,minHorizontal:200}"
-                          :cropperContainerConfig="{horizontal:200}"
-                          @uploaded="changeWheelPointer">
-            </upload-image>
         </div>
     </div>
 </template>
 <script>
     import datetime from 'vuejs-datetimepicker';
     import PopupSelectReward from '../Components/Campaign/PopupSelectReward.vue';
-    import UploadImage from '../Components/Shared/_UploadImage.vue';
+    import UploadFile from '../Components/Shared/UploadFile.vue';
 
     export default {
         name: 'campaign-create',
         components: {
             datetime,
             PopupSelectReward,
-            UploadImage
+            UploadFile
         },
         data() {
             return {

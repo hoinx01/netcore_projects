@@ -18,7 +18,7 @@ const fileStorage = {
     async upload(file, fileGroup, fileName) {
         let form = new FormData();
         form.append('file', file, fileName);
-        form.append('fileGroup', fileGroup);
+        form.append('group', fileGroup);
 
         let requestOptions = this.setRequestOptions(null);
         requestOptions.headers['Content-Type'] = "multipart/form-data";
