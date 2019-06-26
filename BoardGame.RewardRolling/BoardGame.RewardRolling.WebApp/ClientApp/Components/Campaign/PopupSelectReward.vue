@@ -20,18 +20,15 @@
                     <div class="col-name">{{item.name}}</div>
                     <div class="col-name">{{item.cost}}</div>
                     <div class="col-control">
-                        <font-awesome-icon 
-                                           :icon="['fa', 'plus']"
+                        <font-awesome-icon :icon="['fa', 'plus']"
                                            @click="selectReward(item)"
-                                           v-if="!rewardExists(item.id)"/>
-                        <font-awesome-icon 
-                                           :icon="['fa', 'trash-alt']" 
+                                           v-if="!rewardExists(item.id)" />
+                        <font-awesome-icon :icon="['fa', 'trash-alt']"
                                            @click="removeReward(item)"
-                                           v-if="rewardExists(item.id)"/>
+                                           v-if="rewardExists(item.id)" />
 
                     </div>
                 </b-list-group-item>
-
             </b-list-group>
             <div class="router-view-footer">
                 <pagination :total="pagination.count"
@@ -49,7 +46,7 @@
             <b-button variant="primary"
                       size="sm"
                       class="float-right"
-                      v-on:click="">
+                      v-on:click="complete">
                 OK
             </b-button>
         </div>
@@ -59,6 +56,7 @@
     import cloneDeep from 'lodash/cloneDeep';
     import pagination from '../../Components/Shared/_Pagination.vue';
     import rewardRepository from '../../Repositories/RewardRepository'
+    
 
     export default {
         name: 'popup-select-reward',

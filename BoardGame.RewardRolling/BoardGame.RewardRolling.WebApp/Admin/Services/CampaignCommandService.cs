@@ -33,8 +33,8 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Services
             {
                 Id = id,
                 Name = model.Name,
-                StartedAt = model.StartedAt,
-                EndedAt = model.EndedAt,
+                StartedAt = model.StartedAt.Value,
+                EndedAt = model.EndedAt.Value,
                 Rewards = new List<CampaignRewardDto>()
             };
             foreach (var rewardModel in model.Rewards)

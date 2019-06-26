@@ -26,6 +26,8 @@ namespace BoardGame.RewardRolling.WebApp.Registrations
             services.AddSingleton<IRewardQueryService, RewardQueryService>();
             services.AddSingleton<IRewardService, RewardService>();
             services.AddSingleton<ICampaignRepository, CampaignRepository>();
+            services.AddSingleton<ICampaignQueryService, CampaignQueryService>();
+            services.AddSingleton<ICampaignCommandService, CampaignCommandService>();
         }
     }
 }

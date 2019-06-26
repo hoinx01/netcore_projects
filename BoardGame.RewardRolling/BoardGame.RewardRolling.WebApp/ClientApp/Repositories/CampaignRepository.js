@@ -14,6 +14,7 @@ export default {
     },
     async add(campaign) {
         try {
+            console.log(campaign)
             var addResult = await baseRepository.post(jsonUrls.campaign.add, campaign);
             return Promise.resolve(addResult);
         }

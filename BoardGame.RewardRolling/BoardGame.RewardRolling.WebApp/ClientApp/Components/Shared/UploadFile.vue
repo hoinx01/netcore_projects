@@ -28,6 +28,7 @@
                 var file = files[0];
                 var result = await fileStorage.upload(file, this.fileGroup, file.name);
                 console.log(result);
+                this.$emit('success', result);
             },
         }
     }
