@@ -29,7 +29,7 @@ namespace Hinox.Mvc.Middlewares
             context.Response.StatusCode = (int)statusCode;
             if (context.Response.Headers != null)
                 context.Response.Headers.Add("Content-Type", "application/json; charset=utf-8");
-            await context.Response.WriteAsync(JsonConvert.SerializeObject(obj, NewtonJsonSerializerSettings.SNAKE));
+            await context.Response.WriteAsync(JsonConvert.SerializeObject(obj, NewtonJsonSerializerSettings.CAMEL));
 
         }
         public async Task WriteImageResult(HttpContext context, string file)

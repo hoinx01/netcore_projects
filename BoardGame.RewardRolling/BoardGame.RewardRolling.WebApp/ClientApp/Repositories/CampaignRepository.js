@@ -12,6 +12,15 @@ export default {
             return Promise.reject(exception);
         }
     },
+    async getById(id) {
+        try {
+            var result = await baseRepository.get(String.formatUnicorn(jsonUrls.campaign.getById, { id: id }));
+            return Promise.resolve(result);
+        }
+        catch (exception) {
+            return Promise.reject(exception);
+        }
+    },
     async add(campaign) {
         try {
             console.log(campaign)
@@ -24,7 +33,7 @@ export default {
     },
     async update(campaign) {
         try {
-            var updateResult = await baseRepository.put(String.formatUnicorn(jsonUrls.campaign.update, { id: campaign.id }), reward);
+            var updateResult = await baseRepository.put(String.formatUnicorn(jsonUrls.campaign.update, { id: campaign.id }), campaign);
             return Promise.resolve(updateResult);
         }
         catch (exception) {
@@ -33,7 +42,7 @@ export default {
     },
     async delete(campaign) {
         try {
-            var deleteResult = await baseRepository.delete(String.formatUnicorn(jsonUrls.campaign.delete, { id: campaign.id }), reward);
+            var deleteResult = await baseRepository.delete(String.formatUnicorn(jsonUrls.campaign.delete, { id: campaign.id }));
             return Promise.resolve(deleteResult);
         }
         catch (exception) {

@@ -18,8 +18,8 @@
                                v-for="(item,index) in visibleRewards"
                                :key="item.id">
                 <div class="col-index">{{index + 1}}</div>
-                <div class="col-name">{{item.name}}</div>
-                <div class="col-date">{{item.staredAt}}</div>
+                <div class="col-name"><router-link :to="'/admin/campaigns/' + item.id + '/detail'">{{item.name}}</router-link></div>
+                <div class="col-date">{{item.startedAt}}</div>
                 <div class="col-date">{{item.endedAt}}</div>
                 <div class="col-control">
                     <font-awesome-icon :icon="['fa', 'trash-alt']"
@@ -105,6 +105,9 @@
                 this.currentAction.status = 'continuous';
                 this.$router.push('/admin/campaigns/create') 
             },
+        },
+        async created() {
+            await this.$store.dispatch('campaign/DO_FILTER')
         }
     }
 </script>

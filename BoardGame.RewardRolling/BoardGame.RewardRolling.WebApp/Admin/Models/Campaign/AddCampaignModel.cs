@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BoardGame.RewardRolling.Domains.Campaign.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Models.Campaign
         [Required]
         public DateTime? EndedAt { get; set; }
         public List<AddCampaignRewardModel> Rewards { get; set; }
+        public LuckyWheel LuckyWheel { get; set; }
     }
     public class AddCampaignRewardModel
     {

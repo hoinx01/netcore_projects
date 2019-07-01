@@ -6,6 +6,7 @@ import CodeManager from './Pages/CodeManager.vue'
 import RewardManager from './Pages/RewardManager.vue'
 import CampaignManager from './Pages/CampaignManager.vue'
 import CampaignCreate from './Pages/CampaignCreate.vue'
+import CampaignDetail from './Pages/CampaignDetail.vue'
 import LuckyWheel from './Pages/LuckyWheel.vue'
 
 
@@ -16,7 +17,9 @@ const routes = [
     { path: '/admin/rewards', component: RewardManager },  
     { path: '/admin/lucky_wheel', component: LuckyWheel },  
     { path: '/admin/campaigns', component: CampaignManager },  
+    { path: '/admin/campaigns/:id/detail', component: CampaignDetail, name: 'CampaignDetail' },
     { path: '/admin/campaigns/create', component: CampaignCreate },  
+    
 ]
 Vue.use(VueRouter);
 

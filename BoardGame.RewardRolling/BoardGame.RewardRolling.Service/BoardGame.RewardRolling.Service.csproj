@@ -6,11 +6,17 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BoardGame.RewardRolling.Core\BoardGame.RewardRolling.Core.csproj" />
     <ProjectReference Include="..\BoardGame.RewardRolling.Data.Mongo\BoardGame.RewardRolling.Data.Mongo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Identity\" />
   </ItemGroup>
 
 </Project>

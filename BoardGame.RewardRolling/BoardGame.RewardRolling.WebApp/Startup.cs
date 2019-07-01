@@ -2,22 +2,28 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using BoardGame.RewardRolling.Core.Auth;
 using BoardGame.RewardRolling.Data.Mongo;
 using BoardGame.RewardRolling.Data.Mongo.Dao;
 using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
+using BoardGame.RewardRolling.Service.User;
 using BoardGame.RewardRolling.WebApp.Middlewares;
 using BoardGame.RewardRolling.WebApp.Registrations;
 using Hinox.Data.Mongo;
 using Hinox.Mvc.Middlewares;
 using Hinox.Static.Application;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BoardGame.RewardRolling.WebApp
 {
@@ -44,6 +50,38 @@ namespace BoardGame.RewardRolling.WebApp
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddIdentityCore<ApplicationUser>()
+                .AddUserManager<ApplicationUserManager>()
+                .AddSignInManager<ApplicationUserSignInManager>()
+                .AddUserStore<ApplicationUserStore>()
+                .AddClaimsPrincipalFactory<ApplicationUserClaimsPrincipalFactory>()
+                .AddDefaultTokenProviders();
+
+            var jwtSecretKey = AppSettings.Get<string>("Authentication:SecretKey");
+            var key = Encoding.ASCII.GetBytes(jwtSecretKey);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+
+
+
+
+
             DependencyRegistration.Register(services);
             MapperInitiator.Init();
 
@@ -66,6 +104,8 @@ namespace BoardGame.RewardRolling.WebApp
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseMiddleware<ProcessExceptionMiddleware>();
+
+            app.UseAuthentication();
             app.Use(async (context, next) =>
             {
                 await next();

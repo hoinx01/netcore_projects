@@ -24,7 +24,7 @@
                                       description="Ngày bắt đầu"
                                       label="Ngày bắt đầu"
                                       label-for="input-start-date">
-                            <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.startedAt"></datetime>
+                            <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.displayedStartedAt"></datetime>
                         </b-form-group>
                         <b-form-group id="fieldset-horizontal"
                                       label-cols-sm="2"
@@ -32,7 +32,7 @@
                                       description="Ngày kết thúc"
                                       label="Ngày kết thúc"
                                       label-for="input-start-date">
-                            <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.endedAt"></datetime>
+                            <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.displayedEndedAt"></datetime>
                         </b-form-group>
 
                     </div>
@@ -125,8 +125,8 @@
             return {
                 campaign: {
                     name: '',
-                    startedAt: '',
-                    endedAt: '',
+                    displayedStartedAt: '',
+                    displayedEndedAt: '',
                     wheel: {
                         url: '',
                         pointerUrl:''
@@ -176,7 +176,7 @@
             validateRewardRate:{
                 get() {
                     if (this.campaign.rewards.length == 0)
-                        return 0;
+                        return true;
                     var totalRate = this.campaign.rewards.reduce((total, reward) => {
                         return total += parseInt(reward.rate);
                     }, 0);
@@ -245,15 +245,19 @@
             async doCreate() {
                 try {
                     var model = cloneDeep(this.campaign);
-                    model.startedAt = null;
-                    model.endedAt = null;
+                    model.startedAt = this.parseDate(model.displayedStartedAt);
+                    model.endedAt = this.parseDate(model.displayedEndedAt);
                     await campaignRepository.add(model);
                     this.$router.push('/admin/campaigns') 
                 }
                 catch (exception) {
                     console.log(exception)
-                    this.$router.push('/admin/campaigns') 
+                    //this.$router.push('/admin/campaigns') 
                 }
+            },
+            parseDate(text) {
+                var parts = text.split('/');
+                return new Date(parts[2], parts[1], parts[0]);
             }
         }
     }
