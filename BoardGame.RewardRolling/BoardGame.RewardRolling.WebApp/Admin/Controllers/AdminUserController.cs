@@ -71,6 +71,21 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
             var user = await userManager.GetUserAsync(User);
             return user.Name;
         }
+
+        [HttpGet]
+        [Route("me")]
+        public async Task<UserModel> GetCurrentUser()
+        {
+            var user = await userManager.GetUserAsync(User);
+            var model = Mapper.Map<UserModel>(user);
+            return model;
+        }
+
+        //public async Task<UserModel> AddUser([FromBody] AddUserModel model)
+        //{
+
+        //}
+
         private string GenerateJWT(string userId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

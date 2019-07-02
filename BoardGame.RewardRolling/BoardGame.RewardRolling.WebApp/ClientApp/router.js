@@ -8,6 +8,10 @@ import CampaignManager from './Pages/CampaignManager.vue'
 import CampaignCreate from './Pages/CampaignCreate.vue'
 import CampaignDetail from './Pages/CampaignDetail.vue'
 import LuckyWheel from './Pages/LuckyWheel.vue'
+import Login from './Pages/Login.vue'
+import MyAccount from './Pages/MyAccount.vue'
+import ChangePassword from './Pages/ChangePassword.vue'
+
 
 
 
@@ -19,6 +23,9 @@ const routes = [
     { path: '/admin/campaigns', component: CampaignManager },  
     { path: '/admin/campaigns/:id/detail', component: CampaignDetail, name: 'CampaignDetail' },
     { path: '/admin/campaigns/create', component: CampaignCreate },  
+    { path: '/admin/users/login', component: Login },  
+    { path: '/admin/me', component: MyAccount },  
+    { path: '/admin/change_password', component: ChangePassword },  
     
 ]
 Vue.use(VueRouter);

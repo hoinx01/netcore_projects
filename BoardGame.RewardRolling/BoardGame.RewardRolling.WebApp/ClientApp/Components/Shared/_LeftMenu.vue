@@ -12,22 +12,22 @@
                     <router-link to="/admin/campaigns">Quản lý đợt tặng quà</router-link>
                 </li>
                 <li>
-                    <router-link to="/admin/accounts">Quản lý giống PET</router-link>
+                    <router-link to="/admin/users">Quản lý người dùng</router-link>
                 </li>
                 <li>
                     <router-link to="/admin/customers">Quản lý khách hàng</router-link>
                 </li>
             </ul>
         </div>
-        <user v-if="authenticated" id="user-box"></user>
+        <current-user :class="{user_box: true, hidden: !authenticated}"></current-user>
     </div>
 </template>
 
 <script>
-    import User from './_CurrentUser.vue';
+    import CurrentUser from './_CurrentUser.vue';
     export default {
         name: "Menu",
-        components: {User},
+        components: {CurrentUser},
         data() {
             return {
 
@@ -35,8 +35,7 @@
         },
         computed: {
             authenticated() {
-                //return this.$store.state.myAccount.currentAccount != null;
-                return false;
+                return this.$store.state.identity.currentUser.authenticated;
             }
         }
     }
@@ -49,7 +48,7 @@
         height: 100vh;
         background-color: rgba(0,0,0,0.4)
     }
-    #user-box{
+    .user_box{
         flex-basis:10%;
     }
     #menu-item-container{

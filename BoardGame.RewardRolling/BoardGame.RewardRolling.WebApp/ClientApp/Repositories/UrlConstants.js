@@ -17,6 +17,10 @@
         update: "/admin/api/campaigns/{id}.json",
         delete: "/admin/api/campaigns/{id}.json",
         add: "/admin/api/campaigns.json"
+    },
+    user: {
+        login: "/admin/api/users/login.json",
+        getCurrentUser: "/admin/api/users/me.json"
     }
 };
 
