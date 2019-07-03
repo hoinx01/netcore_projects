@@ -20,7 +20,8 @@
     },
     user: {
         login: "/admin/api/users/login.json",
-        getCurrentUser: "/admin/api/users/me.json"
+        getCurrentUser: "/admin/api/users/me.json",
+        createUser: "/admin/api/users.json"
     }
 };
 

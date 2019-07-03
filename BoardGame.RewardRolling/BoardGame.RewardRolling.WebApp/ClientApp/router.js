@@ -11,6 +11,7 @@ import LuckyWheel from './Pages/LuckyWheel.vue'
 import Login from './Pages/Login.vue'
 import MyAccount from './Pages/MyAccount.vue'
 import ChangePassword from './Pages/ChangePassword.vue'
+import CreateUser from './Pages/CreateUser.vue'
 
 
 
@@ -26,6 +27,7 @@ const routes = [
     { path: '/admin/users/login', component: Login },  
     { path: '/admin/me', component: MyAccount },  
     { path: '/admin/change_password', component: ChangePassword },  
+    { path: '/admin/users/create', component: CreateUser },  
     
 ]
 Vue.use(VueRouter);

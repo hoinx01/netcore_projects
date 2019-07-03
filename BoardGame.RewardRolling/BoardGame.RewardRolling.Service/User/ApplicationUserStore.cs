@@ -24,7 +24,22 @@ namespace BoardGame.RewardRolling.Service.User
         }
         public async Task<IdentityResult> CreateAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var mdUser = Mapper.Map<MdUser>(user);
+            try
+            {
+                await userDao.AddAsync(mdUser);
+                return IdentityResult.Success;
+            }
+            catch (Exception e)
+            {
+                var error = new IdentityError()
+                {
+                    Code = e.GetType().Name,
+                    Description = e.Message
+                };
+                var result = IdentityResult.Failed(error);
+                return result;
+            }
         }
         
         public async Task<IdentityResult> DeleteAsync(ApplicationUser user, CancellationToken cancellationToken)
@@ -62,9 +77,9 @@ namespace BoardGame.RewardRolling.Service.User
 
         }
         
-        public Task<string> GetNormalizedUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
+        public async Task<string> GetNormalizedUserNameAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return user.UserName;
         }
         
         public async Task<string> GetUserIdAsync(ApplicationUser user, CancellationToken cancellationToken)

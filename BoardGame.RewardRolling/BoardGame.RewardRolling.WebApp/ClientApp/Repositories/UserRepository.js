@@ -20,5 +20,14 @@ export default {
         catch (exception) {
             return Promise.reject(exception);
         }
+    },
+    async createUser(model) {
+        try {
+            var user = await baseRepository.post(jsonUrls.user.createUser, model);
+            return Promise.resolve(user);
+        }
+        catch (exception) {
+            return Promise.reject(exception);
+        }
     }
 }

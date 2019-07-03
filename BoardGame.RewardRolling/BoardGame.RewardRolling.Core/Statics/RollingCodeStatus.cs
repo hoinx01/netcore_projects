@@ -12,6 +12,7 @@ namespace BoardGame.RewardRolling.Core.Statics
         public static RollingCodeStatus Disabled = new RollingCodeStatus(2, "disabled");
         public static RollingCodeStatus Expired = new RollingCodeStatus(3, "expired");
         public static RollingCodeStatus Deleted = new RollingCodeStatus(4, "deleted");
+        public static RollingCodeStatus Used = new RollingCodeStatus(5, "used");
         public RollingCodeStatus(int id, string name) : base(id, name)
         {
 

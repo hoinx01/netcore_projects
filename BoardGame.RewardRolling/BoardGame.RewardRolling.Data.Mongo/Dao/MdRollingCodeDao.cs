@@ -5,6 +5,8 @@ using Hinox.Data.Mongo.Dal.Dao;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using MongoDB.Driver;
 
 namespace BoardGame.RewardRolling.Data.Mongo.Dao
 {
@@ -15,6 +17,13 @@ namespace BoardGame.RewardRolling.Data.Mongo.Dao
             ) : base(dbFactory)
         {
 
+        }
+
+        public async Task<MdRollingCode> GetBySerialAsync(string serial)
+        {
+            var filter = Builders<MdRollingCode>.Filter.Eq("Serial", serial);
+            var rollingCode = (await Collection.FindAsync(filter)).FirstOrDefault();
+            return rollingCode;
         }
     }
 }

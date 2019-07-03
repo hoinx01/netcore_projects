@@ -1,4 +1,5 @@
 ﻿using Hinox.Static.Application;
+using Hinox.Static.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Security.Principal;
@@ -23,6 +24,18 @@ namespace BoardGame.RewardRolling.Core.Auth
             {
                 return true;
             }
+        }
+
+        public static string GeneratePasswordSalt(string userName)
+        {
+            var inputText = string.Format(
+                "{0}-{1}-{2}",
+                userName, 
+                DateTime.UtcNow.Ticks, 
+                AppSettings.Get<string>("Authentication:CommonSalt")
+                );
+            var result = StringUtils.CalculateMD5Hash(inputText);
+            return result;
         }
 
         public static ApplicationUser SuperAdmin = 

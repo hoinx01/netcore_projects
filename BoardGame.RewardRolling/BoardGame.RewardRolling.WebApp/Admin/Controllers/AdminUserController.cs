@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BoardGame.RewardRolling.Core.Auth;
 using BoardGame.RewardRolling.Core.Statics;
+using BoardGame.RewardRolling.Service.Common;
 using BoardGame.RewardRolling.Service.User;
 using BoardGame.RewardRolling.WebApp.Admin.Models.User;
 using Hinox.Mvc.Controllers;
@@ -81,10 +82,18 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
             return model;
         }
 
-        //public async Task<UserModel> AddUser([FromBody] AddUserModel model)
-        //{
-
-        //}
+        [HttpPost]
+        public async Task<UserModel> AddUser([FromBody] AddUserModel model)
+        {
+            var appUser = new ApplicationUser()
+            {
+                UserName = model.UserName,
+                Name = model.Name
+            };
+            var createResult = await userManager.CreateAsync(appUser, model.Password);
+            var result = Mapper.Map<UserModel>(appUser);
+            return result;
+        }
 
         private string GenerateJWT(string userId)
         {

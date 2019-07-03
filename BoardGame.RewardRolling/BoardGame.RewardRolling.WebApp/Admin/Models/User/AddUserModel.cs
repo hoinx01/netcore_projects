@@ -9,7 +9,7 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Models.User
     public class AddUserModel
     {
         [Required]
-        public string Username { get; set; }
+        public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
         [Required]
