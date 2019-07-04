@@ -65,6 +65,14 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Services
             var domain = await campaignRepository.Get(id);
             var model = Mapper.Map<CampaignModel>(domain);
 
+            await FillCampaignModelData(model);
+
+            return model;
+
+        }
+
+        private async Task FillCampaignModelData(CampaignModel model)
+        {
             var rewardIds = model.Rewards.Select(s => s.RewardId).ToList();
 
             var mdRewardFilter = new MdRewardFilter()
@@ -83,10 +91,18 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Services
                 if (rewardModel != null)
                     f.Reward = rewardModel;
             });
-
-            return model;
-
         }
-        
+
+        public async Task<CampaignModel> GetCurrentCampaign()
+        {
+            var campaign = await campaignDao.GetCurrentCampaignAsync();
+            if (campaign == null)
+                return null;
+
+            var result = Mapper.Map<CampaignModel>(campaign);
+
+            await FillCampaignModelData(result);
+            return result;
+        }
     }
 }

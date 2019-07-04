@@ -10,5 +10,6 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Services.Interfaces
     {
         Task<CampaignFilterResultModel> Filter(CampaignFilterModel filterModel);
         Task<CampaignModel> GetByIdAsync(string id);
+        Task<CampaignModel> GetCurrentCampaign();
     }
 }

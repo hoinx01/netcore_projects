@@ -9,6 +9,8 @@ using BoardGame.RewardRolling.Service.Services.Reward;
 using BoardGame.RewardRolling.Service.User;
 using BoardGame.RewardRolling.WebApp.Admin.Services;
 using BoardGame.RewardRolling.WebApp.Admin.Services.Interfaces;
+using BoardGame.RewardRolling.WebApp.Services;
+using BoardGame.RewardRolling.WebApp.Services.Interfaces;
 using Hinox.Data.Mongo;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,12 +31,15 @@ namespace BoardGame.RewardRolling.WebApp.Registrations
             services.AddSingleton<IMdRewardDao, MdRewardDao>();
             services.AddSingleton<IMdCampaignDao, MdCampaignDao>();
             services.AddSingleton<IMdUserDao, MdUserDao>();
+            services.AddSingleton<IMdCustomerDao, MdCustomerDao>();
 
             services.AddSingleton<IRewardQueryService, RewardQueryService>();
             services.AddSingleton<IRewardService, RewardService>();
             services.AddSingleton<ICampaignRepository, CampaignRepository>();
             services.AddSingleton<ICampaignQueryService, CampaignQueryService>();
             services.AddSingleton<ICampaignCommandService, CampaignCommandService>();
+            services.AddSingleton<IRollingCodeService, RollingCodeService>();
+            services.AddSingleton<ICustomerService, CustomerService>();
         }
     }
 }

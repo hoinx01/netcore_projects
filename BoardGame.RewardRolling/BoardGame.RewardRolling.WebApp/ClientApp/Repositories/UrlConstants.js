@@ -22,6 +22,11 @@
         login: "/admin/api/users/login.json",
         getCurrentUser: "/admin/api/users/me.json",
         createUser: "/admin/api/users.json"
+    },
+    customer: {
+        filter: "/admin/api/customers.json",
+        getById: "/admin/api/customers/{id}.json",
+        exportExcel: "/admin/api/customers/export_excel.json"
     }
 };
 

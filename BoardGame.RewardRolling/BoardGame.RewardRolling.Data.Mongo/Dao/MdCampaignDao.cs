@@ -22,8 +22,8 @@ namespace BoardGame.RewardRolling.Data.Mongo.Dao
         public async Task<MdCampaign> GetCurrentCampaignAsync()
         {
             var filterDefinition = Builders<MdCampaign>.Filter.And(
-                Builders<MdCampaign>.Filter.Gte("StartedAt", DateTime.UtcNow),
-                Builders<MdCampaign>.Filter.Lte("EndedAt", DateTime.UtcNow)
+                Builders<MdCampaign>.Filter.Lte("StartedAt", DateTime.UtcNow),
+                Builders<MdCampaign>.Filter.Gte("EndedAt", DateTime.UtcNow)
             );
             var filterResult = await (await Collection.FindAsync(filterDefinition)).ToListAsync();
 

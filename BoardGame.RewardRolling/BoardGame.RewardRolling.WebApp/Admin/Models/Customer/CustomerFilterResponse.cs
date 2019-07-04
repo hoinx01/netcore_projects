@@ -8,6 +8,6 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Models.Customer
 {
     public class CustomerFilterResponse : BasePagingFilterResponse
     {
-        public CustomerModel Customers { get; set; }  
+        public List<CustomerModel> Customers { get; set; }  
     }
 }

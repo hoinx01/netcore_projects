@@ -8,12 +8,13 @@ using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
 using BoardGame.RewardRolling.Data.Mongo.Entities;
 using BoardGame.RewardRolling.Service.Common;
 using BoardGame.RewardRolling.WebApp.Models.RollingCode;
+using BoardGame.RewardRolling.WebApp.Services.Interfaces;
 using Hinox.Mvc.Exceptions;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace BoardGame.RewardRolling.WebApp.Services
 {
-    public class RollingCodeService
+    public class RollingCodeService : IRollingCodeService
     {
         private readonly IMdCampaignDao campaignDao;
         private readonly IMdRollingCodeDao rollingCodeDao;
@@ -45,7 +46,7 @@ namespace BoardGame.RewardRolling.WebApp.Services
 
             var campaign = await campaignDao.GetCurrentCampaignAsync();
             if(campaign == null)
-                return null;
+                throw new NotFoundException("Không có chương trình tặng quà nào đang hoạt động");
 
             var rewardIdContainer = new List<int>();
             foreach (var reward in campaign.Rewards)
@@ -58,9 +59,13 @@ namespace BoardGame.RewardRolling.WebApp.Services
             var rewardOrdinalIndex = rand.Next(0, rewardIdContainer.Count);
             var rewardOrdinal = rewardIdContainer[rewardOrdinalIndex];
 
-            var rolloutReward = new RolloutReward()
+            var rewardId = campaign.Rewards.FirstOrDefault(f => f.Ordinal == rewardOrdinal)
+                .RewardId
+                .ToString();
+
+            var rolloutReward = new SpinReward()
             {
-                RewardId = campaign.Rewards.FirstOrDefault(f => f.Ordinal == rewardOrdinal).RewardId.ToString(),
+                RewardId = rewardId,
                 CampaignId = campaign.Id.ToString(),
                 RewardOrdinal = rewardOrdinal,
                 RollingCodeId = code.Id.ToString(),
@@ -69,7 +74,7 @@ namespace BoardGame.RewardRolling.WebApp.Services
             };
             var mdCustomer = new MdCustomer()
             {
-                RolloutRewards = new List<RolloutReward>() { rolloutReward },
+                Rewards = new List<SpinReward>() { rolloutReward },
                 FullName = model.Customer.FullName,
                 PhoneNumber = model.Customer.PhoneNumber,
                 Email = model.Customer.Email,
@@ -87,7 +92,7 @@ namespace BoardGame.RewardRolling.WebApp.Services
 
             var result = new RollResultModel()
             {
-                RewardId = campaign.Rewards.FirstOrDefault(f => f.Ordinal == rewardOrdinal).RewardId.ToString(),
+                RewardId = rewardId,
                 CampaignId = campaign.Id.ToString(),
                 RewardOrdinal = rewardOrdinal
 
