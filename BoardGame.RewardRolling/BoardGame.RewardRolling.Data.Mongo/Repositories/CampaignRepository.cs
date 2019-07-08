@@ -38,7 +38,7 @@ namespace BoardGame.RewardRolling.Data.Mongo.Repositories
             if (entity == null)
                 return null;
 
-            var domainDto = Mapper.Map<CampainDto>(entity);
+            var domainDto = Mapper.Map<CampaignDto>(entity);
             var domain = CampaignDomain.Reconstruct(domainDto);
             return domain;
         }

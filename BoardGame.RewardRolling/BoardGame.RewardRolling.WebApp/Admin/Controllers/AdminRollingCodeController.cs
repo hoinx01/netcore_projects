@@ -8,6 +8,7 @@ using Hinox.Mvc.Controllers;
 using Hinox.Mvc.Models;
 using Hinox.Office.Utils;
 using Hinox.Static.Application;
+using Hinox.Static.Extensions;
 using Hinox.Static.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -57,7 +58,10 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
 
             string extension = Path.GetExtension(originalPath);
 
-            var newFileName = file.FileName + "-" + DateTime.Now.Ticks.ToString();
+            var newFileName = 
+                file.FileName.ToUnsignText().RemoveSpecialCharacters().Replace(" ", "-").ToLower() 
+                + "-" 
+                + DateTime.Now.Ticks.ToString();
 
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);

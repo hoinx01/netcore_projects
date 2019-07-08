@@ -42,6 +42,7 @@ const baseRepository = {
         }
     },
     async post(url, data, requestOptions = null) {
+        console.log(JSON.stringify(data))
         let options = this.setRequestOptions(requestOptions);
         try {
             let response = await axios.post(url, data, options);
@@ -84,12 +85,11 @@ const baseRepository = {
         return requestOptions;
     },
     setToken() {
-        let accountItem = localStorage.getItem('account');
-        if (this.token != null && this.token != '' && accountItem != null)
+        let bearerToken = localStorage.getItem('bearerToken');
+        if (this.token != null && this.token != '' && bearerToken == this.token)
             return;
-        if (accountItem != undefined && accountItem != null) {
-            let account = JSON.parse(accountItem);
-            this.token = account.token;
+        if (bearerToken != undefined && bearerToken != null) {
+            this.token = bearerToken;
         }
         if (this.token == null)
             this.token = '';
@@ -98,13 +98,13 @@ const baseRepository = {
         var data = response.data;
         if (data.statusCode) {
             if (data.statusCode == 401) {
-                let accountItem = localStorage.getItem('account');
+                let accountItem = localStorage.getItem('bearerToken');
                 if (accountItem != undefined && accountItem != null) {
-                    localStorage.removeItem('account')
+                    localStorage.removeItem('bearerToken')
                 }
-                if (!window.location.href.includes('admin/accounts/login'))
+                if (!window.location.href.includes('admin/users/login'))
                     //router.push({ path: '/admin/accounts/login' })
-                    window.location.href = "/admin/accounts/login"
+                    window.location.href = "/admin/users/login"
                     
                 else
                     return Promise.reject(data);

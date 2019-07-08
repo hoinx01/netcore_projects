@@ -1,6 +1,6 @@
 ﻿import baseRepository from './BaseRepository';
 import { jsonUrls } from './UrlConstants'
-import String from '../Utils/StringExtensions';
+import string from '../Utils/StringExtensions';
 
 export default {
     async filter(filterModel) {
@@ -12,8 +12,18 @@ export default {
             return Promise.reject(exception);
         }
     },
+    async getById(id) {
+        try {
+            var result = await baseRepository.get(string.formatUnicorn(jsonUrls.campaign.getById, { id: id }));
+            return Promise.resolve(result);
+        }
+        catch (exception) {
+            return Promise.reject(exception);
+        }
+    },
     async add(campaign) {
         try {
+            console.log(campaign)
             var addResult = await baseRepository.post(jsonUrls.campaign.add, campaign);
             return Promise.resolve(addResult);
         }
@@ -23,7 +33,7 @@ export default {
     },
     async update(campaign) {
         try {
-            var updateResult = await baseRepository.put(String.formatUnicorn(jsonUrls.campaign.update, { id: campaign.id }), reward);
+            var updateResult = await baseRepository.put(string.formatUnicorn(jsonUrls.campaign.update, { id: campaign.id }), campaign);
             return Promise.resolve(updateResult);
         }
         catch (exception) {
@@ -32,7 +42,7 @@ export default {
     },
     async delete(campaign) {
         try {
-            var deleteResult = await baseRepository.delete(String.formatUnicorn(jsonUrls.campaign.delete, { id: campaign.id }), reward);
+            var deleteResult = await baseRepository.delete(string.formatUnicorn(jsonUrls.campaign.delete, { id: campaign.id }));
             return Promise.resolve(deleteResult);
         }
         catch (exception) {

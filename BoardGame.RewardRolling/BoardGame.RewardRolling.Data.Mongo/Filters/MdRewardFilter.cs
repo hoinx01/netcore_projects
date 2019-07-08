@@ -5,11 +5,14 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using MongoDB.Bson;
 
 namespace BoardGame.RewardRolling.Data.Mongo.Filters
 {
     public class MdRewardFilter : BaseMdPagingFilter<MdReward>
     {
+        public List<string> Ids { get; set; }
         public List<int> Statuses { get; set; }
         public override MdFilterSpecification<MdReward> GenerateFilterSpecification()
         {
@@ -21,6 +24,12 @@ namespace BoardGame.RewardRolling.Data.Mongo.Filters
 
             if(Statuses != null && Statuses.Count > 0)
                 andFilterDefinitions.Add(Builders<MdReward>.Filter.In("Status", Statuses));
+
+            if(Ids != null && Ids.Count > 0)
+            {
+                var objectIds = Ids.Select(s => new ObjectId(s)).ToList();
+                andFilterDefinitions.Add(Builders<MdReward>.Filter.In("_id", objectIds));
+            }
 
             if (andFilterDefinitions.Count > 0)
                 mdFilterDefinition.Filter = filterDefinitionBuilder.And(andFilterDefinitions);

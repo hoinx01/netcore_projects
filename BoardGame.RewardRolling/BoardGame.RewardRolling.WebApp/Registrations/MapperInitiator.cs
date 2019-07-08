@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
+using BoardGame.RewardRolling.Core.Auth;
 using BoardGame.RewardRolling.Core.Statics;
 using BoardGame.RewardRolling.Data.Mongo.Entities;
 using BoardGame.RewardRolling.Service.Domains;
+using BoardGame.RewardRolling.WebApp.Registrations.ObjectConverters;
 using Hinox.Static.Enumerate;
 using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BoardGame.RewardRolling.WebApp.Registrations
 {
@@ -15,7 +13,8 @@ namespace BoardGame.RewardRolling.WebApp.Registrations
     {
         public static void Init()
         {
-            Mapper.Initialize((cfg) => {
+            Mapper.Initialize((cfg) =>
+            {
                 cfg.CreateMissingTypeMaps = true;
                 cfg.ForAllMaps((map, exp) => {
                     foreach (var unmappedPropertyName in map.GetUnmappedPropertyNames())
@@ -39,6 +38,9 @@ namespace BoardGame.RewardRolling.WebApp.Registrations
             cfg.CreateMap<ObjectId, string>().ConvertUsing<BsonIdStringTypeConverter>();
             cfg.CreateMap<RewardDomain, MdReward>().ConvertUsing<RewardDomainToMdDtoConverter>();
             cfg.CreateMap<MdReward, RewardDomain>().ConvertUsing<RewardMdDtoToDomainConverter>();
+            cfg.CreateMap<int, CampaignStatus>().ConvertUsing<CampaignStatusIdToEnumerationConverter>();
+            cfg.CreateMap<ApplicationUser, MdUser>().ConvertUsing<UserIdentityToMdEntityConverter>();
+            cfg.CreateMap<MdUser, ApplicationUser>().ConvertUsing<UserMdEntityToIdentityConverter>();
         }
     }
 

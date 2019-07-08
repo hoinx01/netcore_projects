@@ -1,4 +1,6 @@
-﻿using Hinox.Data.Mongo.Dal.Entities;
+﻿using BoardGame.RewardRolling.Domains.Campaign.ValueObjects;
+using Hinox.Data.Mongo.Attributes;
+using Hinox.Data.Mongo.Dal.Entities;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Text;
 
 namespace BoardGame.RewardRolling.Data.Mongo.Entities
 {
+    [MdCollection(Name = "Campaigns")]
     public class MdCampaign : BaseObjectIdMongoEntity
     {
         public string Name { get; set; }
@@ -15,6 +18,7 @@ namespace BoardGame.RewardRolling.Data.Mongo.Entities
         public List<MdCampaignReward> Rewards { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public LuckyWheel LuckyWheel { get; set; }
     }
     public class MdCampaignReward
     {

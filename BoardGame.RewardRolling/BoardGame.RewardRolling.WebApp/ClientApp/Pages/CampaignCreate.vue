@@ -24,7 +24,7 @@
                                       description="Ngày bắt đầu"
                                       label="Ngày bắt đầu"
                                       label-for="input-start-date">
-                            <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.startedAt"></datetime>
+                            <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.displayedStartedAt"></datetime>
                         </b-form-group>
                         <b-form-group id="fieldset-horizontal"
                                       label-cols-sm="2"
@@ -32,51 +32,65 @@
                                       description="Ngày kết thúc"
                                       label="Ngày kết thúc"
                                       label-for="input-start-date">
-                            <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.endedAt"></datetime>
+                            <datetime format="DD/MM/YYYY" width="300px" v-model="campaign.displayedEndedAt"></datetime>
                         </b-form-group>
 
                     </div>
-                    <div id="list_reward-container">
-                        <div class="list_reward-container-header">
-                            <div class="list_reward-container-title">Hiện có {{campaign.rewards.length}} đầu quà tặng</div>
-                            <b-btn size="sm" @click="startSelectingReward">Sửa</b-btn>
-                        </div>
-                        <div class="item-row">
-                            <div class="col-index">STT</div>
-                            <div class="col-name">Tên</div>
-                            <div class="col-rate">Tỉ lệ (%)</div>
-                            <div class="col-control"></div>
-                        </div>
-                        <div class="item-row"
-                             v-for="(item,index) in campaign.rewards"
-                             :key="index">
-                            <div class="col-index">{{index + 1}}</div>
-                            <div class="col-name">{{item.reward.name}}</div>
-                            <div class="col-rate">
-                                <input class="reward_rate-input"
-                                       v-model="item.rate" />
+                    <b-form-group>
+                        <div id="list_reward-container">
+                            <div class="list_reward-container-header">
+                                <div class="list_reward-container-title">Hiện có {{campaign.rewards.length}} đầu quà tặng</div>
+                                <b-btn size="sm" @click="startSelectingReward">Sửa</b-btn>
                             </div>
-                            <div class="col-control">
-                                <font-awesome-icon :icon="['fa', 'trash-alt']"
-                                                   @click="removeReward(item.reward)" />
+                            <div class="item-row">
+                                <div class="col-index">STT</div>
+                                <div class="col-name">Tên</div>
+                                <div class="col-rate">Tỉ lệ (%)</div>
+                                <div class="col-control"></div>
                             </div>
+
+                            <draggable v-model="campaign.rewards" group="people" @start="drag=true" @end="drag=false">
+                                <div class="item-row"
+                                     v-for="(item,index) in campaign.rewards"
+                                     :key="index">
+                                    <div class="col-index">{{index + 1}}</div>
+                                    <div class="col-name">{{item.reward.name}}</div>
+                                    <div class="col-rate">
+                                        <input class="reward_rate-input"
+                                               v-model="item.rate" />
+                                    </div>
+                                    <div class="col-control">
+                                        <font-awesome-icon :icon="['fa', 'trash-alt']"
+                                                           @click="removeReward(item.reward)" />
+                                    </div>
+                                </div>
+                            </draggable>
+
+
                         </div>
-                    </div>
+                        <b-form-invalid-feedback :state="validateRewardRate">
+                            {{validationMessages.invalidRewardRate}}
+                        </b-form-invalid-feedback>
+                    </b-form-group>
+                    
                 </div>
                 
                 <div id="wheel-container">
                     <div class="wheel" v-bind:style="wheelStyle">
                     </div>
                     <div>
-                        <b-btn v-b-modal.upload_wheel class="upload-button">Upload Vòng quay</b-btn>
-                        <b-btn v-b-modal.upload_wheel_pointer class="upload-button">Upload Kim</b-btn>
+                        <upload-file label="Upload vòng quay" fileGroup="lucky-wheel-parts" @success="changeMainRimImage"></upload-file>
+                        <upload-file label="Upload tâm" fileGroup="lucky-wheel-parts" @success="changeCenterCircleImage"></upload-file>
+                        <upload-file label="Upload giá kim" fileGroup="lucky-wheel-parts" @success="changePointerRackImage"></upload-file>
+                        <upload-file label="Upload kim" fileGroup="lucky-wheel-parts" @success="changePointerImage"></upload-file>
                         <b-btn @click="play">Quay thử</b-btn>
+                        
                     </div>
                 </div>
             </b-form>
         </div>
         <div id="main-footer" class="router-view-footer">
-            
+            <b-btn @click="doCreate">Đồng ý</b-btn>
         </div>
 
         <div id="popup-container">
@@ -87,42 +101,51 @@
                                  @completed="stopSelectingReward">
 
             </popup-select-reward>
-            <upload-image element-id="upload_wheel"
-                          :imageSizeConfig="{ratio:1,minHorizontal:200}"
-                          :cropperContainerConfig="{horizontal:200}"
-                          @uploaded="changeWheel">
-            </upload-image>
-            <upload-image element-id="upload_wheel_pointer"
-                          :imageSizeConfig="{ratio:1,minHorizontal:200}"
-                          :cropperContainerConfig="{horizontal:200}"
-                          @uploaded="changeWheelPointer">
-            </upload-image>
         </div>
     </div>
 </template>
 <script>
+
+    import campaignRepository from '../Repositories/CampaignRepository';
     import datetime from 'vuejs-datetimepicker';
     import PopupSelectReward from '../Components/Campaign/PopupSelectReward.vue';
-    import UploadImage from '../Components/Shared/_UploadImage.vue';
+    import UploadFile from '../Components/Shared/UploadFile.vue';
+    import draggable from 'vuedraggable';
+    import cloneDeep from 'lodash/cloneDeep'
 
     export default {
         name: 'campaign-create',
         components: {
             datetime,
             PopupSelectReward,
-            UploadImage
+            UploadFile,
+            draggable
         },
         data() {
             return {
                 campaign: {
                     name: '',
-                    startedAt: '',
-                    endedAt: '',
+                    displayedStartedAt: '',
+                    displayedEndedAt: '',
                     wheel: {
                         url: '',
                         pointerUrl:''
                     },
-                    rewards:[]
+                    rewards: [],
+                    luckyWheel: {
+                        mainRim: {
+                            imageSrc:''
+                        },
+                        centerCircle: {
+                            imageSrc: ''
+                        },
+                        pointer: {
+                            imageSrc:''
+                        },
+                        pointerRack: {
+                            imageSrc:''
+                        }
+                    }
                 },
                 selectReward: {
                     doing: false
@@ -134,6 +157,9 @@
 
                 wheelState: {
                     degree: 0
+                },
+                validationMessages: {
+                    invalidRewardRate: 'Tổng tỉ lệ trúng giải không được vượt quá 100%'
                 }
             }
         },
@@ -147,6 +173,17 @@
                 }
                 
             },
+            validateRewardRate:{
+                get() {
+                    if (this.campaign.rewards.length == 0)
+                        return true;
+                    var totalRate = this.campaign.rewards.reduce((total, reward) => {
+                        return total += parseInt(reward.rate);
+                    }, 0);
+                    console.log(totalRate)
+                    return totalRate <= 100;
+                }
+            }
         },
         methods: {
             startSelectingReward() {
@@ -166,12 +203,6 @@
             },
             removeReward(reward) {
                 this.campaign.rewards = this.campaign.rewards.filter(f => f.rewardId != reward.id);
-            },
-            changeWheel(url) {
-
-            },
-            changeWheelPointer(url) {
-
             },
             play() {
                 var degree = 1800;
@@ -196,6 +227,35 @@
 					
                 }, 100);
 
+            },
+            changeMainRimImage(img) {
+                this.campaign.luckyWheel.mainRim.imageSrc = img.cdnAddress + img.path;
+            },
+            changeCenterCircleImage(img) {
+                this.campaign.luckyWheel.centerCircle.imageSrc = img.cdnAddress + img.path;
+            },
+            changePointerRackImage(img) {
+                this.campaign.luckyWheel.pointerRack.imageSrc = img.cdnAddress + img.path;
+            },
+            changePointerImage(img) {
+                this.campaign.luckyWheel.pointer.imageSrc = img.cdnAddress + img.path;
+            },
+            async doCreate() {
+                try {
+                    var model = cloneDeep(this.campaign);
+                    model.startedAt = this.parseDate(model.displayedStartedAt);
+                    model.endedAt = this.parseDate(model.displayedEndedAt);
+                    await campaignRepository.add(model);
+                    this.$router.push('/admin/campaigns') 
+                }
+                catch (exception) {
+                    console.log(exception)
+                    //this.$router.push('/admin/campaigns') 
+                }
+            },
+            parseDate(text) {
+                var parts = text.split('/');
+                return new Date(parts[2], parts[1], parts[0]);
             }
         }
     }

@@ -9,5 +9,6 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Services.Interfaces
     public interface ICampaignCommandService
     {
         Task<CampaignModel> Add(AddCampaignModel model);
+        Task<CampaignModel> Update(string id, UpdateCampaignModel model, string inputJson);
     }
 }

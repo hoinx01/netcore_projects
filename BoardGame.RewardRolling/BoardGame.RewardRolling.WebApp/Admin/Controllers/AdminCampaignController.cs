@@ -4,6 +4,7 @@ using BoardGame.RewardRolling.Service.Common;
 using BoardGame.RewardRolling.WebApp.Admin.Models.Campaign;
 using BoardGame.RewardRolling.WebApp.Admin.Services.Interfaces;
 using Hinox.Mvc.Controllers;
+using Hinox.Mvc.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
             this.campaignQueryService = campaignQueryService;
             this.campaignCommandService = campaignCommandService;
         }
+        [HttpGet]
         public async Task<CampaignFilterResultModel> Filter([FromQuery] CampaignFilterModel filterModel)
         {
             var result = await campaignQueryService.Filter(filterModel);
@@ -38,6 +40,29 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
             var result = await campaignCommandService.Add(model);
             return result;
             
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<CampaignModel> Get([FromRoute] string id)
+        {
+            var model = await campaignQueryService.GetByIdAsync(id);
+            if (model == null)
+                throw new NotFoundException();
+
+
+
+            return model;
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<CampaignModel> Update([FromRoute] string id, [FromBody] UpdateCampaignModel model)
+        {
+            var inputJson = GetTextBody();
+            var result = await campaignCommandService.Update(id, model, inputJson);
+
+            return result;
         }
     }
 }
