@@ -10,11 +10,16 @@ namespace BoardGame.RewardRolling.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
+            ViewData["Title"] = "Trang chủ";
             return View();
         }
-
+        public ActionResult Login()
+        {
+            ViewData["Title"] = "Đăng nhập";
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

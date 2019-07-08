@@ -88,9 +88,12 @@ namespace BoardGame.RewardRolling.WebApp
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{action}",
+                    new { controller = "Home", action = "Index" }
+                    );
             });
+           
         }
     }
 }

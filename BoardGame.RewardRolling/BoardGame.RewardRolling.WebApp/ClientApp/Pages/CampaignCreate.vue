@@ -175,9 +175,7 @@
             },
             play() {
                 var degree = 1800;
-
                 var noY = 0;
-			
 			    var c = 0;
                 var n = 100;	
                 var velocity = 100;

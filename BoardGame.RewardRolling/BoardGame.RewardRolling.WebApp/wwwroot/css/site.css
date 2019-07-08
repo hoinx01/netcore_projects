@@ -6,7 +6,22 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
-
+@font-face {
+    font-family: fontButton;
+    src: url("'/lib/font/UTM Talling.ttf'");
+}
+@font-face {
+    font-family: ObelixPro;
+    src: url("/lib/font/ObelixProTB.ttf");
+}
+@font-face {
+    font-family: UTMAVOBOLD;
+    src: url("/lib/font/utm-avobold.ttf");
+}
+@font-face {
+    font-family: UTMAVO;
+    src: url("/lib/font/utm-avo.ttf");
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
