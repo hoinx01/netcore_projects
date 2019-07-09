@@ -1,8 +1,798 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<div class="page-container">
+    <div class="page-container_shadow">
+        <div class="page-bar">
+            <div class="row">
+                <div class="col-25">
+                    <a class="btn-wheel" href="/login">
+                        <img src="~/images/bar/home.png" />
+                        <span>Đăng nhập</span>
+                    </a>
+                    <button type="button" class="btn-wheel" href="#" id="out-of-turn">
+                        <img src="~/images/bar/home.png" />
+                        <span>Hết lượt</span>
+                    </button>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+                    <button type="button" class="btn-wheel" href="#" id="popup-error">
+                        <img src="~/images/bar/home.png" />
+                        <span>Popup lỗi</span>
+                    </button>
+                    <button type="button" class="btn-wheel" href="#" id="popup-success">
+                        <img src="~/images/bar/home.png" />
+                        <span>Trúng thưởng</span>
+                    </button>
+                    <button type="button" class="btn-wheel" href="#" id="popup-help">
+                        <img src="~/images/bar/home.png" />
+                        <span>Hướng dẫn</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-wheel">
+            <div id="chart"></div>
+        </div>
+    </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="out-of-turn-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="page-container-login">
+            <div class="page-container-login_shadow">
+                <div class="page-content">
+                    <div class="page-bar-content">
+                        <div class="row" style="margin:auto">
+                            <div class="w-25" style="z-index:2">
+                                <div class="page-bar-content_img">
+                                    <img src="~/images/login/nhan-vat-nu.png" />
+                                </div>
+                            </div>
+                            <div class="w-75" style="z-index:1">
+                                <div class="page-bar-content_text">
+                                    <div class="page-bar-content_text__top">
+                                        <span>CHÀO MỪNG</span>
+
+                                    </div>
+                                    <div class="page-bar-content_text__bot">
+                                        ĐẾN VŨ TRỤ LỚP HỌC MẬT NGỮ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-info">
+                        <div style="position: absolute;top: -72px;left:47px">
+                            <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                <div class="img-wheel">
+                                    <img src="~/images/login/vong-quay.png" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:60px;background:url(/images/login/hieu-ung2.png);    ">
+                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                <div class="text-info-login">
+                                    TIẾC QUÁ! BẠN HẾT LƯỢT QUAY MẤT RỒI. NHẬP MÃ COUPON ĐỂ THỰC HIỆN LƯỢT QUAY MỚI NHÉ!
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                <div class="text-info-login" style="font-size:10px">
+                                    <i>MỌI THẮC MẮC XIN LIÊN HỆ HOTLINE: 096.991.4344<br />XIN CẢM ƠN!</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="position:relative">
+                            <div class="img-login-footer">
+                                <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:40px;padding-bottom:40px">
+                            <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                <a href="javascrip:0" class="button-login">
+                                    NHẬP MÃ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="popup-error-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="page-container-login">
+            <div class="page-container-login_shadow">
+                <div class="page-content">
+                    <div class="page-bar-content">
+                        <div class="row" style="margin:auto">
+                            <div class="w-25" style="z-index:2">
+                                <div class="page-bar-content_img">
+                                    <img src="~/images/login/nhan-vat-nu.png" />
+                                </div>
+                            </div>
+                            <div class="w-75" style="z-index:1">
+                                <div class="page-bar-content_text">
+                                    <div class="page-bar-content_text__top">
+                                        <span>CHÀO MỪNG</span>
+
+                                    </div>
+                                    <div class="page-bar-content_text__bot">
+                                        ĐẾN VŨ TRỤ LỚP HỌC MẬT NGỮ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-info">
+                        <div style="position: absolute;top: -72px;left:47px">
+                            <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                <div class="img-wheel">
+                                    <img src="~/images/login/vong-quay.png" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:60px;background:url(/images/login/hieu-ung2.png);    ">
+                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                <div class="text-info-login">
+                                    MÃ VOUCHER CỦA BẠN KHÔNG ĐÚNG. VUI LÒNG NHẬP LẠI
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                <div class="text-info-login" style="font-size:10px">
+                                    <i>MỌI THẮC MẮC XIN LIÊN HỆ HOTLINE: 096.991.4344<br />XIN CẢM ƠN!</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="position:relative">
+                            <div class="img-login-footer">
+                                <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:40px;padding-bottom:40px">
+                            <div class="col-lg-6 col-xl-6" style="margin:auto">
+                                <a href="javascrip:0" class="button-login">
+                                    NHẬP LẠI
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-xl-6" style="margin:auto">
+                                <a href="javascrip:0" class="button-login">
+                                    ĐÓNG
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="popup-success-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="page-container-login">
+            <div class="page-container-login_shadow">
+                <div class="page-content">
+                    <div class="page-bar-content">
+                        <div class="row" style="margin:auto">
+                            <div class="w-25" style="z-index:2">
+                                <div class="page-bar-content_img">
+                                    <img src="~/images/login/nhan-vat-nu.png" />
+                                </div>
+                            </div>
+                            <div class="w-75" style="z-index:1">
+                                <div class="page-bar-content_text">
+                                    <div class="page-bar-content_text__top">
+                                        <span>CHÀO MỪNG</span>
+
+                                    </div>
+                                    <div class="page-bar-content_text__bot">
+                                        ĐẾN VŨ TRỤ LỚP HỌC MẬT NGỮ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-info">
+                        <div style="position: absolute;top: -72px;left:47px">
+                            <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                <div class="img-wheel">
+                                    <img src="~/images/login/vong-quay.png" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:30px;background:url(/images/login/hieu-ung2.png);    ">
+                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                <div class="text-info-login">
+                                    CHÚC MỪNG BẠN ĐÃ TRÚNG
+                                </div>
+                                <div class="text-info-receive">
+                                    <i>x1 Truyện tranh LMHN</i>
+                                </div>
+                                <div class="img-gift">
+                                    <img src="~/images/login/gift.png" style="max-width:50%" />
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                <div class="text-info-login" style="font-size:10px">
+                                    <i>Bộ phận CSKH sẽ liên hệ với bạn trong vòng 48 tiếng để trao quà!<br />Xin cảm ơn và chúc bạn chơi game vui vẻ !</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:40px;padding-bottom:40px">
+                            <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                <a href="javascrip:0" class="button-login">
+                                    ĐÓNG
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="popup-help-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-help">
+        <div class="modal-content">
+            <div class="image-wheel">
+                <img src="~/images/login/vong-quay.png" />
+            </div>
+            <div class="modal-header header-help">
+                <div class="modal-title title-help">HƯỚNG DẪN THAM GIA VÒNG QUAY</div>
+                <a type="button" class="close img-close-popup" data-dismiss="modal" href="javascrip:0">
+                    <img src="~/images/login/close-popup.png" />
+                </a>
+                <div class="image-girl">
+                    <img src="~/images/login/nhan-vat-nu.png" />
+                </div>
+            </div>
+            <div class="modal-body" style="background-color:#0f2f9c;padding: 7px;padding-top: 0px !important;">
+                <div class="modal-body-help">
+                    <div class="w-100 text-info-help">
+                        <div class="col-lg-12">
+                            <span style="color:white">
+                                <span style="color:#ffc600">BƯỚC 1</span>
+                                : Truy tìm ngay Mã coupon trong phiếu quà tặng được chứa trong hộp board game lớp học mật ngũ mà bạn đã mua <br />...tèng teng... thấy mã rồi nè
+                            </span>
+                        </div>
+                        <div class="col-lg-12">
+                            <span style="color:white">
+                                <span style="color:#ffc600">BƯỚC 2</span>
+                                : Truy tìm ngay Mã coupon trong phiếu quà tặng được chứa trong hộp board game lớp học mật ngũ mà bạn đã mua <br />...tèng teng... thấy mã rồi nè
+                            </span>
+                        </div>
+                        <div class="col-lg-12">
+                            <span style="color:white">
+                                <span style="color:#ffc600">BƯỚC 3</span>
+                                : Truy tìm ngay Mã coupon trong phiếu quà tặng được chứa trong hộp board game lớp học mật ngũ mà bạn đã mua <br />...tèng teng... thấy mã rồi nè
+                            </span>
+                        </div>
+                        <div class="col-lg-12">
+                            <span style="color:white">
+                                <span style="color:#ffc600">BƯỚC 4</span>
+                                : Truy tìm ngay Mã coupon trong phiếu quà tặng được chứa trong hộp board game lớp học mật ngũ mà bạn đã mua <br />...tèng teng... thấy mã rồi nè
+                            </span>
+                        </div>
+                        <div class="col-lg-12">
+                            <span style="color:white">
+                                <span style="color:#ffc600">BƯỚC 5</span>
+                                : Truy tìm ngay Mã coupon trong phiếu quà tặng được chứa trong hộp board game lớp học mật ngũ mà bạn đã mua <br />...tèng teng... thấy mã rồi nè
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="img-footer-left-help">
+                                <img src="~/images/login/toc-hong.png" style="max-width:50%" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img-footer-right-help">
+                                <img src="~/images/login/xuc-xac.png" style="max-width:50%" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+
+    body {
+        margin-bottom: 0px;
+    }
+
+    .page-container {
+        /*background: url("/images/backgound.png") no-repeat;
+        height: 100vh;
+        background-size: 100% 100%;*/
+        background-color: #0c051d;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0px;
+    }
+    .page-container_shadow {
+        background: url("/images/backgound.png") no-repeat;
+        height: 100vh;
+        background-size: 100% 100%;
+    }
+    .page-bar {
+        text-align: center;
+        padding-top: 20px;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .btn-wheel {
+        display: flex;
+        position: relative;
+        box-sizing: border-box;
+        display: inline-block;
+        height: auto;
+        background: url("/images/bar/bg-button.png") no-repeat;
+        border: 0;
+        border-radius: inherit;
+        /*font-family: fontButton;*/
+        font-weight: 500;
+        white-space: nowrap;
+        cursor: pointer;
+        text-transform: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        vertical-align: middle;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        padding: .9rem 1.5rem;
+    }
+
+    .page-wheel {
+        text-align: center;
+        margin: 0% 20%;
+    }
+
+
+    /*sâs*/
+    .page-bar-content_img {
+        z-index: 2;
+    }
+
+        .page-bar-content_img > img {
+            float: left;
+        }
+
+    @@media (min-width: 991px) {
+        .page-bar-content_img > img {
+            float: right;
+            max-width: 150%;
+        }
+
+        .page-bar-content_text {
+            width: 75%;
+            position: absolute;
+            text-align: left;
+            top: 12px;
+            left: calc(25% - 20px);
+        }
+        /*.page-bar-content {
+            width: 100%;
+            position: relative;
+            margin-left: 10%
+        }*/
+    }
+
+    @@media (max-width: 991px) {
+        .page-bar-content_img > img {
+            float: right;
+            max-width: 100%;
+        }
+
+        .page-bar-content_text {
+            width: 75%;
+            position: absolute;
+            text-align: left;
+            left: calc(25% - 24px);
+        }
+        /*.page-bar-content {
+            width: 100%;
+            position: relative;
+        }*/
+    }
+
+    .page-bar-content {
+        position: absolute;
+        top: -135px;
+    }
+
+    .page-bar-content_text__top {
+        font-family: ObelixPro;
+        color: #f6cf2e;
+        font-size: 18px;
+        width: 100px;
+        background-color: #1d0052;
+        border-radius: 6px;
+        padding-left: 21px;
+    }
+
+    .page-bar-content_text__bot {
+        font-family: ObelixPro;
+        color: #fff;
+        font-size: 18px;
+        width: 230px;
+        background-color: #1d0052;
+        border-radius: 6px;
+        padding-left: 21px;
+        margin-top: -4px;
+    }
+
+    .img-wheel {
+    }
+
+        .img-wheel > img {
+            max-width: 50%;
+        }
+
+    .text-info-login {
+        font-family: UTMAVOBOLD;
+        color: #fff;
+        font-size: 15px;
+        padding-top: 10px;
+    }
+
+    .input-info-login {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        height: 34px;
+        min-width: 200px;
+        border-radius: 17px 17px;
+        display: flex;
+    }
+
+    .input-info-login_text {
+        font-family: UTMAVO;
+        font-size: 13px;
+        padding: 6px 8px;
+        color: black;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .input-info-login_input {
+        font-family: UTMAVO;
+        font-size: 13px;
+        padding-right: 10px;
+    }
+
+        .input-info-login_input > input {
+            border: none;
+            padding: 6px;
+        }
+
+            .input-info-login_input > input:focus {
+                outline: none;
+            }
+
+    .pading-7 {
+        padding: 7px;
+    }
+
+    .button-login {
+        height: 34px;
+        border: 1px solid #ddd;
+        border-radius: 17px 17px;
+        font-family: UTMAVOBOLD;
+        font-size: 16px;
+        padding: 6px 8px;
+        color: white;
+    }
+
+    .img-login-footer {
+        position: absolute;
+        right: -1px;
+        top: -10px;
+        right: -80px;
+    }
+
+    .page-container-login_shadow {
+        background: url("/images/login/backgound-nen.png") no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .page-container-login {
+        background: url("/images/login/background-login.png") no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .page-content {
+        text-align: center;
+        padding-top: 20px;
+        padding-left: 10%;
+        padding-right: 10%;
+        margin: auto;
+    }
+
+    .modal-dialog {
+        margin-top: 10rem !important;
+        width: 370px;
+    }
+
+    .text-info-receive {
+        font-size: 10px;
+        font-family: UTMAVO;
+        color: #ffc600;
+    }
+
+    .img-gift {
+        margin-top: 10px;
+    }
+    .header-help {
+        background-color: #122db4;
+    }
+    .header-help {
+        color: white;
+        font-family: ObelixPro;
+        font-size:16px;
+        z-index:2;
+    }
+    .title-help {
+        text-align:center;
+        width: 100%;
+    }
+    .image-girl {
+        position: absolute;
+        left: -25px;
+        top: -25px;
+    }
+    .image-girl > img{
+        max-width: 50%;
+    }
+    .image-wheel {
+        position: absolute;
+        width: 100%;
+        left: calc(50% - 70px);
+        top: -105px;
+        z-index: 1;
+    }
+    .image-wheel > img{
+        max-width:35%;
+    }
+    .img-close-popup {
+        position: absolute;
+        right: -30px;
+        top: -12px;
+        -webkit-appearance: none;
+        opacity: 1 !important;
+        padding:0px !important;
+        margin:0px !important;
+    }
+    .img-close-popup > img{
+        max-width:50%;
+    }
+    .text-info-help {
+        font-size: 12px;
+        font-family: UTMAVOBOLD;
+        text-transform: uppercase;
+        margin-bottom:15px;
+    }
+    .modal-body-help {
+        border: 2px solid #216ae7;
+        border-radius: 4px;
+        background-color: #091a6d;
+        padding-top: 15px
+    }
+    .modal-dialog-help {
+        margin-top: 8rem !important;
+    }
+    .img-footer-left-help {
+        position: absolute;
+        top: -105px;
+        left: -50px;
+    }
+    .img-footer-right-help {
+        position: absolute;
+        right: -60px;
+        top: -60px;
+    }
+</style>
+<script>
+    var padding = { top: 40, right: 0, bottom: 0, left: 0 },
+        w = 350 - padding.left - padding.right,
+        h = 350 - padding.top - padding.bottom,
+        r = Math.min(w, h) / 2,
+        rotation = 0,
+        oldrotation = 0,
+        picked = 100000,
+        oldpick = [],
+        color = d3.scale.category20();//category20c()
+    //randomNumbers = getRandomNumbers();
+    //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
+    var data = [
+        { "label": "Dell LAPTOP", "value": 1, "url": "/images/item/item-gift.png" }, // padding
+        { "label": "IMAC PRO", "value": 2, "url": "/images/item/item-gift.png" }, //font-family
+        { "label": "SUZUKI", "value": 3, "url": "/images/item/item-gift.png" }, //color
+        { "label": "HONDA", "value": 4, "url": "/images/item/item-gift.png" }, //font-weight
+        { "label": "FERRARI", "value": 5, "url": "/images/item/item-gift.png" }, //font-size
+        { "label": "APARTMENT", "value": 6, "url": "/images/item/item-gift.png" }, //background-color
+    ];
+    var svg = d3.select('#chart')
+        .append("svg")
+        .data([data])
+        .attr("width", w + padding.left + padding.right)
+        .attr("height", h + padding.top + padding.bottom);
+    var imgArrow = svg.selectAll("image").data([0]);
+    imgArrow.enter()
+        .append("svg:image")
+        .attr("x", "145")
+        .attr("y", "-7")
+        .attr("width", "60")
+        .attr("height", "60")
+        .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+        .attr("href", "/images/kim/kim-quay.png");
+    var container = svg.append("g")
+        .attr("class", "chartholder")
+        .attr("transform", "translate(" + (w / 2 + padding.left) + "," + (h / 2 + padding.top) + ")");
+    var vis = container
+        .append("g");
+
+    var pie = d3.layout.pie().sort(null).value(function (d) { return 1; });
+    // declare an arc generator function
+    var arc = d3.svg.arc().outerRadius(r);
+    // select paths, use arc generator to draw
+    var arcs = vis.selectAll("g.slice")
+        .data(pie)
+        .enter()
+        .append("g")
+        .attr("class", "slice");
+
+    arcs.append("path")
+        .attr("fill", function (d, i) { return color(i); })
+        .attr("d", function (d) { return arc(d); });
+    // add the text
+    arcs.append("text").attr("transform", function (d) {
+        d.innerRadius = 0;
+        d.outerRadius = r;
+        d.angle = (d.startAngle + d.endAngle) / 2;
+        return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius - 10) + ")";
+    })
+        .attr("text-anchor", "end")
+        .text(function (d, i) {
+            return data[i].value;
+        });
+    //arcs.append("svg:image")
+    //    .attr("x", "-60")
+    //    .attr("y", "-45")
+    //    .attr("width", "60")
+    //    .attr("height", "90")
+    //    .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    //    .attr("href", "images/item/item-gift.png")
+    //    .attr("transform", function (d) {
+            
+    //        d.innerRadius = 0;
+    //        d.outerRadius = r;
+    //        d.angle = (d.startAngle + d.endAngle) / 2;
+    //        return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius - 10) + ")";
+    //    });
+   
+    container.append("circle")
+        .attr("class", "circle-wheel")
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .attr("r", 40)
+        .style({ "fill": "white", "cursor": "pointer" });
+
+
+    //var imgs = container.selectAll("image").data([0]);
+    //imgs.enter()
+    container.append("svg:image")
+        .attr("class", "circle-wheel")
+        .attr("x", "-45")
+        .attr("y", "-46")
+        .attr("width", "90")
+        .attr("height", "90")
+        .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+        .attr("href", "/images/kim/button-quay.png");
+    //spin text
+    container.append("text")
+        .attr("x", 0)
+        .attr("y", 8)
+        .attr("text-anchor", "middle")
+        .text("QUAY")
+        .style({ "font-weight": "bold", "font-size": "15px" });
+    //imgs.on("click", spin);
+    $(".circle-wheel").on("click", spin);
+    var count = 0;
+    function spin(d) {
+        
+
+        $(".circle-wheel").on("click", null);
+        if (count > 0) {
+            $(".circle-wheel").on("click", null);
+            return;
+        }
+        //all slices have been seen, all done
+        console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+        if (oldpick.length == data.length) {
+            $(".circle-wheel").on("click", null);
+            return;
+        }
+        debugger
+        var ps = 360 / data.length
+         picked = 4;
+         rotation = (data.length - picked) * ps + 3 * 360;
+        //rotation = rotation - (90 - Math.round(ps));
+        vis.transition()
+            .duration(3000)
+            .attrTween("transform", rotTween)
+            .each("end", function () {
+                //mark question as seen
+                d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+                    .attr("fill", "#111");
+                oldrotation = rotation;
+
+                /* Get the result value from object "data" */
+                console.log(data[picked].value)
+
+                /* Comment the below line for restrict spin to sngle time */
+                $(".circle-wheel").on("click", spin);
+            });
+        count++;
+    }
+    
+    function rotTween(to) {
+        var i = d3.interpolate(oldrotation % 360, rotation);
+        return function (t) {
+            return "rotate(" + i(t) + ")";
+        };
+    }
+
+
+    function getRandomNumbers() {
+        var array = new Uint16Array(1000);
+        var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
+        if (window.hasOwnProperty("crypto") && typeof window.crypto.getRandomValues === "function") {
+            window.crypto.getRandomValues(array);
+            console.log("works");
+        } else {
+            //no support for crypto, get crappy random numbers
+            for (var i = 0; i < 1000; i++) {
+                array[i] = Math.floor(Math.random() * 100000) + 1;
+            }
+        }
+        return array;
+    }
+
+    $(function () {
+        $("#out-of-turn").click(function () {
+            $("#out-of-turn-modal").modal();
+        });
+        $("#popup-error").click(function () {
+            $("#popup-error-modal").modal();
+        });
+        $("#popup-success").click(function () {
+            $("#popup-success-modal").modal();
+        });
+        $("#popup-help").click(function () {
+            $("#popup-help-modal").modal();
+        });
+    });
+
+</script>
