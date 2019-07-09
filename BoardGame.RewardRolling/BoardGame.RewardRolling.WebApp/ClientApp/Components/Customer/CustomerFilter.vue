@@ -25,11 +25,17 @@
             datetime
         },
         computed: {
-            displayedCreatedAtMin() {
-                return dateUtils.format(new Date(), "DD/MM/YYYY");
+            displayedCreatedAtMin: {
+                get: function () {
+                    return dateUtils.format(new Date(), "DD/MM/YYYY");
+                }
+                
             },
-            displayedCreatedAtMax() {
-                return dateUtils.format(new Date(), "DD/MM/YYYY");
+            displayedCreatedAtMax: {
+                get: function () {
+                    return dateUtils.format(new Date(), "DD/MM/YYYY");
+                }
+                
             }
         }
     }
