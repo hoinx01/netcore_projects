@@ -318,19 +318,21 @@
     }
 
     .page-container {
-        background: url("/images/backgound.png") no-repeat;
+        /*background: url("/images/backgound.png") no-repeat;
         height: 100vh;
-        background-size: 100% 100%;
+        background-size: 100% 100%;*/
+        background-color: #0c051d;
     }
 
     .container {
         max-width: 100%;
         padding: 0px;
     }
-    /*.page-container_shadow {
-        background: url("/images/back-ground.png") no-repeat;
+    .page-container_shadow {
+        background: url("/images/backgound.png") no-repeat;
         height: 100vh;
-    }*/
+        background-size: 100% 100%;
+    }
     .page-bar {
         text-align: center;
         padding-top: 20px;
@@ -624,16 +626,12 @@
     //randomNumbers = getRandomNumbers();
     //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
     var data = [
-        { "label": "Dell LAPTOP", "value": 1, "url": "" }, // padding
-        { "label": "IMAC PRO", "value": 2, "question": "What CSS property is used for changing the font?" }, //font-family
-        { "label": "SUZUKI", "value": 3, "question": "What CSS property is used for changing the color of text?" }, //color
-        { "label": "HONDA", "value": 4, "question": "What CSS property is used for changing the boldness of text?" }, //font-weight
-        { "label": "FERRARI", "value": 5, "question": "What CSS property is used for changing the size of text?" }, //font-size
-        { "label": "APARTMENT", "value": 6, "question": "What CSS property is used for changing the background color of a box?" }, //background-color
-        { "label": "IPAD PRO", "value": 7, "question": "Which word is used for specifying an HTML tag that is inside another tag?" }, //nesting
-        { "label": "LAND", "value": 8, "question": "Which side of the box is the third number in: margin:1px 1px 1px 1px; ?" }, //bottom
-        { "label": "MOTOROLLA", "value": 9, "question": "What are the fonts that don't have serifs at the ends of letters called?" }, //sans-serif
-        { "label": "BMW", "value": 10, "question": "With CSS selectors, what character prefix should one use to specify a class?" }
+        { "label": "Dell LAPTOP", "value": 1, "url": "/images/item/item-gift.png" }, // padding
+        { "label": "IMAC PRO", "value": 2, "url": "/images/item/item-gift.png" }, //font-family
+        { "label": "SUZUKI", "value": 3, "url": "/images/item/item-gift.png" }, //color
+        { "label": "HONDA", "value": 4, "url": "/images/item/item-gift.png" }, //font-weight
+        { "label": "FERRARI", "value": 5, "url": "/images/item/item-gift.png" }, //font-size
+        { "label": "APARTMENT", "value": 6, "url": "/images/item/item-gift.png" }, //background-color
     ];
     var svg = d3.select('#chart')
         .append("svg")
@@ -677,17 +675,23 @@
     })
         .attr("text-anchor", "end")
         .text(function (d, i) {
-            return data[i].label;
+            return data[i].value;
         });
-
-    //make arrow
-    //svg.append("g")
-    //    .attr("transform", "translate(" + (w + padding.left + padding.right) + "," + ((h / 2) + padding.top) + ")")
-    //    .append("path")
-    //    .attr("d", "M-" + (r * .15) + ",0L0," + (r * .05) + "L0,-" + (r * .05) + "Z")
-    //    .style({ "fill": "black" });
-    //draw spin circle
-    // container.append('<defs><pattern id = "image" x = "0" y = "0" patternUnits = "userSpaceOnUse" height = "1" width = "1" ><image x="0" y="0" xlink: href="url.png"></image></pattern></defs >')
+    //arcs.append("svg:image")
+    //    .attr("x", "-60")
+    //    .attr("y", "-45")
+    //    .attr("width", "60")
+    //    .attr("height", "90")
+    //    .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    //    .attr("href", "images/item/item-gift.png")
+    //    .attr("transform", function (d) {
+            
+    //        d.innerRadius = 0;
+    //        d.outerRadius = r;
+    //        d.angle = (d.startAngle + d.endAngle) / 2;
+    //        return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius - 10) + ")";
+    //    });
+   
     container.append("circle")
         .attr("class", "circle-wheel")
         .attr("cx", 0)
@@ -696,61 +700,16 @@
         .style({ "fill": "white", "cursor": "pointer" });
 
 
-    var imgs = container.selectAll("image").data([0]);
-    imgs.enter()
-        .append("svg:image")
+    //var imgs = container.selectAll("image").data([0]);
+    //imgs.enter()
+    container.append("svg:image")
+        .attr("class", "circle-wheel")
         .attr("x", "-45")
         .attr("y", "-46")
         .attr("width", "90")
         .attr("height", "90")
         .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
         .attr("href", "/images/kim/button-quay.png");
-    imgs.on("click", spin);
-    $("text").on("click", spin);
-    function spin(d) {
-
-        container.on("click", null);
-        //all slices have been seen, all done
-        console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
-        if (oldpick.length == data.length) {
-            console.log("done");
-            container.on("click", null);
-            return;
-        }
-        var ps = 360 / data.length,
-            pieslice = Math.round(1440 / data.length),
-            rng = Math.floor((Math.random() * 1440) + 360);
-
-        rotation = (Math.round(rng / ps) * ps);
-
-        picked = Math.round(data.length - (rotation % 360) / ps);
-        picked = picked >= data.length ? (picked % data.length) : picked;
-        if (oldpick.indexOf(picked) !== -1) {
-            d3.select(this).call(spin);
-            return;
-        } else {
-            oldpick.push(picked);
-        }
-        rotation += 90 - Math.round(ps / 2);
-        vis.transition()
-            .duration(3000)
-            .attrTween("transform", rotTween)
-            .each("end", function () {
-                //mark question as seen
-                d3.select(".slice:nth-child(" + (picked + 1) + ") path")
-                    .attr("fill", "#111");
-                //populate question
-                d3.select("#question h1")
-                    .text(data[picked].question);
-                oldrotation = rotation;
-
-                /* Get the result value from object "data" */
-                console.log(data[picked].value)
-
-                /* Comment the below line for restrict spin to sngle time */
-                container.on("click", spin);
-            });
-    }
     //spin text
     container.append("text")
         .attr("x", 0)
@@ -758,6 +717,46 @@
         .attr("text-anchor", "middle")
         .text("QUAY")
         .style({ "font-weight": "bold", "font-size": "15px" });
+    //imgs.on("click", spin);
+    $(".circle-wheel").on("click", spin);
+    var count = 0;
+    function spin(d) {
+        
+
+        $(".circle-wheel").on("click", null);
+        if (count > 0) {
+            $(".circle-wheel").on("click", null);
+            return;
+        }
+        //all slices have been seen, all done
+        console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+        if (oldpick.length == data.length) {
+            $(".circle-wheel").on("click", null);
+            return;
+        }
+        debugger
+        var ps = 360 / data.length
+         picked = 4;
+         rotation = (data.length - picked) * ps + 3 * 360;
+        //rotation = rotation - (90 - Math.round(ps));
+        vis.transition()
+            .duration(3000)
+            .attrTween("transform", rotTween)
+            .each("end", function () {
+                //mark question as seen
+                d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+                    .attr("fill", "#111");
+                oldrotation = rotation;
+
+                /* Get the result value from object "data" */
+                console.log(data[picked].value)
+
+                /* Comment the below line for restrict spin to sngle time */
+                $(".circle-wheel").on("click", spin);
+            });
+        count++;
+    }
+    
     function rotTween(to) {
         var i = d3.interpolate(oldrotation % 360, rotation);
         return function (t) {
