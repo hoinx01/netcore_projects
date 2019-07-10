@@ -1,5 +1,8 @@
 ﻿<template>
     <div id="left-menu-container">
+        <div id="logo-box">
+            <h3>Boardgame Admin</h3>
+        </div>
         <div id="menu-item-container">
             <ul>
                 <li>
@@ -52,6 +55,8 @@
         flex-basis:10%;
     }
     #menu-item-container{
+        margin-top: 20px;
+        margin-bottom: 20px;
         flex-grow:1
     }
     ul{

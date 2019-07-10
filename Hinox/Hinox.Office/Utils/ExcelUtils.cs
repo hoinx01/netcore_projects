@@ -4,6 +4,7 @@ using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Text;
 using System.Linq;
 using System.Reflection;
@@ -168,7 +169,64 @@ namespace Hinox.Office.Utils
 
             throw new Exception(string.Format("Missing converter to convert from {0} to {1}", inputType.Name, outputType.Name));
         }
-        
+
+        public static void WriteObjectToRow<T>(T obj, IRow row, List<PropertyColumnIndex> propertyColumnIndices)
+        {
+            foreach (var propertyColumnIndex in propertyColumnIndices)
+            {
+                var prop = propertyColumnIndex.Property;
+                var columnIndex = propertyColumnIndex.ColumnIndex;
+                var cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+                var propValue = prop.GetValue(obj);
+
+                SetCellValue(cell, propValue);
+            }
+        }
+
+        public static void SetCellValue(ICell cell, object cellValue)
+        {
+            if (cellValue == null)
+                return;
+
+            var cellDataType = cellValue.GetType();
+            var cellType = CellTypeDataType.List.FirstOrDefault(f => ReferenceEquals(cellDataType, f.DataType)).CellType;
+
+            cell.SetCellType(cellType);
+
+            if (cellDataType == typeof(int))
+                cell.SetCellValue(Convert.ToInt32(cellValue));
+            else if (cellDataType == typeof(int?))
+                cell.SetCellValue(Convert.ToInt32(cellValue));
+
+            else if (cellDataType == typeof(long))
+                cell.SetCellValue(Convert.ToInt64(cellValue));
+            else if (cellDataType == typeof(long?))
+                cell.SetCellValue(Convert.ToInt64(cellValue));
+
+            else if (cellDataType == typeof(decimal))
+                cell.SetCellValue(Convert.ToDouble(cellValue));
+            else if (cellDataType == typeof(decimal?))
+                cell.SetCellValue(Convert.ToDouble(cellValue));
+
+            else if (cellDataType == typeof(double))
+                cell.SetCellValue(Convert.ToDouble(cellValue));
+            else if (cellDataType == typeof(double?))
+                cell.SetCellValue(Convert.ToDouble(cellValue));
+
+            else if (cellDataType == typeof(string))
+                cell.SetCellValue(Convert.ToString(cellValue));
+
+            else if (cellDataType == typeof(bool))
+                cell.SetCellValue(Convert.ToBoolean(cellValue));
+            else if (cellDataType == typeof(bool?))
+                cell.SetCellValue(Convert.ToBoolean(cellValue));
+
+            else if (cellDataType == typeof(DateTime))
+                cell.SetCellValue(Convert.ToDateTime(cellValue));
+            else if (cellDataType == typeof(DateTime?))
+                cell.SetCellValue(Convert.ToDateTime(cellValue));
+        }
     }
 
     public class CellTypeDataType

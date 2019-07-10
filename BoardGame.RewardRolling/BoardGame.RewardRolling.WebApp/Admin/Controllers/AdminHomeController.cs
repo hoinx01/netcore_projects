@@ -11,6 +11,7 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
     {
         public ActionResult Index()
         {
+
             return View();
         }
     }

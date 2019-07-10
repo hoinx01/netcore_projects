@@ -79,10 +79,10 @@
         },
         methods: {
             changePageIndex(pageIndex) {
-
+                this.$store.dispatch('customer/CHANGE_FILTER_PAGEINDEX', pageIndex);
             },
             changePageSize(pageSize) {
-
+                this.$store.dispatch('customer/CHANGE_FILTER_PAGESIZE', pageSize);
             },
             exportExcel() {
 
