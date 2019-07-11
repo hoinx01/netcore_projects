@@ -17,9 +17,45 @@
       },
       "FirstDataRow": 1,
       "MaxBlankRow": 10
+    },
+    "ExportCustomer": {
+      "Templates": {
+        "nhanh": {
+          "TemplateFilePath": "", 
+          "ColumnNameFieldNameMap": {
+            "Họ và tên": "FullName",
+            "Điện thoại": "PhoneNumber",
+            "Địa chỉ": "Address.Detail",
+            "Thành phố": "Address.Province",
+            "Quận huyện": "Address.District",
+            "Mã khách hàng": "",
+            "Email": "Email",
+            "Facebook link": "",
+            "Ngày sinh": "Birthday",
+            "Giới tính": "Gender",
+            "Loại": "",
+            "Tên công ty": "",
+            "Điện thoại người giới thiệu": "",
+            "Mã số thuế": "",
+            "Ngày bắt đầu": "",
+            "Điểm tích lũy": "",
+            "Tiền tích lũy": "",
+            "Ghi chú": "",
+            "Nhóm khách hàng": "",
+            "Người phụ trách": ""
+          },
+          "CodeHeaderRange": {
+            "FirstRow": 0,
+            "LastRow": 0,
+            "FirstColumn": 0,
+            "LastColumn": 19
+          },
+          "SheetIndex": 1,
+          "FirstDataRow": 1
+        }  
+      } 
+      
     }
-  },
-  "ExportCustomer": {
-
   }
+  
 }
