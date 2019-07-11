@@ -1,4 +1,5 @@
-﻿using BoardGame.RewardRolling.Core.Statics;
+﻿using BoardGame.RewardRolling.Core.Configurations.ExcelImportExport;
+using BoardGame.RewardRolling.Core.Statics;
 using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
 using BoardGame.RewardRolling.Data.Mongo.Entities;
 using BoardGame.RewardRolling.Data.Mongo.Filters;
@@ -13,7 +14,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using NLog;
-using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 using System;
@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using BoardGame.RewardRolling.Core.Configurations.ExcelImportExport;
+using BoardGame.RewardRolling.WebApp.Services.Interfaces;
 
 namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
 {
@@ -30,12 +30,15 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
     {
         private readonly Logger logger = LogManager.GetLogger("UploadFile");
         private readonly IMdRollingCodeDao mdRollingCodeDao;
+        private readonly IUploadService uploadService;
 
         public AdminRollingCodeController(
-            IMdRollingCodeDao mdRollingCodeDao
+            IMdRollingCodeDao mdRollingCodeDao,
+            IUploadService uploadService
             )
         {
             this.mdRollingCodeDao = mdRollingCodeDao;
+            this.uploadService = uploadService;
         }
 
         [HttpPost]
@@ -51,27 +54,7 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
                 logger.Error(e);
             }
 
-            var fileDirectory = "wwwroot/iofiles/upload/{0:yyyy}/{0:MM}/{0:dd}/{0:HH}/{0:mm}";
-            var directory = string.Format(fileDirectory, DateTime.Now);
-
-            var originalPath = string.Format("{0}/{1}", directory, file.FileName);
-
-            string extension = Path.GetExtension(originalPath);
-
-            var newFileName = 
-                file.FileName.ToUnsignText().RemoveSpecialCharacters().Replace(" ", "-").ToLower() 
-                + "-" 
-                + DateTime.Now.Ticks.ToString();
-
-            if (!Directory.Exists(directory))
-                Directory.CreateDirectory(directory);
-
-            var fullPath = string.Format("{0}/{1}{2}", directory, newFileName, extension);
-
-            using (FileStream bits = new FileStream(fullPath, FileMode.Create))
-            {
-                await file.CopyToAsync(bits);
-            }
+            var fullPath = await uploadService.StoreUploadedFile(file);
 
             var importedFileLayout = AppSettings.Get<ImportRollingCodeFileLayout>("ExcelFileLayouts:ImportRollingCode");
 

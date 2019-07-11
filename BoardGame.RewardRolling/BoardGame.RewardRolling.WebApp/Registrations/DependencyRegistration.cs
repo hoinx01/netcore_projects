@@ -32,6 +32,9 @@ namespace BoardGame.RewardRolling.WebApp.Registrations
             services.AddSingleton<IMdCampaignDao, MdCampaignDao>();
             services.AddSingleton<IMdUserDao, MdUserDao>();
             services.AddSingleton<IMdCustomerDao, MdCustomerDao>();
+            services.AddSingleton<IMdCityDao, MdCityDao>();
+            services.AddSingleton<IMdDistrictDao, MdDistrictDao>();
+            services.AddSingleton<IMdCommuneDao, MdCommuneDao>();
 
             services.AddSingleton<IRewardQueryService, RewardQueryService>();
             services.AddSingleton<IRewardService, RewardService>();
@@ -40,6 +43,8 @@ namespace BoardGame.RewardRolling.WebApp.Registrations
             services.AddSingleton<ICampaignCommandService, CampaignCommandService>();
             services.AddSingleton<IRollingCodeService, RollingCodeService>();
             services.AddSingleton<ICustomerService, CustomerService>();
+            services.AddSingleton<IUploadService, UploadService>();
+            services.AddSingleton<IAdministrativeUnitService, AdministrativeUnitService>();
         }
     }
 }

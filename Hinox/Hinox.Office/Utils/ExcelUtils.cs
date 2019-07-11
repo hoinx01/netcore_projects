@@ -33,6 +33,9 @@ namespace Hinox.Office.Utils
             var columnNameFieldNameLowerMap = new Dictionary<string, string>();
             foreach(var key in columnNameFieldNameMap.Keys)
             {
+                var fieldName = columnNameFieldNameMap[key];
+                if(string.IsNullOrWhiteSpace(fieldName))
+                    continue;
                 columnNameFieldNameLowerMap.Add(key.Trim().ToLower(), columnNameFieldNameMap[key].Trim().ToLower());
             }
 

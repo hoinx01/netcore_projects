@@ -18,10 +18,32 @@
       "FirstDataRow": 1,
       "MaxBlankRow": 10
     },
+    "ImportStandardAdministrativeUnit": {
+      "SheetIndex": 0,
+      "KeyColumnName": "Mã PX",
+      "ColumnNameFieldNameMap": {
+        "Tỉnh Thành Phố": "CityName",
+        "Mã TP": "CityId",
+        "Quận Huyện": "DistrictName",
+        "Mã QH": "DistrictId",
+        "Phường Xã": "CommuneName",
+        "Mã PX": "CommuneId",
+        "Cấp": "",
+        "Tên Tiếng Anh": "" 
+      },
+      "CodeHeaderRange": {
+        "FirstRow": 0,
+        "LastRow": 0,
+        "FirstColumn": 0,
+        "LastColumn": 7
+      },
+      "FirstDataRow": 1,
+      "MaxBlankRow": 10
+    },
     "ExportCustomer": {
       "Templates": {
         "nhanh": {
-          "TemplateFilePath": "", 
+          "TemplateFilePath": "",
           "ColumnNameFieldNameMap": {
             "Họ và tên": "FullName",
             "Điện thoại": "PhoneNumber",
@@ -52,9 +74,9 @@
           },
           "SheetIndex": 1,
           "FirstDataRow": 1
-        }  
-      } 
-      
+        }
+      }
+
     }
   }
   
