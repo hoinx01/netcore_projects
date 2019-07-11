@@ -40,5 +40,5 @@ const publicPaths = [
 router.beforeEach((to, from, next) => {
     next();
 })
-
+console.log("a");
 export default router;
