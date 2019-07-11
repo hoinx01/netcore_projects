@@ -7,8 +7,8 @@ a.navbar-brand {
   word-break: break-all;
 }
 @font-face {
-    font-family: fontButton;
-    src: url("'/lib/font/UTM Talling.ttf'");
+    font-family: FontButton;
+    src: url("/lib/font/UTMTalling.ttf");
 }
 @font-face {
     font-family: ObelixPro;
