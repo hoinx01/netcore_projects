@@ -125,5 +125,25 @@ namespace BoardGame.RewardRolling.WebApp.Services
             await districtDao.AddAsync(mdDistricts);
             await communeDao.AddAsync(mdCommunes);
         }
+
+        public async Task<List<CityModel>> GetAllCityAsync()
+        {
+            var mdCities = await cityDao.GetAllAsync();
+            var cityModels = mdCities.Select(s => Mapper.Map<CityModel>(s)).ToList();
+            return cityModels;
+        }
+        public async Task<List<DistrictModel>> GetDistrictByCityIdAsync(string cityId)
+        {
+            var mdDistricts = await districtDao.GetByCityIdAsync(cityId);
+            var districtModels = mdDistricts.Select(s => Mapper.Map<DistrictModel>(s)).ToList();
+            return districtModels;
+        }
+
+        public async Task<List<CommuneModel>> GetCommuneByDistrictId(string districtId)
+        {
+            var mdCommunes = await communeDao.GetByDistrictIdAsync(districtId);
+            var communeModels = mdCommunes.Select(s => Mapper.Map<CommuneModel>(s)).ToList();
+            return communeModels;
+        }
     }
 }
