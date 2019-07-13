@@ -26,8 +26,12 @@ namespace BoardGame.RewardRolling.WebApp.Controllers
         [Route("spins")]
         public async Task<RollResultModel> Roll([FromBody] CustomerRollViewModel model)
         {
-            var result = await rollingCodeService.Roll(model);
-            return result;
+            //var result = await rollingCodeService.Roll(model);
+            RollResultModel resultModel = new RollResultModel();
+            //resultModel.RewardId = 1;
+            resultModel.RewardOrdinal = 2;
+            //resultModel.CampaignId = 1;
+            return resultModel;
         }
     }
 }

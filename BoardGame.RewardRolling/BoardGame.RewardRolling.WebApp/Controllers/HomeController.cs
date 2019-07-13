@@ -5,17 +5,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BoardGame.RewardRolling.WebApp.Models;
+using BoardGame.RewardRolling.WebApp.Admin.Services.Interfaces;
 
 namespace BoardGame.RewardRolling.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly ICampaignQueryService campaignQueryService;
+        public HomeController(
+           ICampaignQueryService campaignQueryService
+       )
         {
+            this.campaignQueryService = campaignQueryService;
+        }
+        public async Task<ActionResult> Index()
+        {
+            var model = await campaignQueryService.GetCurrentCampaign();
             ViewData["Title"] = "Trang chủ";
+            return View(model);
+        }
+        public async Task<ActionResult> Reward()
+        {
+            ViewData["Title"] = "Đăng nhập";
             return View();
         }
-        public ActionResult Login()
+        [HttpPost]
+        public async Task<ActionResult> PostInfo()
         {
             ViewData["Title"] = "Đăng nhập";
             return View();
