@@ -20,6 +20,9 @@
                 <li>
                     <router-link to="/admin/customers">Quản lý khách hàng</router-link>
                 </li>
+                <li>
+                    <router-link to="/admin/administrative_units">Quản lý đơn vị hành chính</router-link>
+                </li>
             </ul>
         </div>
         <current-user :class="{user_box: true, hidden: !authenticated}"></current-user>

@@ -3,6 +3,7 @@ using BoardGame.RewardRolling.Core.Auth;
 using BoardGame.RewardRolling.Core.Statics;
 using BoardGame.RewardRolling.Data.Mongo.Entities;
 using BoardGame.RewardRolling.Service.Domains;
+using BoardGame.RewardRolling.WebApp.Models.AdministrativeUnit;
 using BoardGame.RewardRolling.WebApp.Registrations.ObjectConverters;
 using Hinox.Static.Enumerate;
 using MongoDB.Bson;
@@ -41,6 +42,9 @@ namespace BoardGame.RewardRolling.WebApp.Registrations
             cfg.CreateMap<int, CampaignStatus>().ConvertUsing<CampaignStatusIdToEnumerationConverter>();
             cfg.CreateMap<ApplicationUser, MdUser>().ConvertUsing<UserIdentityToMdEntityConverter>();
             cfg.CreateMap<MdUser, ApplicationUser>().ConvertUsing<UserMdEntityToIdentityConverter>();
+            cfg.CreateMap<MdCity, CityModel>().ConvertUsing<CityMdEntityToModelConverter>();
+            cfg.CreateMap<MdDistrict, DistrictModel>().ConvertUsing<DistrictMdEntityToModelConverter>();
+            cfg.CreateMap<MdCommune, CommuneModel>().ConvertUsing<CommuneMdEntityToModelConverter>();
         }
     }
 

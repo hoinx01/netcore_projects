@@ -13,6 +13,8 @@ import MyAccount from './Pages/MyAccount.vue'
 import ChangePassword from './Pages/ChangePassword.vue'
 import CreateUser from './Pages/CreateUser.vue'
 import CustomerManager from './Pages/CustomerManager.vue'
+import AdministrativeUnitManager from './Pages/AdministrativeUnitManager.vue'
+
 
 
 const routes = [
@@ -27,7 +29,8 @@ const routes = [
     { path: '/admin/me', component: MyAccount },
     { path: '/admin/change_password', component: ChangePassword },
     { path: '/admin/users/create', component: CreateUser },
-    { path: '/admin/customers', component: CustomerManager }
+    { path: '/admin/customers', component: CustomerManager },
+    { path: '/admin/administrative_units', component: AdministrativeUnitManager }
 ];
 Vue.use(VueRouter);
 

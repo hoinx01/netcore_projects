@@ -27,6 +27,15 @@
         filter: "/admin/api/customers.json",
         getById: "/admin/api/customers/{id}.json",
         exportExcel: "/admin/api/customers/export_excel.json"
+    },
+    city: {
+        getAll: "/admin/api/cities.json"
+    },
+    district: {
+        getDistrictByCityId: "/admin/api/districts.json"
+    },
+    commune: {
+        getCommuneByDistrictId: "/admin/api/communes.json"
     }
 };
 
