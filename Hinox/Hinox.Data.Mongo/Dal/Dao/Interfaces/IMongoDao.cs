@@ -3,12 +3,14 @@ using Hinox.Data.Mongo.Filters;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Hinox.Data.Mongo.Dal.Dao.Interfaces
 {
     public interface IMongoDao<T, TId> where T : IMongoEntity<TId>
     {
+        IMongoCollection<T> Collection { get; }
         Task<T> GetByIdAsync(TId id);
         Task AddAsync(T dto);
         Task AddAsync(IEnumerable<T> listDto);

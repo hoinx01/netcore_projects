@@ -13,6 +13,7 @@ namespace BoardGame.RewardRolling.WebApp.Services.Interfaces
             List<ExcelStandardAdministrativeUnitModel> excelModels
         );
 
+        Task Reset();
         Task<List<CityModel>> GetAllCityAsync();
         Task<List<DistrictModel>> GetDistrictByCityIdAsync(string cityId);
         Task<List<CommuneModel>> GetCommuneByDistrictId(string districtId);

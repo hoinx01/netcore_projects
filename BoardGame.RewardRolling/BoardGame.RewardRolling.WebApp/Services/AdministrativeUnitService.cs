@@ -10,6 +10,7 @@ using BoardGame.RewardRolling.WebApp.Admin.Models.AdministrativeUnit;
 using BoardGame.RewardRolling.WebApp.Models.AdministrativeUnit;
 using BoardGame.RewardRolling.WebApp.Services.Interfaces;
 using Hinox.Static.Enumerate;
+using MongoDB.Driver;
 
 namespace BoardGame.RewardRolling.WebApp.Services
 {
@@ -29,6 +30,14 @@ namespace BoardGame.RewardRolling.WebApp.Services
             this.districtDao = districtDao;
             this.communeDao = communeDao;
         }
+
+        public async Task Reset()
+        {
+            await cityDao.Collection.DeleteManyAsync(FilterDefinition<MdCity>.Empty);
+            await districtDao.Collection.DeleteManyAsync(FilterDefinition<MdDistrict>.Empty);
+            await communeDao.Collection.DeleteManyAsync(FilterDefinition<MdCommune>.Empty);
+        }
+
         public async Task ImportExcelAdministrativeUnit(
             List<ExcelStandardAdministrativeUnitModel> excelModels
             )
@@ -46,9 +55,9 @@ namespace BoardGame.RewardRolling.WebApp.Services
                         Name = excelModel.CityName,
                         Districts = new List<DistrictModel>()
                     };
-                    if(excelModel.CityName.StartsWith("Thành phố"))
+                    if(excelModel.CityName.ToLower().StartsWith("thành phố"))
                         cityModel.Level = CityLevel.City;
-                    else if(excelModel.CityName.StartsWith("Tỉnh"))
+                    else if(excelModel.CityName.ToLower().StartsWith("tỉnh"))
                         cityModel.Level = CityLevel.Province;
                     cityModels.Add(cityModel);
                 }
@@ -65,12 +74,14 @@ namespace BoardGame.RewardRolling.WebApp.Services
                         Communes = new List<CommuneModel>()
                     };
 
-                    if(excelModel.DistrictName.StartsWith("Quận"))
+                    if(excelModel.DistrictName.ToLower().StartsWith("quận"))
                         districtModel.Level = DistrictLevel.District;
-                    else if (excelModel.DistrictName.StartsWith("Thị xã"))
+                    else if (excelModel.DistrictName.ToLower().StartsWith("thị xã"))
                         districtModel.Level = DistrictLevel.Borough;
-                    else if (excelModel.DistrictName.StartsWith("Huyện"))
+                    else if (excelModel.DistrictName.ToLower().StartsWith("huyện"))
                         districtModel.Level = DistrictLevel.Town;
+                    else if (excelModel.DistrictName.ToLower().StartsWith("thành phố"))
+                        districtModel.Level = DistrictLevel.SubCity;
 
                     cityModel.Districts.Add(districtModel);
                 }
@@ -80,11 +91,11 @@ namespace BoardGame.RewardRolling.WebApp.Services
                     Id = excelModel.CommuneId,
                     Name =  excelModel.CommuneName
                 };
-                if(excelModel.CommuneName.StartsWith("Phường"))
+                if(excelModel.CommuneName.ToLower().StartsWith("phường"))
                     communeModel.Level = CommuneLevel.Ward;
-                else if (excelModel.CommuneName.StartsWith("Thị trấn"))
+                else if (excelModel.CommuneName.ToLower().StartsWith("thị trấn"))
                     communeModel.Level = CommuneLevel.HighCommune;
-                else if (excelModel.CommuneName.StartsWith("Xã"))
+                else if (excelModel.CommuneName.ToLower().StartsWith("xã"))
                     communeModel.Level = CommuneLevel.Commune;
 
                 districtModel.Communes.Add(communeModel);

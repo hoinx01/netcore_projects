@@ -28,6 +28,9 @@
         getById: "/admin/api/customers/{id}.json",
         exportExcel: "/admin/api/customers/export_excel.json"
     },
+    administrativeUnit: {
+        uploadStandardFile: "/admin/api/administrative_units/excel_files"
+    },
     city: {
         getAll: "/admin/api/cities.json"
     },

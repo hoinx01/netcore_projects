@@ -5,7 +5,7 @@ import string from '../Utils/StringExtensions';
 export default {
     async getByDistrictId(districtId) {
         try {
-            var result = await baseRepository.get(jsonUrls.commune.getCommuneByDistrictId, { districtId: districtId });
+            var result = await baseRepository.get(jsonUrls.commune.getCommuneByDistrictId, { params: { districtId: districtId }});
             return Promise.resolve(result);
         }
         catch (exception) {

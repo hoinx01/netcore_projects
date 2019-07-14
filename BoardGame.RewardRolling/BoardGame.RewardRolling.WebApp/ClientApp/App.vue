@@ -67,4 +67,5 @@
     .list-pagination{
         display:flex;
     }
+
 </style>

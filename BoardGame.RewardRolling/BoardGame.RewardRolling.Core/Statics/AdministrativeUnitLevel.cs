@@ -16,9 +16,10 @@ namespace BoardGame.RewardRolling.Core.Statics
     }
     public class DistrictLevel : Enumeration
     {
-        public static DistrictLevel District = new DistrictLevel(1, "Quận");
-        public static DistrictLevel Borough = new DistrictLevel(2, "Thị xã");
-        public static DistrictLevel Town = new DistrictLevel(3, "Huyện");
+        public static DistrictLevel SubCity = new DistrictLevel(1, "Thành phố");
+        public static DistrictLevel District = new DistrictLevel(2, "Quận");
+        public static DistrictLevel Borough = new DistrictLevel(3, "Thị xã");
+        public static DistrictLevel Town = new DistrictLevel(4, "Huyện");
         public DistrictLevel(int id, string name) : base(id, name)
         {
 

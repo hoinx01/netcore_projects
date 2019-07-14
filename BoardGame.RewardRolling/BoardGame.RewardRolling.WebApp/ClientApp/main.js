@@ -13,9 +13,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrashAlt, faPencilAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faPencilAlt, faPlus, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+import { faMinus } from "@fortawesome/free-solid-svg-icons/faMinus";
 
-library.add(faTrashAlt, faPencilAlt, faPlus)
+library.add(faTrashAlt, faPencilAlt, faPlus, faPlusSquare, faMinus);
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 

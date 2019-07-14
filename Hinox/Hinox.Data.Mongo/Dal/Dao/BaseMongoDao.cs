@@ -12,7 +12,7 @@ namespace Hinox.Data.Mongo.Dal.Dao
     public abstract class BaseMongoDao<T, TId> : IMongoDao<T, TId> where T : IMongoEntity<TId>
     {
         protected IMongoDatabase Database;
-        protected IMongoCollection<T> Collection { get; }
+        public IMongoCollection<T> Collection { get; }
         public BaseMongoDao(IMongoDbFactory databaseFactory)
         {
             Database = databaseFactory.GetMongoDatabase<T>();

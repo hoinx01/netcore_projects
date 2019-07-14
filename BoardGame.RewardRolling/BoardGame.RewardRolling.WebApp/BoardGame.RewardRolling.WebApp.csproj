@@ -6,10 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\Components\AdministrativeUnit\PopupImportStandardFile.vue" />
     <None Remove="ClientApp\Components\RollingCode\PopupImportCode.vue" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="ClientApp\Components\AdministrativeUnit\PopupImportStandardFile.vue" />
     <Content Include="ClientApp\Components\RollingCode\PopupImportCode.vue" />
   </ItemGroup>
 

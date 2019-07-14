@@ -39,6 +39,8 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
         {
             var fullPath = await uploadService.StoreUploadedFile(file);
 
+            await administrativeUnitService.Reset();
+
             var importedFileLayout = AppSettings.Get<ImportStandardAdministrativeUnitFileLayout>("ExcelFileLayouts:ImportStandardAdministrativeUnit");
 
             var workbook = new XSSFWorkbook(fullPath);
