@@ -1,4 +1,6 @@
-﻿<div class="page-container">
+﻿@model CampaignModel
+
+<div class="page-container">
     <div class="page-container_shadow">
         <div class="page-bar">
             <div class="row">
@@ -32,14 +34,20 @@
             </div>
         </div>
         <div class="text-lucky-wheel">
-            <img src="~/images/vong_xoay/text-vong-quay.png" style="max-width:15%" />
+            <img src="~/images/vong_xoay/text-vong-quay.png" />
         </div>
         <div class="page-wheel">
             <div class="light-wheel">
-                <div class="flash-wheel">
+                <div class="flash-wheel hide-flash">
                     <div class="elipse-wheel">
-                        <div class="border-wheel">
-                            <div id="chart"></div>
+                        <div class="border-wheel" style="background:url('@Model.LuckyWheel.PointerRack.ImageSrc') no-repeat; background-size:100% 100%">
+                            <div id="chart" style="background:url('@Model.LuckyWheel.MainRim.ImageSrc') no-repeat; background-size:100% 100%"></div>
+                            <div class="pointer-wheel">
+                                <img src="@Model.LuckyWheel.Pointer.ImageSrc" />
+                            </div>
+                            <div class="center-circle">
+                                <img src="@Model.LuckyWheel.CenterCircle.ImageSrc" />
+                            </div>
                             <div class="actor-men">
                                 <img src="~/images/vong_xoay/nhan-vat-nam.png" style="max-width:40%" />
                             </div>
@@ -382,27 +390,37 @@
         max-width: 100%;
         padding: 0px;
     }
+
     .page-container_shadow {
         background: url("/images/back-ground-new.png") no-repeat;
         height: 100vh;
         background-size: 100% 100%;
     }
+
     .page-bar, .page-footer {
         text-align: center;
         padding-top: 20px;
         margin-left: 20%;
         margin-right: 20%;
     }
+
     #chart {
         position: absolute;
-        top: 4px;
-        left: -4px;
-        z-index:10;
+        top: 40px;
+        left: 13px;
+        z-index: 10;
+        width: 315px;
+        height: 315px;
+        /*background: url("/images/background-wheel.png") no-repeat;*/
+        /*background-size: 100% 100%;*/
+        -webkit-transition: -webkit-transform 3s ease-out;
     }
-    a:hover{
-        text-decoration:none !important;
-        color:#fff;
+
+    a:hover {
+        text-decoration: none !important;
+        color: #fff;
     }
+
     .btn-wheel {
         color: #fff;
         display: flex;
@@ -425,71 +443,106 @@
         vertical-align: middle;
         -webkit-appearance: none;
         -moz-appearance: none;
-        padding: 2px;
+        padding: 3px;
         margin-left: 20px;
         min-width: 90px;
     }
+
     .div-btn-wheel {
-        position:relative;
+        position: relative;
         border-radius: 10px;
-        /*-moz-box-shadow: inset 0 0 10px #000000;
-        -webkit-box-shadow: inset 0 0 10px #000000;*/
-        box-shadow: inset 2px 2px 0px #b3009b;
+        -moz-box-shadow: 0px 0px 0px 1px #b3009b, 2px 2px 1px 0px #b3009b;
+        -webkit-box-shadow: 0px 0px 0px 1px #b3009b, 2px 2px 1px 0px #b3009b;
+        box-shadow: 0px 0px 0px 1px #b3009b, 2px 2px 1px 0px #b3009b;
     }
+
         .div-btn-wheel > img {
             max-width: 13px;
             position: absolute;
             top: 5px;
         }
+
         .div-btn-wheel > span {
-           padding-left:15px;
+            padding-left: 15px;
         }
-        .actor-men {
-            position: absolute;
-            right: -300px;
-            z-index: 1;
-        }
+
+    .actor-men {
+        position: absolute;
+        right: -300px;
+        z-index: 1;
+    }
+
     .footer-phone {
         font-family: FontButton;
         font-size: 20px;
         color: #fff;
         vertical-align: middle;
     }
+
+    .pointer-wheel {
+        position: absolute;
+        top: 0px;
+        left: calc(50% - 25px);
+        z-index: 1;
+    }
+
+        .pointer-wheel > img {
+            max-width: 70%;
+        }
+
+    .center-circle {
+        position: absolute;
+        top: 40%;
+        left: 25%;
+        z-index: 10;
+    }
+
+        .center-circle > img {
+            max-width: 50%;
+        }
+
     .actor-women {
         position: absolute;
         left: -160px;
         z-index: 1;
     }
+
     .actor-blue {
         position: absolute;
         left: -240px;
         bottom: 0px;
     }
+
     .dice {
         position: absolute;
         right: -40px;
         bottom: -30px;
     }
+
     .card-blue {
         position: absolute;
         right: -30px;
         bottom: 60px;
     }
+
     .card-red {
         position: absolute;
         left: -110px;
         z-index: 1;
     }
+
     .card-page {
         position: absolute;
         left: -160px;
         bottom: 70px;
     }
+
     .page-wheel, .text-lucky-wheel {
         text-align: center;
         width: 100%;
         margin-top: 20px
     }
+
     .light-wheel {
         width: 400px;
         height: 400px;
@@ -497,6 +550,7 @@
         background: url("/images/vong_xoay/tia-sang.png") no-repeat;
         background-size: 100% 100%;
     }
+
     .flash-wheel {
         width: 385px;
         height: 385px;
@@ -504,6 +558,7 @@
         background: url("/images/vong_xoay/den-nhay.png") no-repeat;
         background-size: 100% 100%;
     }
+
     .elipse-wheel {
         width: 370px;
         height: 385px;
@@ -511,13 +566,14 @@
         background: url("/images/vong_xoay/elipse.png") no-repeat;
         background-size: 100% 100%;
     }
+
     .border-wheel {
         width: 340px;
         height: 370px;
         margin: auto;
-        background: url("/images/vong_xoay/vong-bao-quanh.png") no-repeat;
-        background-size: 100% 100%;
-        position:relative;
+        /*background: url("/images/vong_xoay/vong-bao-quanh.png") no-repeat;
+        background-size: 100% 100%;*/
+        position: relative;
     }
     /*sâs*/
     .page-bar-content_img {
@@ -541,11 +597,10 @@
             top: 12px;
             left: calc(25% - 20px);
         }
-        /*.page-bar-content {
-            width: 100%;
-            position: relative;
-            margin-left: 10%
-        }*/
+
+        .text-lucky-wheel > img {
+            max-width: 15%;
+        }
     }
 
     @@media (max-width: 991px) {
@@ -560,10 +615,10 @@
             text-align: left;
             left: calc(25% - 24px);
         }
-        /*.page-bar-content {
-            width: 100%;
-            position: relative;
-        }*/
+
+        .text-lucky-wheel > img {
+            max-width: 25%;
+        }
     }
 
     .page-bar-content {
@@ -645,12 +700,17 @@
 
     .button-login {
         height: 34px;
-        border: 1px solid #ddd;
-        border-radius: 17px 17px;
         font-family: UTMAVOBOLD;
-        font-size: 16px;
-        padding: 6px 8px;
+        font-size: 14px;
         color: white;
+        background: url(/images/login/background-button.png) no-repeat;
+        background-size: 100% 100%;
+        padding-top: 6px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 13px;
+        text-decoration: none;
+        cursor: pointer;
     }
 
     .img-login-footer {
@@ -684,7 +744,7 @@
     }
 
     .text-info-receive {
-        padding-top:6px;
+        padding-top: 6px;
         font-size: 12px;
         font-family: UTMAVO;
         color: #ffc600;
@@ -693,27 +753,33 @@
     .img-gift {
         margin-top: 10px;
     }
+
     .header-help {
         background-color: #122db4;
     }
+
     .header-help {
         color: white;
         font-family: ObelixPro;
-        font-size:16px;
-        z-index:2;
+        font-size: 16px;
+        z-index: 2;
     }
+
     .title-help {
-        text-align:center;
+        text-align: center;
         width: 100%;
     }
+
     .image-girl {
         position: absolute;
         left: -25px;
         top: -25px;
     }
-    .image-girl > img{
-        max-width: 50%;
-    }
+
+        .image-girl > img {
+            max-width: 50%;
+        }
+
     .image-wheel {
         position: absolute;
         width: 100%;
@@ -721,46 +787,55 @@
         top: -105px;
         z-index: 1;
     }
-    .image-wheel > img{
-        max-width:35%;
-    }
+
+        .image-wheel > img {
+            max-width: 35%;
+        }
+
     .img-close-popup {
         position: absolute;
         right: -30px;
         top: -12px;
         -webkit-appearance: none;
         opacity: 1 !important;
-        padding:0px !important;
-        margin:0px !important;
+        padding: 0px !important;
+        margin: 0px !important;
     }
-    .img-close-popup > img{
-        max-width:50%;
-    }
+
+        .img-close-popup > img {
+            max-width: 50%;
+        }
+
     .text-info-help {
         font-size: 12px;
         font-family: UTMAVOBOLD;
         text-transform: uppercase;
-        margin-bottom:15px;
+        margin-bottom: 15px;
     }
+
     .modal-body-help {
         border: 2px solid #216ae7;
         border-radius: 4px;
         background-color: #091a6d;
         padding-top: 15px
     }
+
     .modal-dialog-help {
         margin-top: 8rem !important;
     }
+
     .img-footer-left-help {
         position: absolute;
         top: -105px;
         left: -50px;
     }
+
     .img-footer-right-help {
         position: absolute;
         right: -60px;
         top: -60px;
     }
+
     .hide-flash {
         -webkit-animation: FLASH-ANIMATION 1s infinite; /* Safari 4+ */
         -moz-animation: FLASH-ANIMATION 1s infinite; /* Fx 5+ */
@@ -776,6 +851,7 @@
             background: url("/images/vong_xoay/den-nhay.png") no-repeat;
             background-size: 100% 100%;
         }
+
         50%, 100% {
             width: 385px;
             height: 385px;
@@ -783,168 +859,334 @@
             background: none;
         }
     }
+    /* ----------- iPhone 5 and 5S ----------- */
+    @@media only screen and (min-device-width: 320px) and (max-device-width: 736px) {
+        .btn-wheel {
+            margin-left: 0px;
+            min-width: 85px;
+            margin-top: 5px;
+        }
+
+        .text-lucky-wheel > img {
+            max-width: 40%;
+        }
+
+        .light-wheel {
+            width: 240px;
+            height: 240px;
+            margin: auto;
+            background: url(/images/vong_xoay/tia-sang.png) no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .flash-wheel {
+            width: 220px;
+            height: 220px;
+            margin: auto;
+            background: url(/images/vong_xoay/den-nhay.png) no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .elipse-wheel {
+            width: 220px;
+            height: 230px;
+            margin: auto;
+            background: url(/images/vong_xoay/elipse.png) no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .border-wheel {
+            width: 190px;
+            height: 215px;
+            margin: auto;
+            position: relative;
+        }
+
+        #chart {
+            position: absolute;
+            top: 25px;
+            left: 5px;
+            z-index: 10;
+            width: 180px;
+            height: 180px;
+            -webkit-transition: -webkit-transform 3s ease-out;
+        }
+
+        .center-circle {
+            position: absolute;
+            top: calc(50% - 19px);
+            left: calc(50% - 82px);
+            z-index: 10;
+        }
+
+            .center-circle > img {
+                max-width: 30%;
+            }
+
+        .pointer-wheel {
+            position: absolute;
+            top: 0px;
+            left: calc(50% - 25px);
+            z-index: 1;
+        }
+
+            .pointer-wheel > img {
+                max-width: 40%;
+            }
+
+        .hide-flash {
+            -webkit-animation: none; /* Safari 4+ */
+            -moz-animation: none; /* Fx 5+ */
+            -o-animation: none; /* Opera 12+ */
+            animation: none; /* IE 10+, Fx 29+ */
+        }
+
+        .dice {
+            position: absolute;
+            right: -40px;
+            bottom: 0px;
+        }
+
+            .dice > img {
+                max-width: 40% !important
+            }
+
+        .actor-men {
+            position: absolute;
+            right: -225px;
+            z-index: 1;
+        }
+
+            .actor-men > img {
+                max-width: 20% !important
+            }
+
+        .actor-women {
+            position: absolute;
+            left: -160px;
+            z-index: 1;
+        }
+
+            .actor-women > img {
+                max-width: 25% !important;
+            }
+
+        .actor-blue {
+            position: absolute;
+            left: -190px;
+            bottom: 0px;
+        }
+
+            .actor-blue > img {
+                max-width: 20% !important;
+            }
+    }
 </style>
 <script>
-    var padding = { top: 40, right: 0, bottom: 0, left: 0 },
-        w = 350 - padding.left - padding.right,
-        h = 350 - padding.top - padding.bottom,
-        r = Math.min(w, h) / 2,
-        rotation = 0,
-        oldrotation = 0,
-        picked = 100000,
-        oldpick = [];
-    var data = [
-        { "label": "SỔ TAY", "value": 1, "url": "/images/item/item-gift.png" },
-        { "label": "SỔ TAY", "value": 2, "url": "/images/item/item-gift.png" },
-        { "label": "SỔ TAY", "value": 3, "url": "/images/item/item-gift.png" },
-        { "label": "SỔ TAY", "value": 4, "url": "/images/item/item-gift.png" },
-        { "label": "SỔ TAY", "value": 5, "url": "/images/item/item-gift.png" },
-        { "label": "SỔ TAY", "value": 6, "url": "/images/item/item-gift.png" },
-        { "label": "SỔ TAY", "value": 7, "url": "/images/item/item-gift.png" },
-        { "label": "SỔ TAY", "value": 8, "url": "/images/item/item-gift.png" },
-    ];
-    var svg = d3.select('#chart')
-        .append("svg")
-        .data([data])
-        .attr("width", w + padding.left + padding.right)
-        .attr("height", h + padding.top + padding.bottom);
-    //add kim quay
-    var imgArrow = svg.selectAll("image").data([0]);
-    imgArrow.enter()
-        .append("svg:image")
-        .attr("x", "145")
-        .attr("y", "-7")
-        .attr("width", "60")
-        .attr("height", "60")
-        .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
-        .attr("href", "/images/kim/kim-quay.png");
-    //add vòng xoay
-    var container = svg.append("g")
-        .attr("class", "chartholder")
-        .attr("transform", "translate(" + (w / 2 + padding.left) + "," + (h / 2 + padding.top) + ")");
-    var vis = container
-        .append("g");
-    var pie = d3.layout.pie().sort(null).value(function (d) { return 1; });
-    var arc = d3.svg.arc().outerRadius(r);
-    var arcs = vis.selectAll("g.slice")
-        .data(pie)
-        .enter()
-        .append("g")
-        .attr("class", "slice");
-    arcs.append("path")
-        .attr("fill", function (d, i) {
-            if (d.data.value % 2 == 0)
-                return "#572468";
-            else {
-                return "#6e2e84";
-            }
-        })
-        .attr("d", function (d) { return arc(d); });
-     //add text item
-    arcs.append("text").attr("transform", function (d) {
-        d.innerRadius = 0;
-        d.outerRadius = r;
-        d.angle = (d.startAngle + d.endAngle) / 2;
-        return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius - 10) + ")";
-    })
-        .attr("text-anchor", "end")
-        .attr("fill", "#fff")
-        .attr("x", "-60")
-        .attr("y", "0")
-        .style({ "font-weight": "bold", "font-size": "10px", "fill": "#fff","cursor": "pointer" })
-        .text(function (d, i) {
-            return data[i].label;
-        });
-    //add img item
-    arcs.append("svg:image")
-        .attr("x", "-45")
-        .attr("y", "-45")
-        .attr("width", "45")
-        .attr("height", "90")
-        .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
-        .attr("href", "images/item/item-gift.png")
-        .attr("transform", function (d) {
-            d.innerRadius = 0;
-            d.outerRadius = r;
-            d.angle = (d.startAngle + d.endAngle) / 2;
-            return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius - 10) + ")";
-        });
-    //add buttun quay
-    container.append("circle")
-        .attr("class", "circle-wheel")
-        .attr("cx", 0)
-        .attr("cy", 0)
-        .attr("r", 40)
-        .style({ "fill": "white", "cursor": "pointer" });
-    container.append("svg:image")
-        .attr("class", "circle-wheel")
-        .attr("x", "-45")
-        .attr("y", "-46")
-        .attr("width", "90")
-        .attr("height", "90")
-        .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
-        .attr("href", "/images/kim/button-quay.png")
-        .style({"cursor": "pointer" });
-    //add text spin
-    container.append("text")
-        .attr("class", "circle-text")
-        .attr("x", 0)
-        .attr("y", 6)
-        .attr("text-anchor", "middle")
-        .text("QUAY")
-        .style({ "font-weight": "bold", "font-size": "13px", "fill": "#f6cf2e", "text-shadow": "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black","cursor" :"pointer" });
-    $(".circle-wheel").on("click", spin);
-    $(".circle-text").on("click", spin);
-    var count = 0;
-    function spin(d) {
-        
-        $(".circle-wheel").on("click", null);
-        if (count > 0) {
-            $(".circle-wheel").on("click", null);
-            $("#out-of-turn-modal").modal();
-            return;
-        }
-        $(".flash-wheel").addClass("hide-flash");
-        var ps = 360 / data.length
-         picked = 4;
-         rotation = (data.length - picked) * ps + 3 * 360;
-        rotation = rotation - Math.round(ps / 2);
-        vis.transition()
-            .duration(5000)
-            .attrTween("transform", rotTween)
-            .each("end", function () { // kết thúc vòng quay
-                $(".flash-wheel").removeClass("hide-flash");
-                d3.select(".slice:nth-child(" + (picked + 1) + ") path")
-                    .attr("fill", "#481253");
-                oldrotation = rotation;
-                $(".circle-wheel").on("click", spin);
-                $("#popup-success-modal").modal();
-                var itemSuccess = data[picked];
-                $(".text-info-receive > i").text(itemSuccess.label);
-                $(".img-gift > img").attr("src", itemSuccess.url);
-            });
-        count++;
-    }
-    
-    function rotTween(to) {
-        var i = d3.interpolate(oldrotation % 360, rotation);
-        return function (t) {
-            return "rotate(" + i(t) + ")";
-        };
-    }
+    //var padding = { top: 40, right: 0, bottom: 0, left: 0 },
+    //    w = 350 - padding.left - padding.right,
+    //    h = 350 - padding.top - padding.bottom,
+    //    r = Math.min(w, h) / 2,
+    //    rotation = 0,
+    //    oldrotation = 0,
+    //    picked = 100000,
+    //    oldpick = [];
+    //var data = [
+    //    { "label": "SỔ TAY", "value": 1, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 2, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 3, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 4, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 5, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 6, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 7, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 8, "url": "/images/item/item-gift.png" },
+    //];
+    //var svg = d3.select('#chart')
+    //    .append("svg")
+    //    .data([data])
+    //    .attr("width", w + padding.left + padding.right)
+    //    .attr("height", h + padding.top + padding.bottom);
+    ////add kim quay
+    //var imgArrow = svg.selectAll("image").data([0]);
+    //imgArrow.enter()
+    //    .append("svg:image")
+    //    .attr("x", "145")
+    //    .attr("y", "-7")
+    //    .attr("width", "60")
+    //    .attr("height", "60")
+    //    .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    //    .attr("href", "/images/kim/kim-quay.png");
+    ////add vòng xoay
+    //var container = svg.append("g")
+    //    .attr("class", "chartholder")
+    //    .attr("transform", "translate(" + (w / 2 + padding.left) + "," + (h / 2 + padding.top) + ")");
+    //var vis = container
+    //    .append("g");
+    //var pie = d3.layout.pie().sort(null).value(function (d) { return 1; });
+    //var arc = d3.svg.arc().outerRadius(r);
+    //var arcs = vis.selectAll("g.slice")
+    //    .data(pie)
+    //    .enter()
+    //    .append("g")
+    //    .attr("class", "slice");
+    //arcs.append("path")
+    //    .attr("fill", function (d, i) {
+    //        if (d.data.value % 2 == 0)
+    //            return "#572468";
+    //        else {
+    //            return "#6e2e84";
+    //        }
+    //    })
+    //    .attr("d", function (d) { return arc(d); });
+    // //add text item
+    //arcs.append("text").attr("transform", function (d) {
+    //    d.innerRadius = 0;
+    //    d.outerRadius = r;
+    //    d.angle = (d.startAngle + d.endAngle) / 2;
+    //    return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius - 10) + ")";
+    //})
+    //    .attr("text-anchor", "end")
+    //    .attr("fill", "#fff")
+    //    .attr("x", "-60")
+    //    .attr("y", "0")
+    //    .style({ "font-weight": "bold", "font-size": "10px", "fill": "#fff","cursor": "pointer" })
+    //    .text(function (d, i) {
+    //        return data[i].label;
+    //    });
+    ////add img item
+    //arcs.append("svg:image")
+    //    .attr("x", "-45")
+    //    .attr("y", "-45")
+    //    .attr("width", "45")
+    //    .attr("height", "90")
+    //    .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    //    .attr("href", "images/item/item-gift.png")
+    //    .attr("transform", function (d) {
+    //        d.innerRadius = 0;
+    //        d.outerRadius = r;
+    //        d.angle = (d.startAngle + d.endAngle) / 2;
+    //        return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius - 10) + ")";
+    //    });
+    ////add buttun quay
+    //container.append("circle")
+    //    .attr("class", "circle-wheel")
+    //    .attr("cx", 0)
+    //    .attr("cy", 0)
+    //    .attr("r", 40)
+    //    .style({ "fill": "white", "cursor": "pointer" });
+    //container.append("svg:image")
+    //    .attr("class", "circle-wheel")
+    //    .attr("x", "-45")
+    //    .attr("y", "-46")
+    //    .attr("width", "90")
+    //    .attr("height", "90")
+    //    .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    //    .attr("href", "/images/kim/button-quay.png")
+    //    .style({"cursor": "pointer" });
+    ////add text spin
+    //container.append("text")
+    //    .attr("class", "circle-text")
+    //    .attr("x", 0)
+    //    .attr("y", 6)
+    //    .attr("text-anchor", "middle")
+    //    .text("QUAY")
+    //    .style({ "font-weight": "bold", "font-size": "13px", "fill": "#f6cf2e", "text-shadow": "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black","cursor" :"pointer" });
+    //$(".circle-wheel").on("click", spin);
+    //$(".circle-text").on("click", spin);
+    //var count = 0;
+    //function spin(d) {
+
+    //    $(".circle-wheel").on("click", null);
+    //    if (count > 0) {
+    //        $(".circle-wheel").on("click", null);
+    //        $("#out-of-turn-modal").modal();
+    //        return;
+    //    }
+    //    $(".flash-wheel").addClass("hide-flash");
+    //    var ps = 360 / data.length
+    //     picked = 4;
+    //     rotation = (data.length - picked) * ps + 3 * 360;
+    //    rotation = rotation - Math.round(ps / 2);
+    //    vis.transition()
+    //        .duration(5000)
+    //        .attrTween("transform", rotTween)
+    //        .each("end", function () { // kết thúc vòng quay
+    //            $(".flash-wheel").removeClass("hide-flash");
+    //            d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+    //                .attr("fill", "#481253");
+    //            oldrotation = rotation;
+    //            $(".circle-wheel").on("click", spin);
+    //            $("#popup-success-modal").modal();
+    //            var itemSuccess = data[picked];
+    //            $(".text-info-receive > i").text(itemSuccess.label);
+    //            $(".img-gift > img").attr("src", itemSuccess.url);
+    //        });
+    //    count++;
+    //}
+
+    //function rotTween(to) {
+    //    var i = d3.interpolate(oldrotation % 360, rotation);
+    //    return function (t) {
+    //        return "rotate(" + i(t) + ")";
+    //    };
+    //}
     $(function () {
-        $("#out-of-turn").click(function () {
-            $("#out-of-turn-modal").modal();
-        });
-        $("#popup-error").click(function () {
-            $("#popup-error-modal").modal();
-        });
-        $("#popup-success").click(function () {
-            $("#popup-success-modal").modal();
-        });
+        //    $("#out-of-turn").click(function () {
+        //        $("#out-of-turn-modal").modal();
+        //    });
+        //    $("#popup-error").click(function () {
+        //        $("#popup-error-modal").modal();
+        //    });
+        //    $("#popup-success").click(function () {
+        //        $("#popup-success-modal").modal();
+        //    });
         $("#popup-help").click(function () {
             $("#popup-help-modal").modal();
         });
-    });
 
+        var dataLength = @Model.Rewards.Count;
+        var count = 0;
+        $(".center-circle > img").click(function () {
+            debugger
+            var cookieReward = getCookie("cookieReward");
+            if (cookieReward == null || cookieReward == undefined) {
+                if (count > 0) {
+                    $("#out-of-turn-modal").modal();
+                    return;
+                }
+                else {
+                    window.location.href = "/reward";
+                    return;
+                }
+            }
+            var picked = cookieReward - 1;
+            var ps = 360 / dataLength
+            var rotation = (dataLength - picked) * ps + 3 * 360;
+
+            var style = $("#chart").attr("style") == null ? "" : $("#chart").attr("style")
+            var css = '-webkit-transform: rotate(' + rotation + 'deg);' + style;
+            $("#chart").removeAttr('style');
+            $("#chart").attr("style", css);
+            document.cookie = "cookiename= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+            count++;
+            setTimeout(function () {
+                $("#popup-success-modal").modal();
+            }, 3000)
+        });
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return null;
+        }
+    });
 </script>

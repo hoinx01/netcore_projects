@@ -62,13 +62,15 @@
                     <div class="col-lg-6 col-xl-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
-                                SĐT
+                                Email
                             </div>
                             <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="0987654321" />
+                                <input class="w-100" placeholder="nguyenvana@gmail.com" />
                             </div>
                         </div>
                     </div>
+
+                    
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-xl-6 pading-7">
@@ -84,10 +86,10 @@
                     <div class="col-lg-6 col-xl-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
-                                Email
+                                Địa chỉ
                             </div>
                             <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="nguyenvana@gmail.com" />
+                                <input class="w-100" placeholder="Số 1 Hoàng Đạo Thúy" />
                             </div>
                         </div>
                     </div>
@@ -106,22 +108,46 @@
                     <div class="col-lg-6 col-xl-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
-                                Địa chỉ
+                                Tỉnh/ TP
+                            </div>
+                            <div class="w-50 input-info-login_select">
+                                <select>
+                                    <option value="0">Chọn tỉnh/ thành phố</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-xl-6 pading-7">
+                        <div class="input-info-login">
+                            <div class="w-50 input-info-login_text">
+                                SĐT
                             </div>
                             <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="nguyenvana@gmail.com" />
+                                <input class="w-100" placeholder="0987654321" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6 pading-7">
+                        <div class="input-info-login">
+                            <div class="w-50 input-info-login_text">
+                                Quận/ Huyện
+                            </div>
+                            <div class="w-50 input-info-login_input">
+                                <input class="w-100" placeholder="Nam/Nữ" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row" style="position:relative">
                     <div class="img-login-footer">
-                       <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
+                        <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
                     </div>
                 </div>
                 <div class="row" style="margin-top:40px">
                     <div class="col-lg-12 col-xl-12" style="margin:auto">
-                        <a href="javascrip:0" class="button-login">
+                        <a href="javascrip:0" class="button-login" onclick="submitInfo()">
                             ĐĂNG NHẬP
                         </a>
                     </div>
@@ -274,18 +300,35 @@
             .input-info-login_input > input:focus {
                 outline: none;
             }
-
+    .input-info-login_select > select {
+        border: none;
+        height: 32px;
+        border-radius: 17px;
+        width: 90%;
+    }
+    .input-info-login_select > select:focus {
+        outline: none;
+    }
     .pading-7 {
         padding: 7px;
     }
     .button-login {
         height: 34px;
-        border: 1px solid #ddd;
-        border-radius: 17px 17px;
         font-family: UTMAVOBOLD;
-        font-size:16px;
-        padding:6px 8px;
-        color:white;
+        font-size: 14px;
+        color: white;
+        background: url(/images/login/background-button.png) no-repeat;
+        background-size: 100% 100%;
+        padding-top: 6px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 13px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    a:hover {
+        text-decoration: none !important;
+        color: white !important;
     }
     .img-login-footer {
         position: absolute;
@@ -294,3 +337,37 @@
         right: -80px;
     }
 </style>
+<script>
+    function submitInfo() {
+        var model = {};
+        $.ajax({
+            url: "/api/rolling_codes/spins",
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(model),
+            success: function (data) {
+                console.log(data)
+                setCookie("cookieReward", data.rewardOrdinal, 7);
+                setTimeout(function () {
+                    window.location.href = "/index";
+                }, 300)
+            },
+            complete: function () {
+
+            }
+        });
+
+    }
+    function setCookie(name, value, days) {
+        var expires;
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toGMTString();
+        }
+        else {
+            expires = "";
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+</script>
