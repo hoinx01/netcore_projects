@@ -1,9 +1,10 @@
-﻿<div class="page-container-login">
+﻿@model CustomerViewModel
+<div class="page-container-login">
     <div class="page-container-login_shadow">
         <div class="page-content">
             <div class="page-bar-content">
                 <div class="row" style="margin:auto">
-                    <div class="w-25" style="z-index:2" >
+                    <div class="w-25" style="z-index:2">
                         <div class="page-bar-content_img">
                             <img src="~/images/login/nhan-vat-nu.png" />
                         </div>
@@ -12,7 +13,7 @@
                         <div class="page-bar-content_text">
                             <div class="page-bar-content_text__top">
                                 <span>CHÀO MỪNG</span>
-                                
+
                             </div>
                             <div class="page-bar-content_text__bot">
                                 ĐẾN VŨ TRỤ LỚP HỌC MẬT NGỮ
@@ -37,105 +38,112 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-6 col-xl-6 pading-7" style="margin:auto">
+                    <div class="col-md-6 col-xs-6 pading-7" style="margin:auto">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
                                 Mã voucher
                             </div>
                             <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="NTC112233" />
+                                <input class="w-100" placeholder="NTC112233" id="voucher" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 col-xl-6 pading-7">
+                    <div class="col-md-6 col-xs-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
                                 Họ & Tên
                             </div>
                             <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="Nguyễn Văn A" />
+                                <input class="w-100" placeholder="Nguyễn Văn A" id="name-customer" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6 pading-7">
+                    <div class="col-md-6 col-xs-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
                                 Email
                             </div>
                             <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="nguyenvana@gmail.com" />
+                                <input class="w-100" placeholder="nguyenvana@gmail.com" id="email-customer" type="email" />
                             </div>
                         </div>
                     </div>
 
-                    
+
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 col-xl-6 pading-7">
+                    <div class="col-md-6 col-xs-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
                                 Ngày sinh
                             </div>
                             <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="01/01/2010" />
+                                <input class="w-100" placeholder="01/01/2010" id="datetimepicker" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6 pading-7">
+                    <div class="col-md-6 col-xs-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
                                 Địa chỉ
                             </div>
                             <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="Số 1 Hoàng Đạo Thúy" />
+                                <input class="w-100" placeholder="Số 1 Hoàng Đạo Thúy" id="address-customer" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 col-xl-6 pading-7">
+                    <div class="col-md-6 col-xs-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
                                 Giới tính
                             </div>
                             <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="Nam/Nữ" />
+                                <input class="w-100" placeholder="Nam/Nữ" id="sex-customer" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6 pading-7">
+                    <div class="col-md-6 col-xs-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
                                 Tỉnh/ TP
                             </div>
                             <div class="w-50 input-info-login_select">
-                                <select>
-                                    <option value="0">Chọn tỉnh/ thành phố</option>
+                                <select onchange="chooseCity(this)" id="city">
+                                    <option value="0">Chọn Tỉnh/ TP</option>
+                                    @for (int i = 0; i < Model.Cities.Count; i++)
+                                    {
+                                        var city = Model.Cities[i];
+                                        <!option value="@city.Id">@city.Name</!option>
+                                    }
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 col-xl-6 pading-7">
+                    <div class="col-md-6 col-xs-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
                                 SĐT
                             </div>
                             <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="0987654321" />
+                                <input class="w-100" placeholder="0987654321" id="phone-customer" type="number" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6 pading-7">
+                    <div class="col-md-6 col-xs-6 pading-7">
                         <div class="input-info-login">
                             <div class="w-50 input-info-login_text">
                                 Quận/ Huyện
                             </div>
-                            <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="Nam/Nữ" />
+                            <div class="w-50 input-info-login_select" id="district">
+                                <select id="select-district">
+                                    <option value="0">Chọn Quận/Huyện</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -150,6 +158,76 @@
                         <a href="javascrip:0" class="button-login" onclick="submitInfo()">
                             ĐĂNG NHẬP
                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="popup-error-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="page-container-login">
+            <div class="page-container-login_shadow">
+                <div class="page-content">
+                    <div class="page-bar-content">
+                        <div class="row" style="margin:auto">
+                            <div class="w-25" style="z-index:2">
+                                <div class="page-bar-content_img">
+                                    <img src="~/images/login/nhan-vat-nu.png" />
+                                </div>
+                            </div>
+                            <div class="w-75" style="z-index:1">
+                                <div class="page-bar-content_text">
+                                    <div class="page-bar-content_text__top">
+                                        <span>CHÀO MỪNG</span>
+
+                                    </div>
+                                    <div class="page-bar-content_text__bot">
+                                        ĐẾN VŨ TRỤ LỚP HỌC MẬT NGỮ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-info">
+                        <div style="position: absolute;top: -72px;left:47px">
+                            <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                <div class="img-wheel">
+                                    <img src="~/images/login/vong-quay.png" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:60px;background:url(/images/login/hieu-ung2.png);    ">
+                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                <div class="text-info-login">
+                                    MÃ VOUCHER CỦA BẠN KHÔNG ĐÚNG. VUI LÒNG NHẬP LẠI
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                <div class="text-info-login" style="font-size:12px">
+                                    <i>MỌI THẮC MẮC XIN LIÊN HỆ HOTLINE: 096.991.4344<br />XIN CẢM ƠN!</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="position:relative">
+                            <div class="img-login-footer">
+                                <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:40px;padding-bottom:40px">
+                            <div class="col-lg-6 col-xl-6" style="margin:auto">
+                                <a href="javascrip:0" class="button-login">
+                                    NHẬP LẠI
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-xl-6" style="margin:auto">
+                                <a href="javascrip:0" class="button-login">
+                                    ĐÓNG
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -184,10 +262,10 @@
         padding-top: 20px;
         padding-left: 25%;
         padding-right: 25%;
-        margin:auto;
+        margin: auto;
     }
 
-    
+
 
     .page-bar-content_img {
         z-index: 2;
@@ -196,12 +274,13 @@
         .page-bar-content_img > img {
             float: left;
         }
+
     @@media (min-width: 991px) {
         .page-bar-content_img > img {
             float: right;
             max-width: 50%;
-
         }
+
         .page-bar-content_text {
             width: 75%;
             position: absolute;
@@ -209,10 +288,11 @@
             top: 25px;
             left: calc(25% - 32px);
         }
+
         .page-bar-content {
             width: 100%;
             position: relative;
-            margin-left:10%
+            margin-left: 10%
         }
     }
 
@@ -221,12 +301,14 @@
             float: right;
             max-width: 100%;
         }
+
         .page-bar-content_text {
             width: 75%;
             position: absolute;
             text-align: left;
             left: calc(25% - 24px);
         }
+
         .page-bar-content {
             width: 100%;
             position: relative;
@@ -272,7 +354,7 @@
         background-color: #fff;
         border: 1px solid #ddd;
         height: 34px;
-        min-width: 200px;
+        min-width: 210px;
         border-radius: 17px 17px;
         display: flex;
     }
@@ -300,18 +382,22 @@
             .input-info-login_input > input:focus {
                 outline: none;
             }
+
     .input-info-login_select > select {
         border: none;
         height: 32px;
         border-radius: 17px;
         width: 90%;
     }
-    .input-info-login_select > select:focus {
-        outline: none;
-    }
+
+        .input-info-login_select > select:focus {
+            outline: none;
+        }
+
     .pading-7 {
         padding: 7px;
     }
+
     .button-login {
         height: 34px;
         font-family: UTMAVOBOLD;
@@ -326,37 +412,131 @@
         text-decoration: none;
         cursor: pointer;
     }
+
     a:hover {
         text-decoration: none !important;
         color: white !important;
     }
+
     .img-login-footer {
         position: absolute;
         right: -1px;
         top: -10px;
         right: -80px;
     }
+
+    /* ----------- iPhone 5 and 5S ----------- */
+    @@media only screen and (min-device-width: 320px) and (max-device-width: 736px) {
+        .input-info-login {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            height: 24px;
+            min-width: 210px;
+            border-radius: 12px 12px;
+            display: flex;
+        }
+
+        .input-info-login_text {
+            font-family: UTMAVO;
+            font-size: 9px;
+            padding: 6px 8px;
+            color: black;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .input-info-login_input {
+            font-family: UTMAVO;
+            font-size: 9px;
+            padding-right: 10px;
+        }
+
+            .input-info-login_input > input {
+                border: none;
+                padding: 4px;
+            }
+
+        .input-info-login_select > select {
+            border: none;
+            height: 22px;
+            border-radius: 12px;
+            width: 90%;
+            font-size: 9px;
+        }
+    }
 </style>
 <script>
+    $('#datetimepicker').datepicker({
+        format: 'dd/mm/yyyy'
+    });
     function submitInfo() {
+        var check = validateInfo();
+        if (check) {
+            return;
+        }
+        var birthday = $('#datetimepicker').val();
         var model = {};
+        model.rollingCode = $("#voucher").val();
+        model.customer = {};
+        model.customer.fullName = $("#name-customer").val();
+        model.customer.phoneNumber = $("#phone-customer").val();
+        model.customer.email = $("#email-customer").val();
+        model.customer.genderId = $("#sex-customer").val() == "Nam" ? 1 : 0;
+        model.customer.address = {};
+        model.customer.address.provinceId = $("#city").val();
+        model.customer.address.districtId = $("#select-district").val();
+        model.customer.birthday = {};
+        model.customer.birthday.day = birthday.substr(0, 2);
+        model.customer.birthday.month = birthday.substr(3, 2);
+        model.customer.birthday.year = birthday.substr(6, 4);
         $.ajax({
-            url: "/api/rolling_codes/spins",
+            url: "/PostInfo",
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(model),
             success: function (data) {
                 console.log(data)
-                setCookie("cookieReward", data.rewardOrdinal, 7);
+                setCookie("cookieReward", data.roll.rewardOrdinal, 1);
+                alert("Bạn đã đăng nhập thành công!");
                 setTimeout(function () {
                     window.location.href = "/index";
-                }, 300)
+                }, 2000)
+            },
+            error: function (data) {
+                if (data.responseJSON.message != null && data.responseJSON.message != undefined) {
+                    alert(data.responseJSON.message.replace(/\n/g, '; ').replace(/;|$|{|}|\|"|"/g, ''));
+                }
+                //$("#popup-error-modal").modal();
             },
             complete: function () {
 
             }
         });
 
+    }
+    function validateInfo(){
+        var check = false;
+        if ($("#voucher").val() == "" || $("#voucher").val() == null) {
+            alert("Hãy nhập mã voucher!");
+            check = true;
+        }
+        if ($("#name-customer").val() == "" || $("#name-customer").val() == null) {
+            alert("Hãy nhập tên của bạn!");
+            check = true;
+        }
+        if ($("#phone-customer").val() == "" || $("#phone-customer").val() == null) {
+            alert("Hãy nhập số điện thoại của bạn");
+            check = true;
+        }
+        if ($("#email-customer").val() == "" || $("#email-customer").val() == null) {
+            alert("Hãy nhập email của bạn!");
+            check = true;
+        }
+        //if ($("#sex-customer").val() == "" || $("#sex-customer").val() == null) {
+        //    alert("Hãy nhập mã coucher!");
+        //    check = true;
+        //}
+        return check;
     }
     function setCookie(name, value, days) {
         var expires;
@@ -369,5 +549,31 @@
             expires = "";
         }
         document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function chooseCity(ele) {
+        var cityId = $(ele).val();
+        $("#select-district").empty();
+        $.ajax({
+            url: "/GetByCityId",
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            data: { cityId: cityId },
+            success: function (data) {
+                console.log(data)
+                $("#select-district").append($('<option>', {
+                    value: 0,
+                    text: "Chọn Quận/ Huyện"
+                }));
+                $.each(data, function (i, item) {
+                    $("#select-district").append($('<option>', {
+                        value: item.id,
+                        text: item.name
+                    }));
+                });
+            },
+            complete: function () {
+
+            }
+        });
     }
 </script>
