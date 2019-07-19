@@ -43,7 +43,8 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
                 Cost = model.Cost,
                 CreatedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow,
-                Status = RewardStatus.Active
+                Status = RewardStatus.Active,
+                ImageSrc = model.ImageSrc
             };
             await rewardService.AddReward(domain);
 
@@ -61,6 +62,7 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
 
             domain.Name = model.Name;
             domain.Cost = model.Cost;
+            domain.ImageSrc = model.ImageSrc;
             domain.ModifiedAt = DateTime.UtcNow;
 
             await rewardService.UpdateReward(domain);

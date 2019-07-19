@@ -13,6 +13,7 @@ namespace BoardGame.RewardRolling.Service.Domains
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
         public RewardStatus Status { get; set; }
+        public string ImageSrc { get; set; }
 
     }
 }

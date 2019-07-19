@@ -9,5 +9,6 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Models.Reward
     {
         public string Name { get; set; }
         public decimal Cost { get; set; }
+        public string ImageSrc { get; set; }
     }
 }

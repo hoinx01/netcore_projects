@@ -42,9 +42,10 @@ const baseRepository = {
         }
     },
     async post(url, data, requestOptions = null) {
-        console.log(JSON.stringify(data))
+        
         let options = this.setRequestOptions(requestOptions);
         try {
+            console.log(JSON.stringify(data));
             let response = await axios.post(url, data, options);
             return this.processRequestResponse(response);
         }

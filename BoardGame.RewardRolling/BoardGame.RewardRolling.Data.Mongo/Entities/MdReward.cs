@@ -14,5 +14,6 @@ namespace BoardGame.RewardRolling.Data.Mongo.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
         public int Status { get; set; }
+        public string ImageSrc { get; set; }
     }
 }
