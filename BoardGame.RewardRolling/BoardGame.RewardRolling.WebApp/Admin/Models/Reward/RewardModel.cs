@@ -12,5 +12,6 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Models.Reward
         public decimal Cost { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public string ImageSrc { get; set; }
     }
 }
