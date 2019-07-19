@@ -1,4 +1,5 @@
 ﻿using BoardGame.RewardRolling.Core.ValueObjects;
+using BoardGame.RewardRolling.WebApp.Models.AdministrativeUnit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace BoardGame.RewardRolling.WebApp.Models.Customer
         public Birthday Birthday { get; set; }
         public int GenderId { get; set; }
         public Address Address { get; set; }
+        public List<CityModel> Cities { get; set; }
+        public List<DistrictModel> Districts { get; set; }
     }
 }
