@@ -9,11 +9,15 @@ namespace BoardGame.RewardRolling.WebApp.Services.Interfaces
 {
     public interface IAdministrativeUnitService
     {
-        Task ImportExcelAdministrativeUnit(
+        Task ImportExcelStandardAdministrativeUnit(
             List<ExcelStandardAdministrativeUnitModel> excelModels
         );
 
-        Task Reset();
+        Task ImportExcelNhanhAdministrativeUnit(
+            List<ExcelNhanhAdministrativeUnitModel> excelModels
+        );
+
+        Task ResetStandard();
         Task<List<CityModel>> GetAllCityAsync();
         Task<List<DistrictModel>> GetDistrictByCityIdAsync(string cityId);
         Task<List<CommuneModel>> GetCommuneByDistrictId(string districtId);

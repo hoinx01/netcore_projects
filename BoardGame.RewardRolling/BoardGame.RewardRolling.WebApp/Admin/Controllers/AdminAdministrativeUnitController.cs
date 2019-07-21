@@ -34,12 +34,12 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
         }
 
         [HttpPost]
-        [Route("excel_files")]
-        public async Task<UploadAdministrativeUnitResult> Upload([FromForm] IFormFile file)
+        [Route("excel_files/standard")]
+        public async Task<UploadAdministrativeUnitResult> UploadStandardAdministrativeUnitFile([FromForm] IFormFile file)
         {
             var fullPath = await uploadService.StoreUploadedFile(file);
 
-            await administrativeUnitService.Reset();
+            await administrativeUnitService.ResetStandard();
 
             var importedFileLayout = AppSettings.Get<ImportStandardAdministrativeUnitFileLayout>("ExcelFileLayouts:ImportStandardAdministrativeUnit");
 
@@ -81,7 +81,7 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
                 }
             }
 
-            await administrativeUnitService.ImportExcelAdministrativeUnit(excelModels);
+            await administrativeUnitService.ImportExcelStandardAdministrativeUnit(excelModels);
 
             var result = new UploadAdministrativeUnitResult()
             {
@@ -93,5 +93,60 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
             return result;
 
         }
+
+        [HttpPost]
+        [Route("excel_files/nhanh")]
+        public async Task<string> UploadNhanhvnAdministrativeUnitFile([FromForm] IFormFile file)
+        {
+            var fullPath = await uploadService.StoreUploadedFile(file);
+
+            var importedFileLayout = AppSettings.Get<ImportNhanhAdministrativeUnitFileLayout>
+                (
+                "ExcelFileLayouts:ImportNhanhAdministrativeUnit"
+                );
+
+            var workbook = new XSSFWorkbook(fullPath);
+
+            var sheet = workbook.GetSheetAt(importedFileLayout.SheetIndex);
+
+            Dictionary<string, string> columnNameCodeFieldNameMap = importedFileLayout.ColumnNameFieldNameMap; //settings
+            var codeColumnHeaderRange = new CellRangeAddress(
+                importedFileLayout.CodeHeaderRange.FirstRow,
+                importedFileLayout.CodeHeaderRange.LastRow,
+                importedFileLayout.CodeHeaderRange.FirstColumn,
+                importedFileLayout.CodeHeaderRange.LastColumn
+            ); //settings
+            var keyColumnName = importedFileLayout.KeyColumnName; //settings
+            var codePropertyColumnIndicates = ExcelUtils.GetFieldColumnIndex<ExcelNhanhAdministrativeUnitModel>(sheet, codeColumnHeaderRange, columnNameCodeFieldNameMap);
+            var keyColumnIndex = codePropertyColumnIndicates.FirstOrDefault(f => f.Property.Name.ToLower() == columnNameCodeFieldNameMap[keyColumnName].ToLower()).ColumnIndex;
+            var firstRow = importedFileLayout.FirstDataRow; //settings
+            var maxBlankRow = importedFileLayout.MaxBlankRow; //settings
+
+            var excelModels = new List<ExcelNhanhAdministrativeUnitModel>();
+
+            int blankRow = 0;
+            for (int i = firstRow; i <= sheet.LastRowNum; i++)
+            {
+                var row = sheet.GetRow(i);
+                var excelModel = ExcelUtils.ReadObjectFromRow<ExcelNhanhAdministrativeUnitModel>(row, codePropertyColumnIndicates, keyColumnIndex);
+
+                if (excelModel == null)
+                {
+                    blankRow++;
+                    if (blankRow == maxBlankRow)
+                        break;
+                }
+                else
+                {
+                    blankRow = 0;
+                    excelModels.Add(excelModel);
+                }
+            }
+
+            await administrativeUnitService.ImportExcelNhanhAdministrativeUnit(excelModels);
+
+            return "Đang xử lý";
+        }
+
     }
 }

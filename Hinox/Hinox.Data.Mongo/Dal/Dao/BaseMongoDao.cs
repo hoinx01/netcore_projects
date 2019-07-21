@@ -19,6 +19,14 @@ namespace Hinox.Data.Mongo.Dal.Dao
             var type = typeof(T);
             Collection = Database.GetCollection<T>(databaseFactory.GetCollectionName<T>());
         }
+
+        public async Task<List<T>> GetAllAsync()
+        {
+            var filter = Builders<T>.Filter.Empty;
+            var filterResult = await Collection.FindAsync(filter);
+            var entities = await filterResult.ToListAsync();
+            return entities;
+        }
         public async Task<T> GetByIdAsync(TId id)
         {
             var filter = Builders<T>.Filter.Eq("_id", id);

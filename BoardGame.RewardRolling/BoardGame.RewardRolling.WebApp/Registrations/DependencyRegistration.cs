@@ -35,6 +35,8 @@ namespace BoardGame.RewardRolling.WebApp.Registrations
             services.AddSingleton<IMdCityDao, MdCityDao>();
             services.AddSingleton<IMdDistrictDao, MdDistrictDao>();
             services.AddSingleton<IMdCommuneDao, MdCommuneDao>();
+            services.AddSingleton<IMdNhanhCityDao, MdNhanhCityDao>();
+            services.AddSingleton<IMdStandardToNhanhAdministrativeUnitMapDao, MdStandardToNhanhAdministrativeUnitMapDao>();
 
             services.AddSingleton<IRewardQueryService, RewardQueryService>();
             services.AddSingleton<IRewardService, RewardService>();

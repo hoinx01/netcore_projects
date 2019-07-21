@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BoardGame.RewardRolling.Core.Statics;
+using BoardGame.RewardRolling.Data.Mongo.Dao;
 using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
 using BoardGame.RewardRolling.Data.Mongo.Entities;
 using BoardGame.RewardRolling.WebApp.Admin.Models.AdministrativeUnit;
@@ -11,6 +12,7 @@ using BoardGame.RewardRolling.WebApp.Models.AdministrativeUnit;
 using BoardGame.RewardRolling.WebApp.Services.Interfaces;
 using Hinox.Mvc.Exceptions;
 using Hinox.Static.Enumerate;
+using Hinox.Static.Extensions;
 using MongoDB.Driver;
 
 namespace BoardGame.RewardRolling.WebApp.Services
@@ -20,26 +22,32 @@ namespace BoardGame.RewardRolling.WebApp.Services
         private readonly IMdCityDao cityDao;
         private readonly IMdDistrictDao districtDao;
         private readonly IMdCommuneDao communeDao;
+        private readonly IMdNhanhCityDao nhanhCityDao;
+        private readonly IMdStandardToNhanhAdministrativeUnitMapDao mapDao;
 
         public AdministrativeUnitService(
             IMdCityDao cityDao,
             IMdDistrictDao districtDao,
-            IMdCommuneDao communeDao
+            IMdCommuneDao communeDao,
+            IMdNhanhCityDao nhanhCityDao,
+            IMdStandardToNhanhAdministrativeUnitMapDao mapDao
         )
         {
             this.cityDao = cityDao;
             this.districtDao = districtDao;
             this.communeDao = communeDao;
+            this.nhanhCityDao = nhanhCityDao;
+            this.mapDao = mapDao;
         }
 
-        public async Task Reset()
+        public async Task ResetStandard()
         {
             await cityDao.Collection.DeleteManyAsync(FilterDefinition<MdCity>.Empty);
             await districtDao.Collection.DeleteManyAsync(FilterDefinition<MdDistrict>.Empty);
             await communeDao.Collection.DeleteManyAsync(FilterDefinition<MdCommune>.Empty);
         }
 
-        public async Task ImportExcelAdministrativeUnit(
+        public async Task ImportExcelStandardAdministrativeUnit(
             List<ExcelStandardAdministrativeUnitModel> excelModels
             )
         {
@@ -136,6 +144,118 @@ namespace BoardGame.RewardRolling.WebApp.Services
             await cityDao.AddAsync(mdCities);
             await districtDao.AddAsync(mdDistricts);
             await communeDao.AddAsync(mdCommunes);
+        }
+
+        public async Task ImportExcelNhanhAdministrativeUnit(
+            List<ExcelNhanhAdministrativeUnitModel> excelModels
+            )
+        {
+            await nhanhCityDao.Collection.DeleteManyAsync(FilterDefinition<MdNhanhCity>.Empty);
+            await mapDao.Collection.DeleteManyAsync(FilterDefinition<MdStandardToNhanhAdministrativeUnitMap>.Empty);
+
+            var cityModels = new List<NhanhCityModel>();
+
+            foreach (var excelModel in excelModels)
+            {
+                var cityModel = cityModels.FirstOrDefault(f => f.Id == excelModel.CityId);
+                if (cityModel == null)
+                {
+                    cityModel = new NhanhCityModel()
+                    {
+                        Id = excelModel.CityId,
+                        Name = excelModel.CityName,
+                        Districts = new List<NhanhDistrictModel>()
+                    };
+                    cityModels.Add(cityModel);
+                }
+
+                var districtModel = cityModel.Districts.FirstOrDefault(
+                    f => f.Id == excelModel.DistrictId
+                         );
+                if (districtModel == null)
+                {
+                    districtModel = new NhanhDistrictModel()
+                    {
+                        Id = excelModel.DistrictId,
+                        Name = excelModel.DistrictName
+                    };
+
+                    cityModel.Districts.Add(districtModel);
+                }
+            }
+
+            var mdNhanhCities = cityModels.Select(s => Mapper.Map<MdNhanhCity>(s)).ToList();
+            await nhanhCityDao.AddAsync(mdNhanhCities);
+            await MapStandardVsNhanhAdministrativeUnit();
+        }
+
+        public async Task MapStandardVsNhanhAdministrativeUnit()
+        {
+            var standardCities = await cityDao.GetAllAsync();
+            var standardDistricts = await districtDao.GetAllAsync();
+
+            var nhanhCities = await nhanhCityDao.GetAllAsync();
+            var nhanhCityNames = nhanhCities.Select(s => s.Name.ToLower()
+                .Replace("tỉnh","")
+                .Replace("thành phố", "")
+                )
+                .ToList();
+
+            var maps = new List<MdStandardToNhanhAdministrativeUnitMap>();
+
+            foreach (var standardCity in standardCities)
+            {
+                int nhanhCityIndex = -1;
+                try
+                {
+                    nhanhCityIndex = standardCity.Name.ToLower()
+                        .Replace("tỉnh", "")
+                        .Replace("thành phố", "").GetClosestText(nhanhCityNames, 1);
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
+                var nhanhCity = nhanhCities[nhanhCityIndex];
+                var nhanhDistricts = nhanhCity.Districts;
+                var nhanhDistrictNames = nhanhDistricts.Select(s => s.Name.ToLower()
+                    .Replace("quận", "")
+                    .Replace("thành phố", "")
+                    .Replace("huyện", "")
+                    .Replace("thị xã", "")
+                ).ToList();
+
+                var currentCityStandardDistricts = standardDistricts.Where(w => w.CityId == standardCity.Id).ToList();
+                foreach (var currentCidyStandardDistrict in currentCityStandardDistricts)
+                {
+                    int nhanhDistrictIndex = -1;
+                    try
+                    {
+                        nhanhDistrictIndex = currentCidyStandardDistrict.Name.ToLower()
+                            .Replace("quận", "")
+                            .Replace("thành phố", "")
+                            .Replace("huyện", "")
+                            .Replace("thị xã", "")
+                            .GetClosestText(nhanhDistrictNames, 2);
+                    }
+                    catch (Exception e)
+                    {
+                        continue;
+                    }
+                    var nhanhDistrict = nhanhDistricts[nhanhDistrictIndex];
+
+                    var map = new MdStandardToNhanhAdministrativeUnitMap()
+                    {
+                        StandardCityId = standardCity.Id,
+                        StandardDistrictId = currentCidyStandardDistrict.Id,
+                        NhanhCityId = nhanhCity.Id,
+                        NhanhDistrictId = nhanhDistrict.Id
+                    };
+                    maps.Add(map);
+                }
+            }
+
+            await mapDao.AddAsync(maps);
         }
 
         public async Task<List<CityModel>> GetAllCityAsync()

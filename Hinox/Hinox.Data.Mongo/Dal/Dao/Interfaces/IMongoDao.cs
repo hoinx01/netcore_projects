@@ -11,6 +11,7 @@ namespace Hinox.Data.Mongo.Dal.Dao.Interfaces
     public interface IMongoDao<T, TId> where T : IMongoEntity<TId>
     {
         IMongoCollection<T> Collection { get; }
+        Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(TId id);
         Task AddAsync(T dto);
         Task AddAsync(IEnumerable<T> listDto);

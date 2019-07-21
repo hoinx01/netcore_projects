@@ -29,13 +29,33 @@
         "Phường Xã": "CommuneName",
         "Mã PX": "CommuneId",
         "Cấp": "",
-        "Tên Tiếng Anh": "" 
+        "Tên Tiếng Anh": ""
       },
       "CodeHeaderRange": {
         "FirstRow": 0,
         "LastRow": 0,
         "FirstColumn": 0,
         "LastColumn": 7
+      },
+      "FirstDataRow": 1,
+      "MaxBlankRow": 10
+    },
+    "ImportNhanhAdministrativeUnit": {
+      "SheetIndex": 0,
+      "KeyColumnName": "Mã",
+      "ColumnNameFieldNameMap": {
+        "Mã": "DistrictId",
+        "Tên": "DistrictName",
+        "Tên Tiếng Anh": "",
+        "Cấp": "",
+        "Mã TP": "CityId",
+        "Tỉnh/Thành Phố": "CityName"
+      },
+      "CodeHeaderRange": {
+        "FirstRow": 0,
+        "LastRow": 0,
+        "FirstColumn": 0,
+        "LastColumn": 5
       },
       "FirstDataRow": 1,
       "MaxBlankRow": 10

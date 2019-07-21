@@ -29,7 +29,7 @@
         exportExcel: "/admin/api/customers/export_excel.json"
     },
     administrativeUnit: {
-        uploadStandardFile: "/admin/api/administrative_units/excel_files"
+        uploadStandardFile: "/admin/api/administrative_units/excel_files/standard"
     },
     city: {
         getAll: "/admin/api/cities.json",
