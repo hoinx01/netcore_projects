@@ -9,6 +9,7 @@ namespace BoardGame.RewardRolling.WebApp.Models.RollingCode
     {
         public string CampaignId { get; set; }      
         public string RewardId { get; set; }      
-        public int RewardOrdinal { get; set; }      
+        public int RewardOrdinal { get; set; }
+        public string ImageReward { get; set; }
     }
 }

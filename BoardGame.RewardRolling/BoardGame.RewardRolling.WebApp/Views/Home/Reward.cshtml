@@ -217,12 +217,12 @@
                             </div>
                         </div>
                         <div class="row" style="margin-top:40px;padding-bottom:40px">
-                            <div class="col-lg-6 col-xl-6" style="margin:auto">
+                            @*<div class="col-lg-6 col-xl-6" style="margin:auto">
                                 <a href="javascrip:0" class="button-login">
                                     NHẬP LẠI
                                 </a>
-                            </div>
-                            <div class="col-lg-6 col-xl-6" style="margin:auto">
+                            </div>*@
+                            <div class="col-lg-12 col-xl-12" style="margin:auto">
                                 <a href="javascrip:0" class="button-login">
                                     ĐÓNG
                                 </a>
@@ -388,6 +388,7 @@
         height: 32px;
         border-radius: 17px;
         width: 90%;
+        background-color:white;
     }
 
         .input-info-login_select > select:focus {
@@ -455,15 +456,45 @@
                 border: none;
                 padding: 4px;
             }
-
-        .input-info-login_select > select {
-            border: none;
-            height: 22px;
-            border-radius: 12px;
-            width: 90%;
-            font-size: 9px;
+    }
+    @@media only screen and (min-device-width: 414px) and (max-device-width: 736px) {
+        .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content {
+            text-align: center;
+            padding-top: 20px;
+            padding-left: 10% !important;
+            padding-right: 15% !important;
+            margin: auto;
         }
     }
+    .modal-dialog {
+        margin-top: 10rem !important;
+        width: 370px;
+    }
+        .modal-dialog > .page-container-login {
+            height:auto;
+        }
+            .modal-dialog > .page-container-login > .page-container-login_shadow{
+                height:auto;
+            }
+            .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content {
+                text-align: center;
+                padding-top: 20px;
+                padding-left: 10%;
+                padding-right: 10%;
+                margin: auto;
+            }
+            .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content >.page-bar-content {
+                position: absolute;
+                top: -150px;
+                margin-left:0px;
+            }
+                .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content > .page-bar-content > div > div > .page-bar-content_img > img {
+                    float: none;
+                    max-width: 82%;
+                }
+                .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content > .page-info >div >div> .img-wheel > img {
+                    max-width: 50%;
+                }
 </style>
 <script>
     $('#datetimepicker').datepicker({
@@ -471,8 +502,8 @@
     });
     function submitInfo() {
         var check = validateInfo();
-        if (check) {
-            return;
+        if (!check) {
+            return
         }
         var birthday = $('#datetimepicker').val();
         var model = {};
@@ -485,6 +516,7 @@
         model.customer.address = {};
         model.customer.address.provinceId = $("#city").val();
         model.customer.address.districtId = $("#select-district").val();
+        model.customer.address.label = $("#address-customer").val();
         model.customer.birthday = {};
         model.customer.birthday.day = birthday.substr(0, 2);
         model.customer.birthday.month = birthday.substr(3, 2);
@@ -495,18 +527,18 @@
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(model),
             success: function (data) {
-                console.log(data)
                 setCookie("cookieReward", data.roll.rewardOrdinal, 1);
+                setCookie("imgReward", data.roll.imageReward, 1);
                 alert("Bạn đã đăng nhập thành công!");
                 setTimeout(function () {
                     window.location.href = "/index";
                 }, 2000)
             },
             error: function (data) {
-                if (data.responseJSON.message != null && data.responseJSON.message != undefined) {
-                    alert(data.responseJSON.message.replace(/\n/g, '; ').replace(/;|$|{|}|\|"|"/g, ''));
-                }
-                //$("#popup-error-modal").modal();
+                //if (data.responseJSON.message != null && data.responseJSON.message != undefined) {
+                //    alert(data.responseJSON.message.replace(/\n/g, '; ').replace(/;|$|{|}|\|"|"/g, ''));
+                //}
+                $("#popup-error-modal").modal();
             },
             complete: function () {
 
@@ -514,28 +546,44 @@
         });
 
     }
-    function validateInfo(){
-        var check = false;
+    function validateInfo() {
+        var check = true;
         if ($("#voucher").val() == "" || $("#voucher").val() == null) {
             alert("Hãy nhập mã voucher!");
-            check = true;
+            check = false;
+            return check;
         }
         if ($("#name-customer").val() == "" || $("#name-customer").val() == null) {
             alert("Hãy nhập tên của bạn!");
-            check = true;
+            check = false;
+            return check;
         }
         if ($("#phone-customer").val() == "" || $("#phone-customer").val() == null) {
             alert("Hãy nhập số điện thoại của bạn");
-            check = true;
+            check = false;
+            return check;
         }
         if ($("#email-customer").val() == "" || $("#email-customer").val() == null) {
             alert("Hãy nhập email của bạn!");
+            check = false;
+            return check;
+        }
+        if ($("#sex-customer").val() == "" || $("#sex-customer").val() == null) {
+            alert("Hãy nhập giới tính!");
             check = true;
         }
-        //if ($("#sex-customer").val() == "" || $("#sex-customer").val() == null) {
-        //    alert("Hãy nhập mã coucher!");
-        //    check = true;
-        //}
+        if ($("#address-customer").val() == "" || $("#address-customer").val() == null) {
+            alert("Hãy nhập địa chỉ!");
+            check = true;
+        }
+        if ($("#city").val() == "" || $("#city").val() == 0 || $("#city").val() == null) {
+            alert("Hãy nhập tỉnh thành!");
+            check = true;
+        }
+        if ($("#select-district").val() == "" || $("#select-district").val() == null || $("#select-district").val() == 0) {
+            alert("Hãy nhập quận huyện!");
+            check = true;
+        }
         return check;
     }
     function setCookie(name, value, days) {

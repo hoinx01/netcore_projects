@@ -57,11 +57,11 @@ namespace BoardGame.RewardRolling.WebApp.Services
             
             var rand = new Random();
             var rewardOrdinalIndex = rand.Next(0, rewardIdContainer.Count);
-            var rewardOrdinal = rewardIdContainer[rewardOrdinalIndex];
-
+            var rewardOrdinal = rewardIdContainer[rewardOrdinalIndex]; 
             var rewardId = campaign.Rewards.FirstOrDefault(f => f.Ordinal == rewardOrdinal)
                 .RewardId
                 .ToString();
+            var imgReward = campaign.Rewards.FirstOrDefault(f => f.Ordinal == rewardOrdinal).ImageSrc;
 
             var rolloutReward = new SpinReward()
             {
@@ -93,6 +93,7 @@ namespace BoardGame.RewardRolling.WebApp.Services
             var result = new RollResultModel()
             {
                 RewardId = rewardId,
+                ImageReward = imgReward,
                 CampaignId = campaign.Id.ToString(),
                 RewardOrdinal = rewardOrdinal
 

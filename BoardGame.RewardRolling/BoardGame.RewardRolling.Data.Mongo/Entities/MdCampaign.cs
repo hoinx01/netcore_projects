@@ -25,6 +25,7 @@ namespace BoardGame.RewardRolling.Data.Mongo.Entities
         public ObjectId RewardId { get; set; }
         public int Rate { get; set; }
         public int Ordinal { get; set; }
+        public string ImageSrc { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
     }

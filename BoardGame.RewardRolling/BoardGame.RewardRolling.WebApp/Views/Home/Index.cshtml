@@ -149,7 +149,7 @@
                         </div>
                         <div class="row" style="margin-top:40px;padding-bottom:40px">
                             <div class="col-lg-12 col-xl-12" style="margin:auto">
-                                <a href="javascrip:0" class="button-login">
+                                <a href="javascrip:0" class="button-login" id="button-login" style="z-index:100">
                                     NHẬP MÃ
                                 </a>
                             </div>
@@ -911,6 +911,23 @@
                 max-width: 20% !important;
             }
     }
+    /*@@media only screen and (min-device-width: 320px) and (max-device-width: 568px){
+        .modal-dialog {
+            width: 270px;
+        }
+        .page-container-login_shadow > .page-content > .page-info > div:first-child {
+            left: 15px !important;
+        }
+    }*/
+    /*@@media only screen and (min-device-width: 414px) and (max-device-width: 736px) {
+        .modal-dialog {
+            width: 320px;
+        }
+
+        .page-container-login_shadow > .page-content > .page-info > div:first-child {
+            left: 40px !important;
+        }
+    }*/
 </style>
 <script>
     //var padding = { top: 40, right: 0, bottom: 0, left: 0 },
@@ -1073,10 +1090,13 @@
         $("#popup-help").click(function () {
             $("#popup-help-modal").modal();
         });
-
+        $("#button-login").click(function () {
+            window.location.href = "/reward";
+        });
         var dataLength = @Model.Rewards.Count;
         var count = 0;
         $(".center-circle > img").click(function () {
+            debugger
             var cookieReward = getCookie("cookieReward");
             if (cookieReward == null || cookieReward == undefined) {
                 if (count > 0) {
@@ -1096,10 +1116,13 @@
             var css = '-webkit-transform: rotate(' + rotation + 'deg);' + style;
             $("#chart").removeAttr('style');
             $("#chart").attr("style", css);
-            document.cookie = "cookiename= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+            deleteCookie("cookieReward");            
             count++;
             setTimeout(function () {
                 $("#popup-success-modal").modal();
+                var imgReward = getCookie("imgReward");
+                $(".img-gift >img").attr("src", imgReward);
+                deleteCookie("imgReward");
             }, 3000)
         });
         function getCookie(cname) {
@@ -1116,6 +1139,9 @@
                 }
             }
             return null;
+        }
+        function deleteCookie(name) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         }
     });
 </script>
