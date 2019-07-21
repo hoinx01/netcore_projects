@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BoardGame.RewardRolling.Core.Statics;
 using BoardGame.RewardRolling.Core.ValueObjects;
 using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
@@ -11,6 +12,7 @@ using BoardGame.RewardRolling.WebApp.Models.RollingCode;
 using BoardGame.RewardRolling.WebApp.Services.Interfaces;
 using Hinox.Mvc.Exceptions;
 using Microsoft.EntityFrameworkCore.Internal;
+using MongoDB.Bson;
 
 namespace BoardGame.RewardRolling.WebApp.Services
 {
@@ -20,18 +22,20 @@ namespace BoardGame.RewardRolling.WebApp.Services
         private readonly IMdRollingCodeDao rollingCodeDao;
         private readonly IIdGenerator idGenerator;
         private readonly IMdCustomerDao customerDao;
-
+        private readonly IMdRewardDao rewardDao;
         public RollingCodeService(
             IMdCampaignDao campaignDao,
             IMdRollingCodeDao rollingCodeDao, 
             IIdGenerator idGenerator,
-            IMdCustomerDao customerDao
+            IMdCustomerDao customerDao,
+            IMdRewardDao rewardDao
         )
         {
             this.campaignDao = campaignDao;
             this.rollingCodeDao = rollingCodeDao;
             this.idGenerator = idGenerator;
             this.customerDao = customerDao;
+            this.rewardDao = rewardDao;
         }
 
         public async Task<RollResultModel> Roll(CustomerRollViewModel model)
@@ -90,12 +94,14 @@ namespace BoardGame.RewardRolling.WebApp.Services
             await rollingCodeDao.UpdateAsync(code);
             await customerDao.AddAsync(mdCustomer);
 
+            var mdReward = await rewardDao.GetByIdAsync(new ObjectId(rewardId));
+
             var result = new RollResultModel()
             {
                 RewardId = rewardId,
                 CampaignId = campaign.Id.ToString(),
-                RewardOrdinal = rewardOrdinal
-
+                RewardOrdinal = rewardOrdinal,
+                Reward = mdReward == null ? null : Mapper.Map<RollRewardModel>(mdReward)
             };
             return result;
         }

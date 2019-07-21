@@ -21,7 +21,7 @@
             <div class="col-control">
                 <font-awesome-icon 
                                    :icon="['fa', 'trash-alt']" 
-                                   />
+                                   @click="deleteCommuneStart(item.id)"/>
                 <font-awesome-icon 
                                    :icon="['fa', 'pencil-alt']" 
                                    @click="updateCommuneStart(item.id)"/>
@@ -36,11 +36,17 @@
                                   :districtId="districtId">
             </commune-popup-create>
             <commune-popup-edit @success="updateCommuneSuccessfully"
-                                   @completed="updateCommuneCompletely"
-                                   v-if="currentAction.name=='updateCommune'"
-                                   :visible="currentAction.name=='updateCommune'"
-                                   :object="currentAction.object">
+                                @completed="updateCommuneCompletely"
+                                v-if="currentAction.name=='updateCommune'"
+                                :visible="currentAction.name=='updateCommune'"
+                                :object="currentAction.object">
             </commune-popup-edit>
+            <commune-popup-delete @success="deleteCommuneSuccessfully"
+                                   @completed="deleteCommuneCompletely"
+                                   v-if="currentAction.name=='deleteCommune'"
+                                   :visible="currentAction.name=='deleteCommune'"
+                                   :object="currentAction.object">
+            </commune-popup-delete>
         </div>
         
     </b-list-group>
@@ -51,12 +57,14 @@
     import communeRepository from '../../Repositories/CommuneRepository';
     import CommunePopupCreate from './CommunePopupCreate.vue';
     import CommunePopupEdit from './CommunePopupEdit.vue';
+    import CommunePopupDelete from './CommunePopupDelete.vue';
 
     export default {
         name: 'list-commune',
         components: {
             CommunePopupCreate,
-            CommunePopupEdit
+            CommunePopupEdit,
+            CommunePopupDelete
         },
         props: {
             cityId: {
@@ -118,6 +126,25 @@
             },
             updateCommuneCompletely() {
                 this.deaction();
+            },
+            deleteCommuneStart(communeId) {
+                this.currentAction.name = 'deleteCommune';
+                let object = this.administrativeUnits.communes.filter(f => f.id == communeId)[0];
+                this.currentAction.object = cloneDeep(object);
+            },
+            deleteCommuneSuccessfully() {
+                let index = -1;
+                for (let i = 0; i < this.administrativeUnits.communes.length; i++) {
+                    if (this.administrativeUnits.communes[i].id == this.currentAction.object.id) {
+                        index = i;
+                        break;
+                    }
+                }
+                this.administrativeUnits.communes.splice(index, 1);
+                this.deaction();
+            },
+            deleteCommuneCompletely() {
+                 this.deaction();
             }
         },
         async created() {

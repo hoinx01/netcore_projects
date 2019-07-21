@@ -10,11 +10,12 @@ using BoardGame.RewardRolling.WebApp.Models.Customer;
 using BoardGame.RewardRolling.WebApp.Services.Interfaces;
 using BoardGame.RewardRolling.WebApp.Models.AdministrativeUnit;
 using BoardGame.RewardRolling.WebApp.Models.RollingCode;
+using Hinox.Mvc.Controllers;
 using Hinox.Mvc.Exceptions;
 
 namespace BoardGame.RewardRolling.WebApp.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseMvcController
     {
         private readonly ICampaignQueryService campaignQueryService;
         private readonly IAdministrativeUnitService administrativeUnitService;
