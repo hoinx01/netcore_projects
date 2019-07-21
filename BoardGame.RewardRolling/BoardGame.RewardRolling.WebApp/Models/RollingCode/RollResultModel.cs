@@ -11,6 +11,7 @@ namespace BoardGame.RewardRolling.WebApp.Models.RollingCode
         public string RewardId { get; set; }      
         public int RewardOrdinal { get; set; }
         public RollRewardModel Reward { get; set; }
+        public string ImageReward { get; set; }
     }
 
     public class RollRewardModel

@@ -12,6 +12,7 @@ using BoardGame.RewardRolling.WebApp.Models.AdministrativeUnit;
 using BoardGame.RewardRolling.WebApp.Models.RollingCode;
 using Hinox.Mvc.Controllers;
 using Hinox.Mvc.Exceptions;
+using BoardGame.RewardRolling.WebApp.Admin.Models.Campaign;
 
 namespace BoardGame.RewardRolling.WebApp.Controllers
 {
@@ -32,9 +33,17 @@ namespace BoardGame.RewardRolling.WebApp.Controllers
         }
         public async Task<ActionResult> Index()
         {
-            var model = await campaignQueryService.GetCurrentCampaign();
             ViewData["Title"] = "Trang chủ";
-            return View(model);
+            try
+            {
+                var model = await campaignQueryService.GetCurrentCampaign();
+                return View(model);
+            }
+            catch (BaseCustomException e)
+            {
+                Response.StatusCode = (int)e.StatusCode;
+                return View(new CampaignModel());
+            }
         }
         public async Task<ActionResult> Reward()
         {
