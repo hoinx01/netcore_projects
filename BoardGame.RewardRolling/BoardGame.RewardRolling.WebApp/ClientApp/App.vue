@@ -67,5 +67,7 @@
     .list-pagination{
         display:flex;
     }
-
+    .hovered{
+        cursor:pointer;
+    }
 </style>

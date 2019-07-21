@@ -9,6 +9,7 @@ using BoardGame.RewardRolling.Data.Mongo.Entities;
 using BoardGame.RewardRolling.WebApp.Admin.Models.AdministrativeUnit;
 using BoardGame.RewardRolling.WebApp.Models.AdministrativeUnit;
 using BoardGame.RewardRolling.WebApp.Services.Interfaces;
+using Hinox.Mvc.Exceptions;
 using Hinox.Static.Enumerate;
 using MongoDB.Driver;
 
@@ -155,6 +156,128 @@ namespace BoardGame.RewardRolling.WebApp.Services
             var mdCommunes = await communeDao.GetByDistrictIdAsync(districtId);
             var communeModels = mdCommunes.Select(s => Mapper.Map<CommuneModel>(s)).ToList();
             return communeModels;
+        }
+
+        public async Task<CityModel> AddCityAsync(AddCityRequest model)
+        {
+            var mdCity = new MdCity()
+            {
+                Name = model.Name,
+                LevelId = model.LevelId.Value
+            };
+            var id = await cityDao.GetNextId();
+            mdCity.Id = id;
+
+            await cityDao.AddAsync(mdCity);
+            var result = Mapper.Map<CityModel>(mdCity);
+            return result;
+        }
+
+        public async Task<CityModel> UpdateCity(string id, UpdateCityRequest model)
+        {
+            var mdCity = await cityDao.GetByIdAsync(id);
+
+            if(mdCity == null)
+                throw new NotFoundException();
+
+            mdCity.Name = model.Name;
+            mdCity.LevelId = model.LevelId.Value;
+
+            await cityDao.UpdateAsync(mdCity);
+            var result = Mapper.Map<CityModel>(mdCity);
+            return result;
+        }
+
+        public async Task DeleteCityAsync(string id)
+        {
+            var mdCity = await cityDao.GetByIdAsync(id);
+
+            if (mdCity == null)
+                throw new NotFoundException();
+
+            await cityDao.DeleteAsync(mdCity);
+        }
+
+        public async Task<DistrictModel> AddDistrict(AddDistrictRequest model)
+        {
+            var mdDistrict = new MdDistrict()
+            {
+                CityId = model.CityId,
+                Name = model.Name,
+                LevelId = model.LevelId.Value
+            };
+            var id = await districtDao.GetNextId();
+            mdDistrict.Id = id;
+
+            await districtDao.AddAsync(mdDistrict);
+            var result = Mapper.Map<DistrictModel>(mdDistrict);
+            return result;
+        }
+
+        public async Task<DistrictModel> UpdateDistrict(string id, UpdateDistrictRequest model)
+        {
+            var mdDistrict = await districtDao.GetByIdAsync(id);
+
+            if (mdDistrict == null)
+                throw new NotFoundException();
+
+            mdDistrict.Name = model.Name;
+            mdDistrict.LevelId = model.LevelId.Value;
+
+            await districtDao.UpdateAsync(mdDistrict);
+            var result = Mapper.Map<DistrictModel>(mdDistrict);
+            return result;
+        }
+
+        public async Task DeleteDistrictAsync(string id)
+        {
+            var mdDistrict = await districtDao.GetByIdAsync(id);
+
+            if (mdDistrict == null)
+                throw new NotFoundException();
+
+            await districtDao.DeleteAsync(mdDistrict);
+        }
+        public async Task<CommuneModel> AddCommune(AddCommuneRequest model)
+        {
+            var mdCommune = new MdCommune()
+            {
+                DistrictId = model.DistrictId,
+                CityId = model.CityId,
+                Name = model.Name,
+                LevelId = model.LevelId.Value
+            };
+            var id = await districtDao.GetNextId();
+            mdCommune.Id = id;
+
+            await communeDao.AddAsync(mdCommune);
+            var result = Mapper.Map<CommuneModel>(mdCommune);
+            return result;
+        }
+
+        public async Task<CommuneModel> UpdateCommune(string id, UpdateCommuneRequest model)
+        {
+            var mdCommune = await communeDao.GetByIdAsync(id);
+
+            if (mdCommune == null)
+                throw new NotFoundException();
+
+            mdCommune.Name = model.Name;
+            mdCommune.LevelId = model.LevelId.Value;
+
+            await communeDao.UpdateAsync(mdCommune);
+            var result = Mapper.Map<CommuneModel>(mdCommune);
+            return result;
+        }
+
+        public async Task DeleteCommuneAsync(string id)
+        {
+            var mdCommune = await communeDao.GetByIdAsync(id);
+
+            if (mdCommune == null)
+                throw new NotFoundException();
+
+            await communeDao.DeleteAsync(mdCommune);
         }
     }
 }

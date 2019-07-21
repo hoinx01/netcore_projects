@@ -6,6 +6,7 @@ using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
 using BoardGame.RewardRolling.Data.Mongo.Entities;
 using Hinox.Data.Mongo;
 using Hinox.Data.Mongo.Dal.Dao;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace BoardGame.RewardRolling.Data.Mongo.Dao
@@ -23,6 +24,11 @@ namespace BoardGame.RewardRolling.Data.Mongo.Dao
             var filterResult = await Collection.FindAsync(filterDefinition);
             var entities = await filterResult.ToListAsync();
             return entities;
+        }
+
+        public async Task<string> GetNextId()
+        {
+            return ObjectId.GenerateNewId().ToString();
         }
     }
     public class MdDistrictDao : BaseStringIdMongoDao<MdDistrict>, IMdDistrictDao
@@ -48,6 +54,10 @@ namespace BoardGame.RewardRolling.Data.Mongo.Dao
             var entities = await filterResult.ToListAsync();
             return entities;
         }
+        public async Task<string> GetNextId()
+        {
+            return ObjectId.GenerateNewId().ToString();
+        }
     }
     public class MdCommuneDao : BaseStringIdMongoDao<MdCommune>, IMdCommuneDao
     {
@@ -71,6 +81,11 @@ namespace BoardGame.RewardRolling.Data.Mongo.Dao
             var filterResult = await Collection.FindAsync(filterDefinition);
             var entities = await filterResult.ToListAsync();
             return entities;
+        }
+
+        public async Task<string> GetNextId()
+        {
+            return ObjectId.GenerateNewId().ToString();
         }
     }
 }

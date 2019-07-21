@@ -66,7 +66,10 @@ const baseRepository = {
     async delete(url, data = null, requestOptions = null) {
         let options = this.setRequestOptions(requestOptions);
         try {
-            let response = await axios.delete(url, data, options);
+            console.log(url);
+            console.log(options);
+            let response = await axios.delete(url, options);
+            console.log(response);
             return this.processRequestResponse(response);
         }
         catch (exception) {
