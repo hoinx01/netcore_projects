@@ -32,13 +32,22 @@
         uploadStandardFile: "/admin/api/administrative_units/excel_files"
     },
     city: {
-        getAll: "/admin/api/cities.json"
+        getAll: "/admin/api/cities.json",
+        add: "/admin/api/cities.json",
+        update: "/admin/api/cities/{id}.json",
+        delete: "/admin/api/cities/{id}.json"
     },
     district: {
-        getDistrictByCityId: "/admin/api/districts.json"
+        getDistrictByCityId: "/admin/api/districts.json",
+        add: "/admin/api/districts.json",
+        update: "/admin/api/districts/{id}.json",
+        delete: "/admin/api/districts/{id}.json"
     },
     commune: {
-        getCommuneByDistrictId: "/admin/api/communes.json"
+        getCommuneByDistrictId: "/admin/api/communes.json",
+        add: "/admin/api/communes.json",
+        update: "/admin/api/communes/{id}.json",
+        delete: "/admin/api/communes/{id}.json"
     }
 };
 

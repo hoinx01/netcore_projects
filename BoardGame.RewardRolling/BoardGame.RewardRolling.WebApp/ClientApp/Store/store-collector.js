@@ -1,17 +1,18 @@
-﻿import Vue from 'vue'
-import Vuex from 'vuex'
+﻿import Vue from 'vue';
+import Vuex from 'vuex';
 import rollingCode from './modules/rolling_code/store';
 import reward from './modules/reward/store';
 import campaign from './modules/campaign/store';
 import identity from './modules/identity/store';
 import customer from './modules/customer/store';
+import root from './modules/root/store';
 
 
-
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
     modules: {
+        root,
         rollingCode,
         reward,
         campaign,

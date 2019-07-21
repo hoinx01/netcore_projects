@@ -38,7 +38,7 @@
                     var loginResult = await userRepository.login(this.loginModel);
                     console.log(loginResult);
                     localStorage.setItem('bearerToken', loginResult.token);
-                    this.$router.push('/');
+                    this.$router.push('/admin');
                 }
                 catch (exception) {
                     alert(exception.messages[0])
