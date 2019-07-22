@@ -76,14 +76,30 @@
                 </div>
                 
                 <div id="wheel-container">
-                    <div class="wheel" v-bind:style="wheelStyle">
+                    <div class="page-wheel">
+                        <div class="light-wheel">
+                            <div class="flash-wheel hide-flash">
+                                <div class="elipse-wheel">
+                                    <div class="border-wheel background-full" :style="{backgroundImage: 'url(' + campaign.luckyWheel.pointerRack.imageSrc + ')', backgroundSize: '100% 100%'}">
+                                        <div class="background-full" id="chart" :style="{backgroundImage: 'url(' + campaign.luckyWheel.mainRim.imageSrc + ')', backgroundSize: '100% 100%'}"></div>
+                                        <div class="pointer-wheel">
+                                            <img :src="campaign.luckyWheel.pointer.imageSrc" />
+                                        </div>
+                                        <div class="center-circle">
+                                            <img :src="campaign.luckyWheel.centerCircle.imageSrc" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div>
                         <upload-file label="Upload vòng quay" fileGroup="lucky-wheel-parts" @success="changeMainRimImage"></upload-file>
                         <upload-file label="Upload tâm" fileGroup="lucky-wheel-parts" @success="changeCenterCircleImage"></upload-file>
                         <upload-file label="Upload giá kim" fileGroup="lucky-wheel-parts" @success="changePointerRackImage"></upload-file>
                         <upload-file label="Upload kim" fileGroup="lucky-wheel-parts" @success="changePointerImage"></upload-file>
-                        <b-btn @click="play">Quay thử</b-btn>
+                        <!--<b-btn @click="play">Quay thử</b-btn>-->
                         
                     </div>
                 </div>
@@ -293,56 +309,101 @@
     .create_campaign_form{
         display:flex;
     }
-    #wheel-container{
+    #input-name{
         width:300px;
-        height:300px;
-        background-color:red;
     }
-    .wheel{
-        width:300px;
-        height:300px;
-        border-radius: 150px;
-        background-color: yellow;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background-image: url(http://static.ekipvn.com/Sites/6637/Data/images/2014/3/v%C3%B2ng%20quay.jpg);
-        background-position: center;
-        background-size: cover;
+    .create_campaign_form-left{
+        width: 500px;
+    }
+
+    .background-full{
+        background-size: 100% 100%;
     }
     
-    .wheel_pointer{
-        width:100px;
-        height:100px;
-        border-radius: 50%;
-        background-color: white
-    }
-    @-webkit-keyframes hh {
-      0%, 100%{
-        transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-      }
-
-      50%{
-        transform: rotate(7deg);
-        -webkit-transform: rotate(7deg);
-      }
+    .page-wheel{
+        text-align: center;
+        width: 100%;
+        margin-top: 20px
     }
 
-    @keyframes hh {
-       0%, 100%{
-        transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-      }
-
-      50%{
-        transform: rotate(7deg);
-        -webkit-transform: rotate(7deg);
-      }
+    .light-wheel {
+        width: 400px;
+        height: 400px;
+        margin: auto;
+        background: url("/images/vong_xoay/tia-sang.png") no-repeat;
+        background-size: 100% 100%;
     }
 
-    .spin {
-      -webkit-animation: hh 0.1s; /* Chrome, Safari, Opera */
-        animation: hh 0.1s;
+    .flash-wheel {
+        width: 385px;
+        height: 385px;
+        margin: auto;
+        background: url("/images/vong_xoay/den-nhay.png") no-repeat;
+        background-size: 100% 100%;
     }
+    .hide-flash {
+        -webkit-animation: FLASH-ANIMATION 1s infinite; /* Safari 4+ */
+        -moz-animation: FLASH-ANIMATION 1s infinite; /* Fx 5+ */
+        -o-animation: FLASH-ANIMATION 1s infinite; /* Opera 12+ */
+        animation: FLASH-ANIMATION 1s infinite; /* IE 10+, Fx 29+ */
+    }
+
+    @@-webkit-keyframes FLASH-ANIMATION {
+        0%, 49% {
+            width: 385px;
+            height: 385px;
+            margin: auto;
+            background: url("/images/vong_xoay/den-nhay.png") no-repeat;
+            background-size: 100% 100%;
+        }
+
+        50%, 100% {
+            width: 385px;
+            height: 385px;
+            margin: auto;
+            background: none;
+        }
+    }
+
+    .elipse-wheel {
+        width: 370px;
+        height: 385px;
+        margin: auto;
+        background: url("/images/vong_xoay/elipse.png") no-repeat;
+        background-size: 100% 100%;
+    }
+    .border-wheel {
+        width: 340px;
+        height: 370px;
+        margin: auto;
+        position: relative;
+    }
+    #chart {
+        position: absolute;
+        top: 40px;
+        left: 13px;
+        z-index: 10;
+        width: 315px;
+        height: 315px;
+        -webkit-transition: -webkit-transform 3s ease-out;
+    }
+    .pointer-wheel {
+            position: absolute;
+            top: 0px;
+            left: calc(50% - 25px);
+            z-index: 1;
+        }
+
+            .pointer-wheel > img {
+                max-width: 70%;
+            }
+    .center-circle {
+        position: absolute;
+        top: 40%;
+        left: 25%;
+        z-index: 10;
+    }
+        .center-circle > img {
+            max-width: 50%;
+        }
 </style>

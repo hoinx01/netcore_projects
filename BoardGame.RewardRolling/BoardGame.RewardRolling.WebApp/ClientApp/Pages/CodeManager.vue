@@ -10,6 +10,7 @@
             <b-list-group-item class="item-row">
                 <div class="col-index">STT</div>
                 <div class="col-name">Serial</div>
+                <div class="col-status">Trạng thái</div>
                 <div class="col-control"></div>
             </b-list-group-item>
             <b-list-group-item class="item-row"
@@ -17,6 +18,7 @@
                                :key="item.id">
                 <div class="col-index">{{index + 1}}</div>
                 <div class="col-name">{{item.serial}}</div>
+                <div class="col-status">{{item.status}}</div>
                 <div class="col-control">
 
                 </div>
@@ -120,6 +122,10 @@
     }
 
         .item-row .col-index {
+            width: 50px;
+        }
+
+        .item-row .col-status {
             width: 50px;
         }
 

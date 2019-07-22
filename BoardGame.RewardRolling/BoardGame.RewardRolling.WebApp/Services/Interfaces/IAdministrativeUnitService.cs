@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BoardGame.RewardRolling.Core.ValueObjects;
 using BoardGame.RewardRolling.WebApp.Admin.Models.AdministrativeUnit;
+using BoardGame.RewardRolling.WebApp.Admin.Models.Customer;
 using BoardGame.RewardRolling.WebApp.Models.AdministrativeUnit;
 
 namespace BoardGame.RewardRolling.WebApp.Services.Interfaces
@@ -30,5 +32,6 @@ namespace BoardGame.RewardRolling.WebApp.Services.Interfaces
         Task DeleteDistrictAsync(string id);
         Task<CommuneModel> UpdateCommune(string id, UpdateCommuneRequest model);
         Task DeleteCommuneAsync(string id);
+        Task<ExcelCustomerAddress> MapAddressToExcelAddress(Address address);
     }
 }

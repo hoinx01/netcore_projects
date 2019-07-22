@@ -6,10 +6,10 @@ namespace BoardGame.RewardRolling.Core.ValueObjects
 {
     public class Address : ValueObject
     {
-        public int? CountryId { get; set; }
-        public int? ProvinceId { get; set; }
-        public int? DistrictId { get; set; }
-        public int? WardId { get; set; }
+        public string CountryId { get; set; }
+        public string ProvinceId { get; set; }
+        public string DistrictId { get; set; }
+        public string WardId { get; set; }
         public string Label { get; set; }
         public string Detail { get; set; }
 

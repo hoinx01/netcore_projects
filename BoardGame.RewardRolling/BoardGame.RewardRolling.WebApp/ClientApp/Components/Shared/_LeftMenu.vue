@@ -52,7 +52,7 @@
         flex-direction: column;
         max-height: 100vh;
         height: 100vh;
-        background-color: rgba(0,0,0,0.4)
+        background-color: rgba(0,0,0,0.2)
     }
     .user_box{
         flex-basis:10%;
@@ -62,7 +62,12 @@
         margin-bottom: 20px;
         flex-grow:1
     }
-    ul{
+    #menu-item-container ul{
         list-style-type: none;
+        margin-left: 15px;
+    }
+    #menu-item-container ul li{
+        margin-bottom:15px;
+        font-weight: bold;
     }
 </style>

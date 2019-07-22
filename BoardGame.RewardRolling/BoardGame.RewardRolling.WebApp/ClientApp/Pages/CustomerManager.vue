@@ -50,6 +50,7 @@
     import pagination from '../Components/Shared/_Pagination.vue';
     import dateUtils from '../Utils/DateExtensions.js';
     import customerFilter from '../Components/Customer/CustomerFilter.vue';
+    import customerRepository from '../Repositories/CustomerRepository';
 
     export default {
         name: 'campaign-manager',
@@ -84,8 +85,16 @@
             changePageSize(pageSize) {
                 this.$store.dispatch('customer/CHANGE_FILTER_PAGESIZE', pageSize);
             },
-            exportExcel() {
-
+            async exportExcel() {
+                var filterRequest = this.$store.state.customer.filter.request;
+                var filterModel = {
+                    templateName : 'nhanh',
+                    createdAtMin : filterRequest.createdAtMin,
+                    createdAtMax : filterRequest.createdAtMax
+                };
+                var exportResult = await customerRepository.exportExcel(filterModel);
+                console.log(exportResult);
+                window.open(exportResult.url, '_blank');
             },
             getDisplayedDate(date) {
 

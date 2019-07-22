@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BoardGame.RewardRolling.Core.Statics;
+using BoardGame.RewardRolling.Core.ValueObjects;
 using BoardGame.RewardRolling.Data.Mongo.Dao;
 using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
 using BoardGame.RewardRolling.Data.Mongo.Entities;
 using BoardGame.RewardRolling.WebApp.Admin.Models.AdministrativeUnit;
+using BoardGame.RewardRolling.WebApp.Admin.Models.Customer;
 using BoardGame.RewardRolling.WebApp.Models.AdministrativeUnit;
 using BoardGame.RewardRolling.WebApp.Services.Interfaces;
 using Hinox.Mvc.Exceptions;
@@ -398,6 +400,47 @@ namespace BoardGame.RewardRolling.WebApp.Services
                 throw new NotFoundException();
 
             await communeDao.DeleteAsync(mdCommune);
+        }
+
+        private static List<MdCity> allCities;
+        private static List<MdDistrict> allDistricts;
+        private static List<MdCommune> allCommunes;
+        private static List<MdNhanhCity> allNhanhCities;
+        private static List<MdStandardToNhanhAdministrativeUnitMap> allMaps;
+        public async Task<ExcelCustomerAddress> MapAddressToExcelAddress(Address address)
+        {
+            if (allCities == null)
+                allCities = await cityDao.GetAllAsync();
+            if (allDistricts == null)
+                allDistricts = await districtDao.GetAllAsync();
+            if (allNhanhCities == null)
+                allNhanhCities = await nhanhCityDao.GetAllAsync();
+            if (allMaps == null)
+                allMaps = await mapDao.GetAllAsync();
+
+            var result = new ExcelCustomerAddress()
+            {
+                Detail = string.IsNullOrWhiteSpace(address.Detail) ? address.Label : address.Detail,
+                Province = "",
+                District = ""
+            };
+
+            var map = allMaps.FirstOrDefault(f =>
+                f.StandardCityId == address.ProvinceId && f.StandardDistrictId == address.DistrictId);
+
+            if (map == null)
+                return result;
+
+            var nhanhCity = allNhanhCities.FirstOrDefault(f => f.Id == map.NhanhCityId);
+            if (nhanhCity != null)
+            {
+                result.Province = nhanhCity.Name;
+                var nhanhDistrict = nhanhCity.Districts.FirstOrDefault(f => f.Id == map.NhanhDistrictId);
+                if (nhanhDistrict != null)
+                    result.District = nhanhDistrict.Name;
+            }
+
+            return result;
         }
     }
 }

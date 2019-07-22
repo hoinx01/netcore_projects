@@ -24,8 +24,6 @@
                 <div class="col-control">
                     <font-awesome-icon :icon="['fa', 'trash-alt']"
                                        @click="startDeleting(item.id)" />
-                    <font-awesome-icon :icon="['fa', 'pencil-alt']"
-                                       @click="startUpdating(item.id)" />
                 </div>
             </b-list-group-item>
 

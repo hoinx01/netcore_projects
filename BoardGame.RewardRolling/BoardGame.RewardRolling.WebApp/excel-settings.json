@@ -63,13 +63,10 @@
     "ExportCustomer": {
       "Templates": {
         "nhanh": {
-          "TemplateFilePath": "",
-          "ColumnNameFieldNameMap": {
+          "TemplateFilePath": "wwwroot/sample-files/export-customer.xlsx",
+          "CustomerColumnNameFieldNameMap": {
             "Họ và tên": "FullName",
             "Điện thoại": "PhoneNumber",
-            "Địa chỉ": "Address.Detail",
-            "Thành phố": "Address.Province",
-            "Quận huyện": "Address.District",
             "Mã khách hàng": "",
             "Email": "Email",
             "Facebook link": "",
@@ -86,7 +83,18 @@
             "Nhóm khách hàng": "",
             "Người phụ trách": ""
           },
-          "CodeHeaderRange": {
+          "CustomerAddressColumnNameFieldNameMap": {
+            "Địa chỉ": "Detail",
+            "Thành phố": "Province",
+            "Quận huyện": "District"
+          },
+          "CustomerCodeHeaderRange": {
+            "FirstRow": 0,
+            "LastRow": 0,
+            "FirstColumn": 0,
+            "LastColumn": 19
+          },
+          "CustomerAddressCodeHeaderRange": {
             "FirstRow": 0,
             "LastRow": 0,
             "FirstColumn": 0,

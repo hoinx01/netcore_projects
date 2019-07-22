@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Text;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Hinox.Office.Utils
@@ -132,8 +133,18 @@ namespace Hinox.Office.Utils
 
         public static object ConvertData(object inputValue, Type outputType)
         {
-            if(inputValue == null)
-                return Activator.CreateInstance(outputType);
+            if (inputValue == null)
+            {
+                try
+                {
+                    return Activator.CreateInstance(outputType);
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+                
 
             var inputType = inputValue.GetType();
 

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "name": "pet-hub-admin",
+  "name": "boardgame-rollingcode",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --config ./webpack.config.js",

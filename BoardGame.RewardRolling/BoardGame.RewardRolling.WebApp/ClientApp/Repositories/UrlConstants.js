@@ -26,7 +26,7 @@
     customer: {
         filter: "/admin/api/customers.json",
         getById: "/admin/api/customers/{id}.json",
-        exportExcel: "/admin/api/customers/export_excel.json"
+        exportExcel: "/admin/api/customers/excel_files.json"
     },
     administrativeUnit: {
         uploadStandardFile: "/admin/api/administrative_units/excel_files/standard"

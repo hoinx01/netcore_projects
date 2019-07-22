@@ -20,8 +20,9 @@ const webpathConfig = {
     ,     // Specifies the entry point of the application where webpack begins the packaging process.  
     output: {
         path: path.resolve(__dirname, "./wwwroot/js"),  // Specifies the output directory for any wepback output files
-        filename: "bundle.js",                              // Specifies the file name template for entry chunks (TODO: figure out what an entry point chunk is),
-        publicPath: "/js/"                                  // Specifies the page-relative URL to prefix before assets to ensure they can be resolved by a browser.  (Notice this value is injected into index.html to refer to the bundle.js file created by webpack).
+        filename: "[name].js",                              // Specifies the file name template for entry chunks (TODO: figure out what an entry point chunk is),
+        publicPath: "/js/",                                  // Specifies the page-relative URL to prefix before assets to ensure they can be resolved by a browser.  (Notice this value is injected into index.html to refer to the bundle.js file created by webpack).
+        chunkFilename: '[id].[chunkhash].js'    
     },
     resolve: {
         alias: {
