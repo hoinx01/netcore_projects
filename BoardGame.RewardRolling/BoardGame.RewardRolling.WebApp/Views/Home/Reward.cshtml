@@ -36,130 +36,138 @@
                     </div>
 
                 </div>
+                <form id="form-submit" style="width:100%" method="get" accept-charset="utf-8" role="form">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 pading-7" style="margin:auto">
+                            <div class="input-info-login">
+                                <div class="w-50 input-info-login_text">
+                                    Mã voucher
+                                </div>
+                                <div class="w-50 input-info-login_input">
+                                    <input class="w-100" placeholder="NTC112233" id="voucher" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 pading-7">
+                            <div class="input-info-login">
+                                <div class="w-50 input-info-login_text">
+                                    Họ & Tên
+                                </div>
+                                <div class="w-50 input-info-login_input">
+                                    @*<input class="w-100" placeholder="Nguyễn Văn A" id="name-customer" type="text" minlength="1" required />*@
+                                    @Html.TextBoxFor(model => model.FullName, new { @class = "w-100", @type = "text",  required = "", @id = "name-customer", @placeholder = "Nguyễn Văn A" })
+                                    <span class="help-block help-block-margin">@Html.ValidationMessageFor(model => model.FullName)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6 pading-7">
+                            <div class="input-info-login">
+                                <div class="w-50 input-info-login_text">
+                                    Email
+                                </div>
+                                <div class="w-50 input-info-login_input">
+                                    @*<input class="w-100" placeholder="nguyenvana@gmail.com" id="email-customer" type="email" required />*@
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "w-100", @type = "email", required = "", @id = "email-customer", @placeholder = "nguyenvana@gmail.com" })
+                                    <span class="help-block help-block-margin">@Html.ValidationMessageFor(model => model.Email)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 pading-7">
+                            <div class="input-info-login">
+                                <div class="w-50 input-info-login_text">
+                                    Ngày sinh
+                                </div>
+                                <div class="w-50 input-info-login_input">
+                                    <input class="w-100" placeholder="01/01/2010" id="datetimepicker" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6 pading-7">
+                            <div class="input-info-login">
+                                <div class="w-50 input-info-login_text">
+                                    Địa chỉ
+                                </div>
+                                <div class="w-50 input-info-login_input">
+                                    <input class="w-100" placeholder="Số 1 Hoàng Đạo Thúy" id="address-customer" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 pading-7">
+                            <div class="input-info-login">
+                                <div class="w-50 input-info-login_text">
+                                    Giới tính
+                                </div>
+                                <div class="w-50 input-info-login_input">
+                                    <input class="w-100" placeholder="Nam/Nữ" id="sex-customer" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6 pading-7">
+                            <div class="input-info-login">
+                                <div class="w-50 input-info-login_text">
+                                    SĐT
+                                </div>
+                                <div class="w-50 input-info-login_input">
+                                    @*<input class="w-100" placeholder="0987654321" id="phone-customer" type="number" />*@
+                                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "w-100", required = "", @id = "phone-customer", @placeholder = "0987654321" })
+                                    <span class="help-block help-block-margin">@Html.ValidationMessageFor(model => model.PhoneNumber)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 pading-7">
+                            <div class="input-info-login">
+                                <div class="w-50 input-info-login_text">
+                                    Tỉnh/ TP
+                                </div>
+                                <div class="w-50 input-info-login_select">
+                                    <select onchange="chooseCity(this)" id="city">
+                                        <option value="0">Chọn Tỉnh/ TP</option>
+                                        @for (int i = 0; i < Model.Cities.Count; i++)
+                                        {
+                                            var city = Model.Cities[i];
+                                            <!option value="@city.Id">@city.Name</!option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="row">
-                    <div class="col-md-6 col-xs-6 pading-7" style="margin:auto">
-                        <div class="input-info-login">
-                            <div class="w-50 input-info-login_text">
-                                Mã voucher
-                            </div>
-                            <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="NTC112233" id="voucher" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-xs-6 pading-7">
-                        <div class="input-info-login">
-                            <div class="w-50 input-info-login_text">
-                                Họ & Tên
-                            </div>
-                            <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="Nguyễn Văn A" id="name-customer" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xs-6 pading-7">
-                        <div class="input-info-login">
-                            <div class="w-50 input-info-login_text">
-                                Email
-                            </div>
-                            <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="nguyenvana@gmail.com" id="email-customer" type="email" />
+                        <div class="col-md-6 col-xs-6 pading-7">
+                            <div class="input-info-login">
+                                <div class="w-50 input-info-login_text">
+                                    Quận/ Huyện
+                                </div>
+                                <div class="w-50 input-info-login_select" id="district">
+                                    <select id="select-district">
+                                        <option value="0">Chọn Quận/Huyện</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="row" style="position:relative">
+                        <div class="img-login-footer">
+                            <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:40px">
+                        <div class="col-lg-12 col-xl-12" style="margin:auto">
+                            <a href="javascrip:0" class="button-login" onclick="submitInfo()">
+                                ĐĂNG NHẬP
+                            </a>
+                        </div>
+                    </div>
+                </form>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-xs-6 pading-7">
-                        <div class="input-info-login">
-                            <div class="w-50 input-info-login_text">
-                                Ngày sinh
-                            </div>
-                            <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="01/01/2010" id="datetimepicker" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xs-6 pading-7">
-                        <div class="input-info-login">
-                            <div class="w-50 input-info-login_text">
-                                Địa chỉ
-                            </div>
-                            <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="Số 1 Hoàng Đạo Thúy" id="address-customer" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-xs-6 pading-7">
-                        <div class="input-info-login">
-                            <div class="w-50 input-info-login_text">
-                                Giới tính
-                            </div>
-                            <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="Nam/Nữ" id="sex-customer" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xs-6 pading-7">
-                        <div class="input-info-login">
-                            <div class="w-50 input-info-login_text">
-                                Tỉnh/ TP
-                            </div>
-                            <div class="w-50 input-info-login_select">
-                                <select onchange="chooseCity(this)" id="city">
-                                    <option value="0">Chọn Tỉnh/ TP</option>
-                                    @for (int i = 0; i < Model.Cities.Count; i++)
-                                    {
-                                        var city = Model.Cities[i];
-                                        <!option value="@city.Id">@city.Name</!option>
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-xs-6 pading-7">
-                        <div class="input-info-login">
-                            <div class="w-50 input-info-login_text">
-                                SĐT
-                            </div>
-                            <div class="w-50 input-info-login_input">
-                                <input class="w-100" placeholder="0987654321" id="phone-customer" type="number" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xs-6 pading-7">
-                        <div class="input-info-login">
-                            <div class="w-50 input-info-login_text">
-                                Quận/ Huyện
-                            </div>
-                            <div class="w-50 input-info-login_select" id="district">
-                                <select id="select-district">
-                                    <option value="0">Chọn Quận/Huyện</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="position:relative">
-                    <div class="img-login-footer">
-                        <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
-                    </div>
-                </div>
-                <div class="row" style="margin-top:40px">
-                    <div class="col-lg-12 col-xl-12" style="margin:auto">
-                        <a href="javascrip:0" class="button-login" onclick="submitInfo()">
-                            ĐĂNG NHẬP
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -218,10 +226,10 @@
                         </div>
                         <div class="row" style="margin-top:40px;padding-bottom:40px">
                             @*<div class="col-lg-6 col-xl-6" style="margin:auto">
-                                <a href="javascrip:0" class="button-login">
-                                    NHẬP LẠI
-                                </a>
-                            </div>*@
+                                    <a href="javascrip:0" class="button-login">
+                                        NHẬP LẠI
+                                    </a>
+                                </div>*@
                             <div class="col-lg-12 col-xl-12" style="margin:auto">
                                 <a href="javascrip:0" class="button-login">
                                     ĐÓNG
@@ -239,7 +247,12 @@
     body {
         margin-bottom: 0px;
     }
-
+    .help-block {
+        color: red;
+        margin: 0;
+        display: inline-block;
+        background-color:white;
+    }
     .page-container-login {
         background: url("/images/login/background-login.png") no-repeat;
         height: 100vh;
@@ -377,10 +390,12 @@
         .input-info-login_input > input {
             border: none;
             padding: 6px;
+            background-color:white !important;
         }
 
             .input-info-login_input > input:focus {
                 outline: none;
+                background-color: white !important;
             }
 
     .input-info-login_select > select {
@@ -388,7 +403,7 @@
         height: 32px;
         border-radius: 17px;
         width: 90%;
-        background-color:white;
+        background-color: white;
     }
 
         .input-info-login_select > select:focus {
@@ -455,8 +470,19 @@
             .input-info-login_input > input {
                 border: none;
                 padding: 4px;
+                background-color: white !important;
             }
+
+        .input-info-login_select > select {
+            border: none;
+            height: 22px;
+            border-radius: 11px;
+            width: 90%;
+            background-color: white;
+            font-size: 9px;
+        }
     }
+
     @@media only screen and (min-device-width: 414px) and (max-device-width: 736px) {
         .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content {
             text-align: center;
@@ -466,41 +492,51 @@
             margin: auto;
         }
     }
+
     .modal-dialog {
         margin-top: 10rem !important;
         width: 370px;
     }
+
         .modal-dialog > .page-container-login {
-            height:auto;
+            height: auto;
         }
-            .modal-dialog > .page-container-login > .page-container-login_shadow{
-                height:auto;
+
+            .modal-dialog > .page-container-login > .page-container-login_shadow {
+                height: auto;
             }
-            .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content {
-                text-align: center;
-                padding-top: 20px;
-                padding-left: 10%;
-                padding-right: 10%;
-                margin: auto;
-            }
-            .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content >.page-bar-content {
-                position: absolute;
-                top: -150px;
-                margin-left:0px;
-            }
-                .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content > .page-bar-content > div > div > .page-bar-content_img > img {
-                    float: none;
-                    max-width: 82%;
+
+                .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content {
+                    text-align: center;
+                    padding-top: 20px;
+                    padding-left: 10%;
+                    padding-right: 10%;
+                    margin: auto;
                 }
-                .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content > .page-info >div >div> .img-wheel > img {
-                    max-width: 50%;
-                }
+
+                    .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content > .page-bar-content {
+                        position: absolute;
+                        top: -150px;
+                        margin-left: 0px;
+                    }
+
+                        .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content > .page-bar-content > div > div > .page-bar-content_img > img {
+                            float: none;
+                            max-width: 82%;
+                        }
+
+                    .modal-dialog > .page-container-login > .page-container-login_shadow > .page-content > .page-info > div > div > .img-wheel > img {
+                        max-width: 50%;
+                    }
 </style>
 <script>
     $('#datetimepicker').datepicker({
         format: 'dd/mm/yyyy'
     });
+
     function submitInfo() {
+        debugger
+       
         var check = validateInfo();
         if (!check) {
             return
@@ -521,70 +557,96 @@
         model.customer.birthday.day = birthday.substr(0, 2);
         model.customer.birthday.month = birthday.substr(3, 2);
         model.customer.birthday.year = birthday.substr(6, 4);
-        $.ajax({
-            url: "/PostInfo",
-            type: 'POST',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(model),
-            success: function (data) {
-                setCookie("cookieReward", data.roll.rewardOrdinal, 1);
-                setCookie("imgReward", data.roll.imageReward, 1);
-                alert("Bạn đã đăng nhập thành công!");
-                setTimeout(function () {
-                    window.location.href = "/index";
-                }, 2000)
-            },
-            error: function (data) {
-                //if (data.responseJSON.message != null && data.responseJSON.message != undefined) {
-                //    alert(data.responseJSON.message.replace(/\n/g, '; ').replace(/;|$|{|}|\|"|"/g, ''));
-                //}
-                $("#popup-error-modal").modal();
-            },
-            complete: function () {
-
+        setCookie("cookieReward", JSON.stringify(model), 1);
+        var n = new Noty({
+            type: 'success',
+            layout: 'topCenter',
+            text: 'Bạn đã đăng nhập thành công!',
+            theme: 'mint',
+            animation: {
+                open: 'animated fadeInRight',
+                close: 'animated fadeOutRight'
             }
         });
-
+        n.show();
+        setTimeout(function () {
+            window.location.href = "/index";
+        }, 2000);
     }
     function validateInfo() {
-        var check = true;
+        var regexphone = /^[0-9\(\)\ \-\+]{10,25}$/;
+        var remail = /^(([^<>()[\]\\.,;:\s\"]+(\.[^<>()[\]\\.,;:\s\"]+)*)|(\".+\"))((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var n = new Noty({
+            type: 'error',
+            layout: 'topCenter',
+            text: 'Hãy nhập mã voucher!',
+            theme: 'mint',
+            animation: {
+                open: 'animated fadeInRight',
+                close: 'animated fadeOutRight'
+            }
+        });
         if ($("#voucher").val() == "" || $("#voucher").val() == null) {
-            alert("Hãy nhập mã voucher!");
-            check = false;
-            return check;
+            n.setText("Hãy nhập mã voucher!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
         }
         if ($("#name-customer").val() == "" || $("#name-customer").val() == null) {
-            alert("Hãy nhập tên của bạn!");
-            check = false;
-            return check;
+            n.setText("Hãy nhập tên của bạn!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
         }
         if ($("#phone-customer").val() == "" || $("#phone-customer").val() == null) {
-            alert("Hãy nhập số điện thoại của bạn");
-            check = false;
-            return check;
+            n.setText("Hãy nhập tên của bạn!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#phone-customer").val() != "" && $("#phone-customer").val() != null && !regexphone.test($("#phone-customer").val())) {
+            n.setText("Số điện thoại chưa đúng định dạng!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#email-customer").val() != undefined && $("#email-customer").val() != null && $("#email-customer").val() != "" && !remail.test($("#email-customer").val())) {
+            n.setText("Email chưa đúng định dạng!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
         }
         if ($("#email-customer").val() == "" || $("#email-customer").val() == null) {
-            alert("Hãy nhập email của bạn!");
-            check = false;
-            return check;
+            n.setText("Hãy nhập email của bạn!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
         }
         if ($("#sex-customer").val() == "" || $("#sex-customer").val() == null) {
-            alert("Hãy nhập giới tính!");
-            check = true;
+            n.setText("Hãy nhập giới tính của bạn!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
         }
         if ($("#address-customer").val() == "" || $("#address-customer").val() == null) {
-            alert("Hãy nhập địa chỉ!");
-            check = true;
+            n.setText("Hãy nhập địa chỉ!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
         }
         if ($("#city").val() == "" || $("#city").val() == 0 || $("#city").val() == null) {
-            alert("Hãy nhập tỉnh thành!");
-            check = true;
+            n.setText("Hãy nhập tỉnh thành!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
         }
         if ($("#select-district").val() == "" || $("#select-district").val() == null || $("#select-district").val() == 0) {
-            alert("Hãy nhập quận huyện!");
-            check = true;
+            n.setText("Hãy nhập quận huyện!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
         }
-        return check;
+        return true;
     }
     function setCookie(name, value, days) {
         var expires;
@@ -607,7 +669,6 @@
             contentType: "application/json; charset=utf-8",
             data: { cityId: cityId },
             success: function (data) {
-                console.log(data)
                 $("#select-district").append($('<option>', {
                     value: 0,
                     text: "Chọn Quận/ Huyện"

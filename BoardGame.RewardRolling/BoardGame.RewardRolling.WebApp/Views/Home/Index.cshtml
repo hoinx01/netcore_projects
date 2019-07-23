@@ -204,7 +204,7 @@
                                 <div class="text-info-login">
                                     CHÚC MỪNG BẠN ĐÃ TRÚNG
                                 </div>
-                                <div class="text-info-receive">
+                                <div class="text-info-receive" id="name-reward">
                                     x1<i> Truyện tranh LMHN</i>
                                 </div>
                                 <div class="img-gift">
@@ -280,8 +280,8 @@
                             <span style="color:white">
                                 <span style="color:#ffc600">BƯỚC 5</span>
                                 :Nhận quà <br />- trong vòng 48 tiếng, bộ phận cskh của lớp học mật ngữ sẽ liên hệ với các bạn để trao quà. Nếu bạn nào không muốn chờ đợi thì hãy gọi ngay cho chúng tớ theo hotline 096.991.4344 để được kiểm tra và hỗ trợ gửi quà sớm nhá.
-                                <br/> 100% các bạn đều nhận được quà, quà lớn quà nhỏ là phụ thuộc may mắn của chúng ta! là lá la.
-                                <br/> cùng quay thôi nào và chúc các bạn may mắn nhận đc món quà thật to thật to nhá nhá <3
+                                <br /> 100% các bạn đều nhận được quà, quà lớn quà nhỏ là phụ thuộc may mắn của chúng ta! là lá la.
+                                <br /> cùng quay thôi nào và chúc các bạn may mắn nhận đc món quà thật to thật to nhá nhá <3
                             </span>
                         </div>
                     </div>
@@ -1078,15 +1078,6 @@
     //    };
     //}
     $(function () {
-        //    $("#out-of-turn").click(function () {
-        //        $("#out-of-turn-modal").modal();
-        //    });
-        //    $("#popup-error").click(function () {
-        //        $("#popup-error-modal").modal();
-        //    });
-        //    $("#popup-success").click(function () {
-        //        $("#popup-success-modal").modal();
-        //    });
         $("#popup-help").click(function () {
             $("#popup-help-modal").modal();
         });
@@ -1096,9 +1087,8 @@
         var dataLength = @Model.Rewards.Count;
         var count = 0;
         $(".center-circle > img").click(function () {
-            debugger
             var cookieReward = getCookie("cookieReward");
-            if (cookieReward == null || cookieReward == undefined) {
+            if (cookieReward == null || cookieReward == undefined || cookieReward == "") {
                 if (count > 0) {
                     $("#out-of-turn-modal").modal();
                     return;
@@ -1108,22 +1098,50 @@
                     return;
                 }
             }
-            var picked = cookieReward - 1;
-            var ps = 360 / dataLength
-            var rotation = (dataLength - picked) * ps + 3 * 360;
+             $.ajax({
+                url: "/PostInfo",
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                data: cookieReward,
+                success: function (data) {
+                    var picked = data.roll.rewardOrdinal - 1;
+                    var ps = 360 / dataLength
+                    var rotation = (dataLength - picked) * ps + 3 * 360;
+                    var style = $("#chart").attr("style") == null ? "" : $("#chart").attr("style")
+                    var css = '-webkit-transform: rotate(' + rotation + 'deg);' + style;
+                    $("#chart").removeAttr('style');
+                    $("#chart").attr("style", css);
+                    deleteCookie("cookieReward");
+                    count++;
+                    setTimeout(function () {
+                        $("#popup-success-modal").modal();
+                        var imgReward = data.roll.reward.imageSrc;
+                        var nameReward = "x1 <i>" + data.roll.reward.name + "</i>";
+                        $(".img-gift >img").attr("src", imgReward);
+                        $("#name-reward").html(nameReward);
+                    }, 3000)
+                },
+                 error: function (data) {
+                     deleteCookie("cookieReward");
+                     var n = new Noty({
+                         type: 'error',
+                         layout: 'topCenter',
+                         text: 'Hãy nhập mã voucher!',
+                         theme: 'mint',
+                         animation: {
+                             open: 'animated fadeInRight',
+                             close: 'animated fadeOutRight'
+                         }
+                     });
+                     n.setText("Có lỗi xảy ra!", true)
+                     n.show();
+                     n.setTimeout(2000);
+                },
+                complete: function () {
 
-            var style = $("#chart").attr("style") == null ? "" : $("#chart").attr("style")
-            var css = '-webkit-transform: rotate(' + rotation + 'deg);' + style;
-            $("#chart").removeAttr('style');
-            $("#chart").attr("style", css);
-            deleteCookie("cookieReward");            
-            count++;
-            setTimeout(function () {
-                $("#popup-success-modal").modal();
-                var imgReward = getCookie("imgReward");
-                $(".img-gift >img").attr("src", imgReward);
-                deleteCookie("imgReward");
-            }, 3000)
+                }
+            });
+            
         });
         function getCookie(cname) {
             var name = cname + "=";
