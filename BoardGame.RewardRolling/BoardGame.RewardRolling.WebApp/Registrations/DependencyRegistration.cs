@@ -47,6 +47,7 @@ namespace BoardGame.RewardRolling.WebApp.Registrations
             services.AddSingleton<ICustomerService, CustomerService>();
             services.AddSingleton<IUploadService, UploadService>();
             services.AddSingleton<IAdministrativeUnitService, AdministrativeUnitService>();
+            services.AddSingleton<IUserService, UserService>();
         }
     }
 }

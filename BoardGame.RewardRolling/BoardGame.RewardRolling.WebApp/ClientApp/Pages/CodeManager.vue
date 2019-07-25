@@ -88,10 +88,10 @@
         },
         methods: {
             changePageIndex(pageIndex) {
-                console.log(pageIndex);
+                this.$store.dispatch('rollingCode/CHANGE_FILTER_PAGEINDEX', pageIndex);
             },
             changePageSize(pageSize) {
-                console.log(pageSize);
+                this.$store.dispatch('rollingCode/CHANGE_FILTER_PAGESIZE', pageSize);
             },
             openPopupImportCode() {
                 this.domElementStatuses.popupImportCode.displayed = true;

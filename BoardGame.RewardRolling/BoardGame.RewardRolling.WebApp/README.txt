@@ -1,0 +1,1 @@
+﻿nohup dotnet BoardGame.RewardRolling.WebApp.dll > /dev/null 2>&1 & disown

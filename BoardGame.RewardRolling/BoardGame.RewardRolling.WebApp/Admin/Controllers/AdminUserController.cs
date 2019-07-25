@@ -18,6 +18,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using BoardGame.RewardRolling.Data.Mongo.Dao.Interfaces;
+using BoardGame.RewardRolling.WebApp.Admin.Services.Interfaces;
 
 namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
 {
@@ -29,14 +31,17 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
 
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUserService userService;
 
         public AdminUserController(
             SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager
+            UserManager<ApplicationUser> userManager,
+            IUserService userService
             )
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.userService = userService;
         }
 
         [HttpPost]
@@ -110,6 +115,21 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        [HttpGet]
+        public async Task<List<UserModel>> FilterUser()
+        {
+            var userModels = await userService.FilterUser();
+            return userModels;
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task DeleteUser([FromRoute] string id)
+        {
+            await userService.DeleteUser(id);
+            return;
         }
     }
 }

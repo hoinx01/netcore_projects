@@ -12,7 +12,7 @@ namespace BoardGame.RewardRolling.Service.User
         
         public string HashPassword(ApplicationUser user, string password)
         {
-            var inputText = string.Format("{0}-{1}-{2}", user.UserName, user.PasswordSalt, user.HashedPassword);
+            var inputText = string.Format("{0}-{1}-{2}", user.UserName, user.PasswordSalt, password);
             var result = StringUtils.CalculateMD5Hash(inputText);
             return result;
         }
