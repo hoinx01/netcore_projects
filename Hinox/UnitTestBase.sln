@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hinox.Data.Elasticsearch", "Hinox.Data.Elasticsearch\Hinox.Data.Elasticsearch.csproj", "{64DCBDBA-5090-4C89-8C56-7E110E326778}"
 EndProject
@@ -18,6 +18,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hinox.EventBus.Common", "Hinox.EventBus.Common\Hinox.EventBus.Common.csproj", "{2D6F1EC5-4DA5-4D6B-B96A-F4F6CCEAFBBF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hinox.Mvc", "Hinox.Mvc\Hinox.Mvc.csproj", "{781B4143-50B8-43BD-BF54-359143037F74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hinox.Test", "Hinox.Test\Hinox.Test.csproj", "{A35766FF-6470-4F4E-B0FA-9E5A4074BEAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hinox.Office", "Hinox.Office\Hinox.Office.csproj", "{AD9F512D-7531-4C9E-8A6B-8D524C8B27BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{781B4143-50B8-43BD-BF54-359143037F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{781B4143-50B8-43BD-BF54-359143037F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{781B4143-50B8-43BD-BF54-359143037F74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A35766FF-6470-4F4E-B0FA-9E5A4074BEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A35766FF-6470-4F4E-B0FA-9E5A4074BEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A35766FF-6470-4F4E-B0FA-9E5A4074BEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A35766FF-6470-4F4E-B0FA-9E5A4074BEAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD9F512D-7531-4C9E-8A6B-8D524C8B27BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD9F512D-7531-4C9E-8A6B-8D524C8B27BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD9F512D-7531-4C9E-8A6B-8D524C8B27BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD9F512D-7531-4C9E-8A6B-8D524C8B27BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
