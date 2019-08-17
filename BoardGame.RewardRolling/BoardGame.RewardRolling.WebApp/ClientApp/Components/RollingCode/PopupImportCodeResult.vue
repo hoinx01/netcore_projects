@@ -1,5 +1,6 @@
 ﻿<template>
-    <b-modal :visible="displayed"
+    <b-modal 
+             :visible="displayed"
              title="Kết quả nhập file"
              @hide="hide">
         <div v-if="data">
@@ -8,11 +9,11 @@
             <p>Số mã gặp lỗi: {{data.failedRecordCount}}</p>
             <div>
                 <p>Danh sách lỗi:</p>
-                <ul>
+                <ul class="list_errors">
                     <li 
                         v-for="(item,index) in data.errors"
                         :key="index">
-                        <p>Dòng {{item.rowIndex}}: {{item.errorMessage}}</p>
+                        <p><span class="error_item_title">Dòng {{item.rowIndex}}:</span> {{item.errorMessage}}</p>
                     </li>
                 </ul>
             </div>
@@ -40,3 +41,13 @@
         }
     }
 </script>
+<style scoped>
+    .list_errors{
+        max-height: 400px;
+        overflow-y: scroll;
+        
+    }
+    .error_item_title{
+        font-weight:bold;
+    }
+</style>

@@ -13,6 +13,7 @@ using BoardGame.RewardRolling.WebApp.Middlewares;
 using BoardGame.RewardRolling.WebApp.Registrations;
 using Hinox.Data.Mongo;
 using Hinox.Mvc.Middlewares;
+using Hinox.Mvc.ViewEngine;
 using Hinox.Static.Application;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -20,6 +21,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,6 +60,7 @@ namespace BoardGame.RewardRolling.WebApp
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddTransient<IRazorViewEngine, CustomRazorViewEngine>();
 
             services.AddIdentityCore<ApplicationUser>()
                 .AddUserManager<ApplicationUserManager>()

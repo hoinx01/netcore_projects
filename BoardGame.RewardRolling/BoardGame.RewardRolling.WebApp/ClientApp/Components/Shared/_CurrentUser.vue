@@ -27,6 +27,7 @@
             logout() {
                 //this.$store.dispatch('myAccount/logout');
                 //this.$router.push('/')
+                localStorage.clear();
                 window.location.href = '/admin'
             }
         },

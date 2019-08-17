@@ -20,7 +20,7 @@ namespace BoardGame.RewardRolling.Data.Mongo.Dao
 
         public async Task<MdUser> GetByUserNameAsync(string userName)
         {
-            var filterDefinitionBuilder = Builders<MdUser>.Filter.Eq("Username", userName);
+            var filterDefinitionBuilder = Builders<MdUser>.Filter.Eq("UserName", userName);
             var filterResult = await(await Collection.FindAsync(filterDefinitionBuilder)).ToListAsync();
 
             return filterResult.FirstOrDefault();

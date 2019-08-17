@@ -14,6 +14,7 @@ import ChangePassword from './Pages/ChangePassword.vue'
 import CreateUser from './Pages/CreateUser.vue'
 import CustomerManager from './Pages/CustomerManager.vue'
 import AdministrativeUnitManager from './Pages/AdministrativeUnitManager.vue'
+import UserManager from './Pages/UserManager.vue'
 
 
 
@@ -29,6 +30,7 @@ const routes = [
     { path: '/admin/me', component: MyAccount },
     { path: '/admin/change_password', component: ChangePassword },
     { path: '/admin/users/create', component: CreateUser },
+    { path: '/admin/users', component: UserManager },
     { path: '/admin/customers', component: CustomerManager },
     { path: '/admin/administrative_units', component: AdministrativeUnitManager }
 ];
@@ -38,10 +40,10 @@ const router = new VueRouter({ mode:'history', routes: routes });
 
 const publicPaths = [
     '/admin/accounts/login'
-]
+];
 
 router.beforeEach((to, from, next) => {
     next();
-})
-console.log("a");
+});
+
 export default router;

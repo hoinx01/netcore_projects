@@ -2,6 +2,7 @@
     currentUser: {
         authenticated: false,
         name: '',
-        avatarUrl: ''
+        avatarUrl: '',
+        userName: ''
     }
 }

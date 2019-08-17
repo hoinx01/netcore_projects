@@ -14,7 +14,7 @@
                 <li>
                     <router-link to="/admin/campaigns">Quản lý đợt tặng quà</router-link>
                 </li>
-                <li>
+                <li v-if="userName=='sa'">
                     <router-link to="/admin/users">Quản lý người dùng</router-link>
                 </li>
                 <li>
@@ -42,7 +42,10 @@
         computed: {
             authenticated() {
                 return this.$store.state.identity.currentUser.authenticated;
-            }
+            },
+            userName() {
+                return this.$store.state.identity.currentUser.userName;
+            },
         }
     }
 </script>

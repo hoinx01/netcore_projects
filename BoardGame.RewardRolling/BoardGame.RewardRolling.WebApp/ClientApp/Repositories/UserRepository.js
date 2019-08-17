@@ -1,6 +1,6 @@
 ﻿import baseRepository from './BaseRepository';
 import { jsonUrls } from './UrlConstants'
-import String from '../Utils/StringExtensions';
+import string from '../Utils/StringExtensions';
 
 export default {
     async login(loginModel) {
@@ -25,6 +25,24 @@ export default {
         try {
             var user = await baseRepository.post(jsonUrls.user.createUser, model);
             return Promise.resolve(user);
+        }
+        catch (exception) {
+            return Promise.reject(exception);
+        }
+    },
+    async filter() {
+        try {
+            var users = await baseRepository.get(jsonUrls.user.filter);
+            return Promise.resolve(users);
+        }
+        catch (exception) {
+            return Promise.reject(exception);
+        }
+    },
+    async delete(user) {
+        try {
+            var deleteResult = await baseRepository.delete(string.formatUnicorn(jsonUrls.user.delete, { id: user.id }));
+            return Promise.resolve(deleteResult);
         }
         catch (exception) {
             return Promise.reject(exception);

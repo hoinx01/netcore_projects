@@ -21,7 +21,9 @@
     user: {
         login: "/admin/api/users/login.json",
         getCurrentUser: "/admin/api/users/me.json",
-        createUser: "/admin/api/users.json"
+        createUser: "/admin/api/users.json",
+        filter: "/admin/api/users.json",
+        delete: "/admin/api/users/{id}.json"
     },
     customer: {
         filter: "/admin/api/customers.json",

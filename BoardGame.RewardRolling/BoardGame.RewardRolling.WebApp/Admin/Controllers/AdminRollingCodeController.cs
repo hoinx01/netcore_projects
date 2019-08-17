@@ -103,11 +103,29 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
                 .Select(s => s.RewardCode)
                 .ToList();
 
-            
+            var result = new UploadCodeResultModel()
+            {
+                FailedRecordCount = 0,
+                SuccessRecordCount = 0,
+                TotalRecords = 0,
+                Errors = new List<ErrorRollingCode>()
+            };
 
-            foreach(var excelCode in excelCodes)
+            foreach (var excelCode in excelCodes)
             {
                 var errors = ObjectUtils.ValidateObject(excelCode);
+
+                if (errors.Count > 0)
+                {
+                    result.FailedRecordCount += 1;
+                    result.Errors.Add(new ErrorRollingCode()
+                    {
+                        RowIndex = excelCode.DisplayedRowIndex,
+                        ErrorMessage = string.Join(",", errors.Values.ToList())
+                    });
+                    continue;
+                }
+
                 var mdCode = new MdRollingCode()
                 {
                     Id = ObjectId.GenerateNewId(),
@@ -120,14 +138,20 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
                 try
                 {
                     await mdRollingCodeDao.AddAsync(mdCode);
+                    result.SuccessRecordCount += 1;
                 }
                 catch(Exception e)
                 {
-
+                    result.FailedRecordCount += 1;
+                    result.Errors.Add(new ErrorRollingCode()
+                    {
+                        RowIndex = excelCode.DisplayedRowIndex,
+                        ErrorMessage = e.Message
+                    });
                 }
             }
 
-            return new UploadCodeResultModel();
+            return result;
         }
 
         public async Task<RollingCodeFilterResult> Filter([FromQuery] RollingCodeFilterRequest filterModel)
