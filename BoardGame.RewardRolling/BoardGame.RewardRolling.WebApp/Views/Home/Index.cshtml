@@ -40,6 +40,10 @@
             <div class="light-wheel">
                 <div class="flash-wheel hide-flash">
                     <div class="elipse-wheel">
+                        <div class="actor-women">
+                            <img src="~/images/vong_xoay/nhan-vat-nu.png" style="max-width:75%" />
+                        </div>
+
                         <div class="border-wheel" style="background:url('@Model.LuckyWheel.PointerRack.ImageSrc') no-repeat; background-size:100% 100%">
                             <div id="chart" style="background:url('@Model.LuckyWheel.MainRim.ImageSrc') no-repeat; background-size:100% 100%"></div>
                             <div class="pointer-wheel">
@@ -49,16 +53,14 @@
                                 <img src="@Model.LuckyWheel.CenterCircle.ImageSrc" />
                             </div>
                             <div class="actor-men">
-                                <img src="~/images/vong_xoay/nhan-vat-nam.png" style="max-width:40%" />
+                                <img src="~/images/vong_xoay/nhan-vat-nam.png" style="max-width:67%" />
                             </div>
-                            <div class="actor-women">
-                                <img src="~/images/vong_xoay/nhan-vat-nu.png" style="max-width:45%" />
-                            </div>
+
                             <div class="actor-blue">
-                                <img src="~/images/vong_xoay/nhan-vat-mau-xanh.png" style="max-width:45%" />
+                                <img src="~/images/vong_xoay/nhan-vat-mau-xanh.png" style="max-width:65%" />
                             </div>
                             <div class="dice">
-                                <img src="~/images/labai/xuc-sac.png" style="max-width:75%" />
+                                <img src="~/images/labai/xuc-sac.png" style="max-width:70%" />
                             </div>
                             <div class="card-red">
                                 <img src="~/images/labai/la-bai-do.png" style="max-width:70%" />
@@ -70,6 +72,7 @@
                                 <img src="~/images/labai/la-bai-xanh.png" style="max-width:70%" />
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -327,20 +330,24 @@
         background-size: 100% 100%;
     }
 
-    .page-bar, .page-footer {
+    .page-bar {
         text-align: center;
-        padding-top: 20px;
+        padding-top: 10px;
         margin-left: 20%;
         margin-right: 20%;
     }
-
+    .page-footer {
+        text-align: center;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
     #chart {
         position: absolute;
         top: 40px;
         left: 13px;
         z-index: 10;
-        width: 315px;
-        height: 315px;
+        width: 365px;
+        height: 365px;
         /*background: url("/images/background-wheel.png") no-repeat;*/
         /*background-size: 100% 100%;*/
         -webkit-transition: -webkit-transform 3s ease-out;
@@ -398,7 +405,8 @@
 
     .actor-men {
         position: absolute;
-        right: -300px;
+        right: -340px;
+        top:-70px;
         z-index: 1;
     }
 
@@ -422,88 +430,94 @@
 
     .center-circle {
         position: absolute;
-        top: 40%;
-        left: 25%;
+        top: 38%;
+        left: 28%;
         z-index: 10;
     }
 
         .center-circle > img {
-            max-width: 50%;
+            max-width: 70%;
         }
 
     .actor-women {
         position: absolute;
-        left: -160px;
+        left: -130px;
         z-index: 1;
+        top:-45px;
     }
 
     .actor-blue {
         position: absolute;
-        left: -240px;
-        bottom: 0px;
+        left: -270px;
+        bottom: 30px;
     }
 
     .dice {
         position: absolute;
         right: -40px;
-        bottom: -30px;
+        bottom: -5px;
     }
 
     .card-blue {
         position: absolute;
-        right: -30px;
-        bottom: 60px;
+        right: -50px;
+        bottom: 100px;
     }
 
     .card-red {
         position: absolute;
-        left: -110px;
+        left: -120px;
+        top:-25px;
         z-index: 1;
     }
 
     .card-page {
         position: absolute;
-        left: -160px;
-        bottom: 70px;
+        left: -210px;
+        bottom: 130px;
     }
 
-    .page-wheel, .text-lucky-wheel {
+    .page-wheel {
         text-align: center;
         width: 100%;
-        margin-top: 20px
+        margin-top: 5px
     }
-
+    .text-lucky-wheel {
+        text-align: center;
+        width: 100%;
+        margin: 10px 0px;
+    }
     .light-wheel {
-        width: 400px;
-        height: 400px;
+        width: 450px;
+        height: 430px;
         margin: auto;
         background: url("/images/vong_xoay/tia-sang.png") no-repeat;
         background-size: 100% 100%;
     }
 
     .flash-wheel {
-        width: 385px;
-        height: 385px;
+        /*width: 385px;
+        height: 385px;*/
         margin: auto;
         background: url("/images/vong_xoay/den-nhay.png") no-repeat;
         background-size: 100% 100%;
     }
 
     .elipse-wheel {
-        width: 370px;
-        height: 385px;
+        width: 420px;
+        height: 435px;
         margin: auto;
         background: url("/images/vong_xoay/elipse.png") no-repeat;
         background-size: 100% 100%;
+        position:relative;
     }
 
     .border-wheel {
-        width: 340px;
-        height: 370px;
+        width: 390px;
+        height: 420px;
         margin: auto;
-        /*background: url("/images/vong_xoay/vong-bao-quanh.png") no-repeat;
-        background-size: 100% 100%;*/
         position: relative;
+        z-index:10;
     }
     /*sâs*/
     .page-bar-content_img {
@@ -529,7 +543,7 @@
         }
 
         .text-lucky-wheel > img {
-            max-width: 15%;
+            max-width: 18%;
         }
     }
 
@@ -775,16 +789,16 @@
 
     @@-webkit-keyframes FLASH-ANIMATION {
         0%, 49% {
-            width: 385px;
-            height: 385px;
+            /*width: 385px;
+            height: 385px;*/
             margin: auto;
             background: url("/images/vong_xoay/den-nhay.png") no-repeat;
             background-size: 100% 100%;
         }
 
         50%, 100% {
-            width: 385px;
-            height: 385px;
+            /*width: 385px;
+            height: 385px;*/
             margin: auto;
             background: none;
         }
