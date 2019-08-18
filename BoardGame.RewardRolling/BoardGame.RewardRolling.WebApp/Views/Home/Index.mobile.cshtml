@@ -781,7 +781,7 @@
 
     .modal-dialog {
         margin-top: 10rem !important;
-        width: 370px;
+        width: 360px;
     }
 
     .text-info-receive {
@@ -1229,7 +1229,7 @@
             $("#popup-help-modal").modal();
         });
         $("#button-login").click(function () {
-            $("#popup-login-modal").modal('show');
+            window.location.href = "/reward";
         });
         var dataLength = @Model.Rewards.Count;
         var count = 0;
