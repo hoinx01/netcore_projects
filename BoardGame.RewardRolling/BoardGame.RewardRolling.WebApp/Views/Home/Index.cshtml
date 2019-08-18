@@ -99,70 +99,70 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="out-of-turn-modal" role="dialog">
+<div class="modal" id="out-of-turn-modal">
     <div class="modal-dialog">
-        <div class="page-container-login">
-            <div class="page-container-login_shadow">
-                <div class="page-content">
-                    <div class="page-bar-content">
-                        <div class="row" style="margin:auto">
-                            <div class="w-25" style="z-index:2">
-                                <div class="page-bar-content_img">
-                                    <img src="~/images/login/nhan-vat-nu.png" />
-                                </div>
-                            </div>
-                            <div class="w-75" style="z-index:1">
-                                <div class="page-bar-content_text">
-                                    <div class="page-bar-content_text__top">
-                                        <span>CHÀO MỪNG</span>
-
-                                    </div>
-                                    <div class="page-bar-content_text__bot">
-                                        ĐẾN VŨ TRỤ LỚP HỌC MẬT NGỮ
+        <div class="modal-content">
+            <div class="page-container-login">
+                <div class="page-container-login_shadow">
+                    <div class="page-content">
+                        <div class="page-bar-content">
+                            <div class="row" style="margin:auto">
+                                <div class="w-25" style="z-index:2">
+                                    <div class="page-bar-content_img">
+                                        <img src="~/images/login/nhan-vat-nu.png" />
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="page-info">
-                        <div style="position: absolute;top: -72px;left:47px">
-                            <div class="col-lg-12 col-xl-12" style="margin:auto">
-                                <div class="img-wheel">
-                                    <img src="~/images/login/vong-quay.png" />
-                                </div>
-                            </div>
-                        </div>
+                                <div class="w-75" style="z-index:1">
+                                    <div class="page-bar-content_text">
+                                        <div class="page-bar-content_text__top">
+                                            <span>CHÀO MỪNG</span>
 
-                        <div style="margin-top:60px;background:url(/images/login/hieu-ung2.png);    ">
-                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
-                                <div class="text-info-login">
-                                    TIẾC QUÁ! BẠN HẾT LƯỢT QUAY MẤT RỒI. NHẬP MÃ COUPON ĐỂ THỰC HIỆN LƯỢT QUAY MỚI NHÉ!
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
-                                <div class="text-info-login" style="font-size:12px">
-                                    <i>MỌI THẮC MẮC XIN LIÊN HỆ HOTLINE: 096.991.4344<br />XIN CẢM ƠN!</i>
+                                        </div>
+                                        <div class="page-bar-content_text__bot">
+                                            ĐẾN VŨ TRỤ LỚP HỌC MẬT NGỮ
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="position:relative">
-                            <div class="img-login-footer">
-                                <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
+                        <div class="page-info">
+                            <div style="position: absolute;top: -72px;left:47px">
+                                <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                    <div class="img-wheel">
+                                        <img src="~/images/login/vong-quay.png" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row" style="margin-top:40px;padding-bottom:40px">
-                            <div class="col-lg-12 col-xl-12" style="margin:auto">
-                                <a href="javascrip:0" class="button-login" id="button-login" style="z-index:100">
-                                    NHẬP MÃ
-                                </a>
+
+                            <div style="margin-top:60px;background:url(/images/login/hieu-ung2.png);    ">
+                                <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                    <div class="text-info-login">
+                                        TIẾC QUÁ! BẠN HẾT LƯỢT QUAY MẤT RỒI. NHẬP MÃ COUPON ĐỂ THỰC HIỆN LƯỢT QUAY MỚI NHÉ!
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                    <div class="text-info-login" style="font-size:12px">
+                                        <i>MỌI THẮC MẮC XIN LIÊN HỆ HOTLINE: 096.991.4344<br />XIN CẢM ƠN!</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="position:relative">
+                                <div class="img-login-footer">
+                                    <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:40px;padding-bottom:40px">
+                                <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                    <a href="javascrip:0" class="button-login" id="button-login" style="z-index:100">
+                                        NHẬP MÃ
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 
@@ -306,6 +306,183 @@
 
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal" id="popup-login-modal">
+    <div class="modal-dialog" style="max-width:700px !important; width:700px !important">
+        <div class="modal-content">
+            <div class="page-container-login">
+                <div class="page-container-login_shadow">
+                    <div class="page-content">
+                        <div class="page-bar-content" style="left: 230px;">
+                            <div class="row" style="margin:auto">
+                                <div class="w-25" style="z-index:2">
+                                    <div class="page-bar-content_img">
+                                        <img src="~/images/login/nhan-vat-nu.png" />
+                                    </div>
+                                </div>
+                                <div class="w-75" style="z-index:1">
+                                    <div class="page-bar-content_text">
+                                        <div class="page-bar-content_text__top">
+                                            <span>CHÀO MỪNG</span>
+
+                                        </div>
+                                        <div class="page-bar-content_text__bot">
+                                            ĐẾN VŨ TRỤ LỚP HỌC MẬT NGỮ
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-info">
+                            <div style="position: absolute;top: -72px;left:calc(50% - 130px)">
+                                <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                    <div class="img-wheel">
+                                        <img src="~/images/login/vong-quay.png" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:40px;background:url(/images/login/hieu-ung2.png);    ">
+                                <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                    <div class="text-info-login">
+                                        NHẬP THÔNG TIN
+                                    </div>
+                                </div>
+                            </div>
+                            <form id="form-submit" style="width:100%" method="get" accept-charset="utf-8" role="form">
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-6 pading-7" style="margin:auto">
+                                        <div class="input-info-login">
+                                            <div class="w-50 input-info-login_text">
+                                                Mã voucher
+                                            </div>
+                                            <div class="w-50 input-info-login_input">
+                                                <input class="w-100" placeholder="NTC112233" id="voucher" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-6 pading-7">
+                                        <div class="input-info-login">
+                                            <div class="w-50 input-info-login_text">
+                                                Họ & Tên
+                                            </div>
+                                            <div class="w-50 input-info-login_input">
+                                                <input class="w-100" placeholder="Nguyễn Văn A" id="name-customer" type="text" minlength="1" required />
+                                                @*@Html.TextBoxFor(model => model.FullName, new { @class = "w-100", @type = "text", required = "", @id = "name-customer", @placeholder = "Nguyễn Văn A" })
+                                                    <span class="help-block help-block-margin">@Html.ValidationMessageFor(model => model.FullName)</span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-6 pading-7">
+                                        <div class="input-info-login">
+                                            <div class="w-50 input-info-login_text">
+                                                Email
+                                            </div>
+                                            <div class="w-50 input-info-login_input">
+                                                <input class="w-100" placeholder="nguyenvana@gmail.com" id="email-customer" type="email" required />
+                                                @*@Html.TextBoxFor(model => model.Email, new { @class = "w-100", @type = "email", required = "", @id = "email-customer", @placeholder = "nguyenvana@gmail.com" })
+                                                        <span class="help-block help-block-margin">@Html.ValidationMessageFor(model => model.Email)</span>
+                                                    </div>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-6 pading-7">
+                                        <div class="input-info-login">
+                                            <div class="w-50 input-info-login_text">
+                                                Ngày sinh
+                                            </div>
+                                            <div class="w-50 input-info-login_input">
+                                                <input class="w-100" placeholder="01/01/2010" id="datetimepicker" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-6 pading-7">
+                                        <div class="input-info-login">
+                                            <div class="w-50 input-info-login_text">
+                                                Địa chỉ
+                                            </div>
+                                            <div class="w-50 input-info-login_input">
+                                                <input class="w-100" placeholder="Số 1 Hoàng Đạo Thúy" id="address-customer" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-6 pading-7">
+                                        <div class="input-info-login">
+                                            <div class="w-50 input-info-login_text">
+                                                Giới tính
+                                            </div>
+                                            <div class="w-50 input-info-login_input">
+                                                <input class="w-100" placeholder="Nam/Nữ" id="sex-customer" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-6 pading-7">
+                                        <div class="input-info-login">
+                                            <div class="w-50 input-info-login_text">
+                                                SĐT
+                                            </div>
+                                            <div class="w-50 input-info-login_input">
+                                                <input class="w-100" placeholder="0987654321" id="phone-customer" type="number" />
+                                                @*@Html.TextBoxFor(model => model.PhoneNumber, new { @class = "w-100", required = "", @id = "phone-customer", @placeholder = "0987654321" })
+                                                    <span class="help-block help-block-margin">@Html.ValidationMessageFor(model => model.PhoneNumber)</span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xs-6 pading-7">
+                                        <div class="input-info-login">
+                                            <div class="w-50 input-info-login_text">
+                                                Tỉnh/ TP
+                                            </div>
+                                            <div class="w-50 input-info-login_select">
+                                                <select onchange="chooseCity(this)" id="city">
+                                                    <option value="0">Chọn Tỉnh/ TP</option>
+                                                    @for (int i = 0; i < Model.Cities.Count; i++)
+                                                    {
+                                                        var city = Model.Cities[i];
+                                                        <!option value="@city.Id">@city.Name</!option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-xs-6 pading-7">
+                                        <div class="input-info-login">
+                                            <div class="w-50 input-info-login_text">
+                                                Quận/ Huyện
+                                            </div>
+                                            <div class="w-50 input-info-login_select" id="district">
+                                                <select id="select-district">
+                                                    <option value="0">Chọn Quận/Huyện</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="row" style="position:relative">
+                                <div class="img-login-footer">
+                                    <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:40px;padding-bottom:40px">
+                                <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                    <a href="javascrip:0" class="button-login" id="button-login" onclick="submitInfo()" style="z-index:100">
+                                        ĐĂNG NHẬP
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <style>
 
     body {
@@ -336,11 +513,25 @@
         margin-left: 20%;
         margin-right: 20%;
     }
+
     .page-footer {
         text-align: center;
         margin-left: 20%;
         margin-right: 20%;
     }
+
+    .input-info-login_select > select {
+        border: none;
+        height: 32px;
+        border-radius: 17px;
+        width: 90%;
+        background-color: white;
+    }
+
+        .input-info-login_select > select:focus {
+            outline: none;
+        }
+
     #chart {
         position: absolute;
         top: 40px;
@@ -406,7 +597,7 @@
     .actor-men {
         position: absolute;
         right: -340px;
-        top:-70px;
+        top: -70px;
         z-index: 1;
     }
 
@@ -443,7 +634,7 @@
         position: absolute;
         left: -130px;
         z-index: 1;
-        top:-45px;
+        top: -45px;
     }
 
     .actor-blue {
@@ -467,7 +658,7 @@
     .card-red {
         position: absolute;
         left: -120px;
-        top:-25px;
+        top: -25px;
         z-index: 1;
     }
 
@@ -482,11 +673,13 @@
         width: 100%;
         margin-top: 5px
     }
+
     .text-lucky-wheel {
         text-align: center;
         width: 100%;
         margin: 10px 0px;
     }
+
     .light-wheel {
         width: 450px;
         height: 430px;
@@ -509,7 +702,7 @@
         margin: auto;
         background: url("/images/vong_xoay/elipse.png") no-repeat;
         background-size: 100% 100%;
-        position:relative;
+        position: relative;
     }
 
     .border-wheel {
@@ -517,7 +710,7 @@
         height: 420px;
         margin: auto;
         position: relative;
-        z-index:10;
+        z-index: 10;
     }
     /*sâs*/
     .page-bar-content_img {
@@ -1096,7 +1289,7 @@
             $("#popup-help-modal").modal();
         });
         $("#button-login").click(function () {
-            window.location.href = "/reward";
+            $("#popup-login-modal").modal('show');
         });
         var dataLength = @Model.Rewards.Count;
         var count = 0;
@@ -1104,11 +1297,13 @@
             var cookieReward = getCookie("cookieReward");
             if (cookieReward == null || cookieReward == undefined || cookieReward == "") {
                 if (count > 0) {
-                    $("#out-of-turn-modal").modal();
+                    $("#out-of-turn-modal").modal('show');
                     return;
                 }
                 else {
-                    window.location.href = "/reward";
+                    //$("#button-login-modal").click();
+                    $("#popup-login-modal").modal('show');
+                    //window.location.href = "/reward";
                     return;
                 }
             }
@@ -1155,7 +1350,7 @@
 
                 }
             });
-            
+
         });
         function getCookie(cname) {
             var name = cname + "=";
@@ -1175,5 +1370,161 @@
         function deleteCookie(name) {
             document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         }
+
     });
+    $('#datetimepicker').datepicker({
+        format: 'dd/mm/yyyy'
+    });
+
+    function submitInfo() {
+        debugger
+
+        var check = validateInfo();
+        if (!check) {
+            return
+        }
+        var birthday = $('#datetimepicker').val();
+        var model = {};
+        model.rollingCode = $("#voucher").val();
+        model.customer = {};
+        model.customer.fullName = $("#name-customer").val();
+        model.customer.phoneNumber = $("#phone-customer").val();
+        model.customer.email = $("#email-customer").val();
+        model.customer.genderId = $("#sex-customer").val() == "Nam" ? 1 : 0;
+        model.customer.address = {};
+        model.customer.address.provinceId = $("#city").val();
+        model.customer.address.districtId = $("#select-district").val();
+        model.customer.address.label = $("#address-customer").val();
+        model.customer.birthday = {};
+        model.customer.birthday.day = birthday.substr(0, 2);
+        model.customer.birthday.month = birthday.substr(3, 2);
+        model.customer.birthday.year = birthday.substr(6, 4);
+        setCookie("cookieReward", JSON.stringify(model), 1);
+        var n = new Noty({
+            type: 'success',
+            layout: 'topCenter',
+            text: 'Bạn đã đăng nhập thành công!',
+            theme: 'mint',
+            animation: {
+                open: 'animated fadeInRight',
+                close: 'animated fadeOutRight'
+            }
+        });
+        n.show();
+        setTimeout(function () {
+            window.location.href = "/index";
+        }, 2000);
+    }
+    function validateInfo() {
+        var regexphone = /^[0-9\(\)\ \-\+]{10,25}$/;
+        var remail = /^(([^<>()[\]\\.,;:\s\"]+(\.[^<>()[\]\\.,;:\s\"]+)*)|(\".+\"))((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var n = new Noty({
+            type: 'error',
+            layout: 'topCenter',
+            text: 'Hãy nhập mã voucher!',
+            theme: 'mint',
+            animation: {
+                open: 'animated fadeInRight',
+                close: 'animated fadeOutRight'
+            }
+        });
+        if ($("#voucher").val() == "" || $("#voucher").val() == null) {
+            n.setText("Hãy nhập mã voucher!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#name-customer").val() == "" || $("#name-customer").val() == null) {
+            n.setText("Hãy nhập tên của bạn!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#phone-customer").val() == "" || $("#phone-customer").val() == null) {
+            n.setText("Hãy nhập tên của bạn!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#phone-customer").val() != "" && $("#phone-customer").val() != null && !regexphone.test($("#phone-customer").val())) {
+            n.setText("Số điện thoại chưa đúng định dạng!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#email-customer").val() != undefined && $("#email-customer").val() != null && $("#email-customer").val() != "" && !remail.test($("#email-customer").val())) {
+            n.setText("Email chưa đúng định dạng!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#email-customer").val() == "" || $("#email-customer").val() == null) {
+            n.setText("Hãy nhập email của bạn!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#sex-customer").val() == "" || $("#sex-customer").val() == null) {
+            n.setText("Hãy nhập giới tính của bạn!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#address-customer").val() == "" || $("#address-customer").val() == null) {
+            n.setText("Hãy nhập địa chỉ!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#city").val() == "" || $("#city").val() == 0 || $("#city").val() == null) {
+            n.setText("Hãy nhập tỉnh thành!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        if ($("#select-district").val() == "" || $("#select-district").val() == null || $("#select-district").val() == 0) {
+            n.setText("Hãy nhập quận huyện!", true)
+            n.show();
+            n.setTimeout(2000);
+            return false;
+        }
+        return true;
+    }
+    function setCookie(name, value, days) {
+        var expires;
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toGMTString();
+        }
+        else {
+            expires = "";
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function chooseCity(ele) {
+        var cityId = $(ele).val();
+        $("#select-district").empty();
+        $.ajax({
+            url: "/GetByCityId",
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            data: { cityId: cityId },
+            success: function (data) {
+                $("#select-district").append($('<option>', {
+                    value: 0,
+                    text: "Chọn Quận/ Huyện"
+                }));
+                $.each(data, function (i, item) {
+                    $("#select-district").append($('<option>', {
+                        value: item.id,
+                        text: item.name
+                    }));
+                });
+            },
+            complete: function () {
+
+            }
+        });
+    }
 </script>

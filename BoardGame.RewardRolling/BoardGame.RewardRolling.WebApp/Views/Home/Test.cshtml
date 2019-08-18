@@ -1,0 +1,1298 @@
+﻿@model CampaignModel
+
+<div class="page-container">
+    <div class="page-container_shadow">
+        <div class="w-100" style="height:50px;background-color:#0a002c;display:flex">
+            <div style="width:15%;text-align: center;padding-top: 5px;">
+                <img src="~/images/footer/logo-zoo.png" />
+            </div>
+            <div style="width:15%;text-align: center;padding-top: 5px;">
+                <img src="~/images/footer/logo-bg.png" />
+            </div>
+            <div style="width:55%;padding-left:40px">
+                <img src="~/images/footer/logo-mat-ngu.png" style="max-width:50%;" />
+            </div>
+            <div style="width:15%;float:right;padding-top: 8px;" data-toggle="dropdown">
+                <img src="~/images/menu.png" style="max-width:75%;" />
+            </div>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" style="border-bottom: 1px solid;" href="https://lophocmatngu.com">TRANG CHỦ</a>
+                <a class="dropdown-item" style="border-bottom: 1px solid;" href="#">SẢN PHẨM</a>
+                <a class="dropdown-item" href="#">HỖ TRỢ</a>
+            </div>
+            @*<div class="row">
+            <div class="col-lg-12">
+                <a type="button" class="btn-wheel" href="https://lophocmatngu.com">
+                    <div class="div-btn-wheel">
+                        <img src="~/images/bar/home.png" />
+                        <span>TRANG CHỦ</span>
+                    </div>
+                </a>
+                <a type="button" class="btn-wheel" href="#">
+                    <div class="div-btn-wheel">
+                        <img src="~/images/bar/san-pham.png" style="width:15px;max-width:15px" />
+                        <span style="padding-left:20px">SẢN PHẨM</span>
+                    </div>
+
+                </a>
+                <a type="button" class="btn-wheel" href="#" id="popup-help">
+                    <div class="div-btn-wheel">
+                        <img src="~/images/bar/the-le.png" style="width:15px;max-width:15px;top:8px" />
+                        <span style="padding-left:20px">THỂ LỆ</span>
+                    </div>
+                </a>
+                <a type="button" class="btn-wheel" href="#">
+                    <div class="div-btn-wheel">
+                        <img src="~/images/bar/hotro.png" />
+                        <span style="padding-left:20px">HỖ TRỢ</span>
+                    </div>
+                </a>
+            </div>
+        </div>*@
+        </div>
+        <div class="text-lucky-wheel">
+            <img src="~/images/vong_xoay/text-vong-quay.png" />
+        </div>
+        <div class="page-wheel">
+            <div class="light-wheel">
+                <div class="flash-wheel hide-flash">
+                    <div class="elipse-wheel">
+                        <div class="border-wheel" style="background:url('@Model.LuckyWheel.PointerRack.ImageSrc') no-repeat; background-size:100% 100%">
+                            <div id="chart" style="background:url('@Model.LuckyWheel.MainRim.ImageSrc') no-repeat; background-size:100% 100%"></div>
+                            <div class="pointer-wheel">
+                                <img src="@Model.LuckyWheel.Pointer.ImageSrc" />
+                            </div>
+                            <div class="center-circle">
+                                <img src="@Model.LuckyWheel.CenterCircle.ImageSrc" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="image-actor w-100" style="position:relative;height:125px">
+            <div class="img-1">
+                <img src="~/images/vong_xoay/nhan-vat-mau-xanh.png" style="max-width:30%" />
+            </div>
+            <div class="img-2">
+                <img src="~/images/vong_xoay/anh1.png" style="max-width:50%" />
+            </div>
+            <div class="img-3">
+                <img src="~/images/vong_xoay/anh2.png" style="max-width:50%" />
+            </div>
+            <div class="img-4">
+                <img src="~/images/vong_xoay/anh3.png" style="max-width:50%" />
+            </div>
+            <div class="img-5">
+                <img src="~/images/vong_xoay/nhan-vat-nam.png" style="max-width:100%" />
+            </div>
+            <div class="img-6">
+                <img src="~/images/labai/xuc-sac.png" style="max-width:70%" />
+            </div>
+        </div>
+        <div class="page-help w-100" style="clear:both">
+            <div class="w-100 page-help__title">
+                HƯỚNG DẪN THAM GIA VÒNG QUAY
+            </div>
+            <div class="w-100 page-help__content">
+                <div class="row">
+                    <div class="col-12">
+                        <span style="color:#fd5023">Bước 1:</span> Truy tìm ngay Mã coupon trong phiếu quà tặng được chứa trong hộp Board game Lớp Học Mật Ngữ mà bạn đã mua...tèng teng...thấy mã rồi nè!!!
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <span style="color:#fd5023">Bước 2:</span> Dùng điện thoại hoặc máy tính vào trang website: <a href="gift.lophocmatngu.com">gift.lophocmatngu.com</a><br/>.......Òa Vũ Trụ Lớp Học Mật Ngữ đây rồi......
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <span style="color:#fd5023">Bước 3:</span> Nhập Mã coupon và điền thông tin nhận quà vào bảng hiển thị tại website.<br />Lưu ý: mỗi Mã coupon chỉ được quay 1 lần nhé.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <span style="color:#fd5023">Bước 4:</span> Quay nào...Quay nào!<br/> Vpngf quay dừng tại đâu thì đó chính là phần quà của bạn đó nha....thích quá thích quá, quà kute quá.....
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <span style="color:#fd5023">Bước 5:</span> Nhận quà<br/> Trong vòng 48 tiếng, bộ phận CSKH của Lớp Học Mật Ngữ sẽ liên hệ với các bạn để trao quà. Nếu bạn nào không muốn chờ đợi thì hãy gọi ngay cho chúng tớ theo Hotline 096.991.4344 để được kiểm tra và hỗ trợ gửi quà sớm nhé.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer">
+            <div class="row">
+                <div class="col-lg-12">
+                    @*<img src="~/images/footer/logo-mat-ngu.png" style="max-width:50%;" />
+                    <img src="~/images/footer/logo-bg.png" style="max-width:50%;margin-left:20px" />
+                    <img src="~/images/footer/logo-zoo.png" style="max-width:50%;margin-left:20px" />*@
+                    <img src="~/images/footer/phone.png" style="max-width:50%;margin-left:20px" />
+                    <span class="footer-phone">
+                        096.991.4344
+                    </span>
+                    <img src="~/images/bar/home.png" style="max-width:50%;margin-left:20px" />
+                    <span class="footer-phone">
+                        LOPHOCMATNGU.COM
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal" id="out-of-turn-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="page-container-login">
+                <div class="page-container-login_shadow">
+                    <div class="page-content">
+                        <div class="page-bar-content">
+                            <div class="row" style="margin:auto">
+                                <div class="w-25" style="z-index:2">
+                                    <div class="page-bar-content_img">
+                                        <img src="~/images/login/nhan-vat-nu.png" />
+                                    </div>
+                                </div>
+                                <div class="w-75" style="z-index:1">
+                                    <div class="page-bar-content_text">
+                                        <div class="page-bar-content_text__top">
+                                            <span>CHÀO MỪNG</span>
+
+                                        </div>
+                                        <div class="page-bar-content_text__bot">
+                                            ĐẾN VŨ TRỤ LỚP HỌC MẬT NGỮ
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-info">
+                            <div style="position: absolute;top: -72px;left:47px">
+                                <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                    <div class="img-wheel">
+                                        <img src="~/images/login/vong-quay.png" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:60px;background:url(/images/login/hieu-ung2.png);    ">
+                                <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                    <div class="text-info-login">
+                                        TIẾC QUÁ! BẠN HẾT LƯỢT QUAY MẤT RỒI. NHẬP MÃ COUPON ĐỂ THỰC HIỆN LƯỢT QUAY MỚI NHÉ!
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                    <div class="text-info-login" style="font-size:12px">
+                                        <i>MỌI THẮC MẮC XIN LIÊN HỆ HOTLINE: 096.991.4344<br />XIN CẢM ƠN!</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="position:relative">
+                                <div class="img-login-footer">
+                                    <img src="~/images/login/nhan-vat-nam.png" style="max-width:50%" />
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:40px;padding-bottom:40px">
+                                <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                    <a href="javascrip:0" class="button-login" id="button-login" style="z-index:100">
+                                        NHẬP MÃ
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="popup-success-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="page-container-login">
+            <div class="page-container-login_shadow">
+                <div class="page-content">
+                    <div class="page-bar-content">
+                        <div class="row" style="margin:auto">
+                            <div class="w-25" style="z-index:2">
+                                <div class="page-bar-content_img">
+                                    <img src="~/images/login/nhan-vat-nu.png" />
+                                </div>
+                            </div>
+                            <div class="w-75" style="z-index:1">
+                                <div class="page-bar-content_text">
+                                    <div class="page-bar-content_text__top">
+                                        <span>CHÀO MỪNG</span>
+
+                                    </div>
+                                    <div class="page-bar-content_text__bot">
+                                        ĐẾN VŨ TRỤ LỚP HỌC MẬT NGỮ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-info">
+                        <div style="position: absolute;top: -72px;left:47px">
+                            <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                <div class="img-wheel">
+                                    <img src="~/images/login/vong-quay.png" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:30px;background:url(/images/login/hieu-ung2.png);    ">
+                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                <div class="text-info-login">
+                                    CHÚC MỪNG BẠN ĐÃ TRÚNG
+                                </div>
+                                <div class="text-info-receive" id="name-reward">
+                                    x1<i> Truyện tranh LMHN</i>
+                                </div>
+                                <div class="img-gift">
+                                    <img src="~/images/login/gift.png" style="max-width:50%" />
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-xl-12 pading-7" style="margin:auto">
+                                <div class="text-info-login" style="font-size:12px">
+                                    <i>Bộ phận CSKH sẽ liên hệ với bạn trong vòng 48 tiếng để trao quà!<br />Xin cảm ơn và chúc bạn chơi game vui vẻ !</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:40px;padding-bottom:40px">
+                            <div class="col-lg-12 col-xl-12" style="margin:auto">
+                                <a href="javascrip:0" class="button-login">
+                                    ĐÓNG
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="popup-help-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-help">
+        <div class="modal-content">
+            <div class="image-wheel">
+                <img src="~/images/login/vong-quay.png" />
+            </div>
+            <div class="modal-header header-help">
+                <div class="modal-title title-help">HƯỚNG DẪN THAM GIA VÒNG QUAY</div>
+                <a type="button" class="close img-close-popup" data-dismiss="modal" href="javascrip:0">
+                    <img src="~/images/login/close-popup.png" />
+                </a>
+                <div class="image-girl">
+                    <img src="~/images/login/nhan-vat-nu.png" />
+                </div>
+            </div>
+            <div class="modal-body" style="background-color:#0f2f9c;padding: 7px;padding-top: 0px !important;">
+                <div class="modal-body-help">
+                    <div class="w-100 text-info-help">
+                        <div class="col-lg-12">
+                            <span style="color:white">
+                                <span style="color:#ffc600">BƯỚC 1</span>
+                                : Truy tìm ngay Mã coupon trong phiếu quà tặng được chứa trong hộp board game lớp học mật ngũ mà bạn đã mua <br />...tèng teng... thấy mã rồi nè
+                            </span>
+                        </div>
+                        <div class="col-lg-12">
+                            <span style="color:white">
+                                <span style="color:#ffc600">BƯỚC 2</span>
+                                : Dùng điện thoại hoặc máy tính vào trang website: gift.lophocmatngu.com <br />...òa vũ trụ lớp học mật ngữ đây rồi
+                            </span>
+                        </div>
+                        <div class="col-lg-12">
+                            <span style="color:white">
+                                <span style="color:#ffc600">BƯỚC 3</span>
+                                : nhập mã coupon và điền thông tin nhận quà vào bảng hiển thị tại website.<br />lưu ý mỗi mã coupon chỉ được quay một lần nhé.
+                            </span>
+                        </div>
+                        <div class="col-lg-12">
+                            <span style="color:white">
+                                <span style="color:#ffc600">BƯỚC 4</span>
+                                : quay nào... quay nào <br />- vòng quay dừng lại tại đâu thì đó chính là phần quà của bạn đó nha. Thích quá thích quá, quà cute quá...
+                            </span>
+                        </div>
+                        <div class="col-lg-12">
+                            <span style="color:white">
+                                <span style="color:#ffc600">BƯỚC 5</span>
+                                :Nhận quà <br />- trong vòng 48 tiếng, bộ phận cskh của lớp học mật ngữ sẽ liên hệ với các bạn để trao quà. Nếu bạn nào không muốn chờ đợi thì hãy gọi ngay cho chúng tớ theo hotline 096.991.4344 để được kiểm tra và hỗ trợ gửi quà sớm nhá.
+                                <br /> 100% các bạn đều nhận được quà, quà lớn quà nhỏ là phụ thuộc may mắn của chúng ta! là lá la.
+                                <br /> cùng quay thôi nào và chúc các bạn may mắn nhận đc món quà thật to thật to nhá nhá <3
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="img-footer-left-help">
+                                <img src="~/images/login/toc-hong.png" style="max-width:50%" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img-footer-right-help">
+                                <img src="~/images/login/xuc-xac.png" style="max-width:50%" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .w-20{
+        width:20% !important;
+        position:relative;
+    }
+    body {
+        margin-bottom: 0px;
+    }
+    .dropdown-menu {
+        background-color: rgb(7, 0, 12);
+        opacity: 0.7;
+        transform: translate3d(0px, 50px, 0px) !important;
+        width: 100%;
+    }
+    .dropdown-item {
+        color: white;
+        padding: 6px;
+        text-align: center;
+    }
+    .page-container {
+        /*background: url("/images/backgound.png") no-repeat;
+        height: 100vh;
+        background-size: 100% 100%;*/
+        /*background-color: #0c051d;*/
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0px;
+    }
+
+    .page-container_shadow {
+        background: url("/images/background-mobile.png") no-repeat;
+        /*height: 100vh;
+        background-size: 100% 100%;*/
+    }
+
+    .page-bar {
+        text-align: center;
+        padding-top: 10px;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .page-footer {
+        text-align: center;
+        height:50px;
+    }
+    .page-help {
+        font-family: HELVETICA;
+    }
+    .page-help__title {
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .page-help__content {
+        color: white;
+        text-align: left;
+        font-size: 14px;
+        padding:10px 15px;
+        font-weight:bold;
+    }
+    .input-info-login_select > select {
+        border: none;
+        height: 32px;
+        border-radius: 17px;
+        width: 90%;
+        background-color: white;
+    }
+
+        .input-info-login_select > select:focus {
+            outline: none;
+        }
+
+    #chart {
+        position: absolute;
+        top: 40px;
+        left: 13px;
+        z-index: 10;
+        width: 365px;
+        height: 365px;
+        /*background: url("/images/background-wheel.png") no-repeat;*/
+        /*background-size: 100% 100%;*/
+        -webkit-transition: -webkit-transform 3s ease-out;
+    }
+
+    a:hover {
+        text-decoration: none !important;
+        color: #fff;
+    }
+
+    .btn-wheel {
+        color: #fff;
+        display: flex;
+        position: relative;
+        box-sizing: border-box;
+        display: inline-block;
+        height: auto;
+        background-color: #D800DB;
+        border: 1px solid inherit !important;
+        border-radius: 10px;
+        font-family: FontButton;
+        font-size: 16px;
+        white-space: nowrap;
+        cursor: pointer;
+        text-transform: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        vertical-align: middle;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding: 3px;
+        margin-left: 20px;
+        min-width: 90px;
+    }
+
+    .div-btn-wheel {
+        position: relative;
+        border-radius: 10px;
+        -moz-box-shadow: 0px 0px 0px 1px #b3009b, 2px 2px 1px 0px #b3009b;
+        -webkit-box-shadow: 0px 0px 0px 1px #b3009b, 2px 2px 1px 0px #b3009b;
+        box-shadow: 0px 0px 0px 1px #b3009b, 2px 2px 1px 0px #b3009b;
+    }
+
+        .div-btn-wheel > img {
+            max-width: 13px;
+            position: absolute;
+            top: 5px;
+        }
+
+        .div-btn-wheel > span {
+            padding-left: 15px;
+        }
+
+    .actor-men {
+        position: absolute;
+        right: -340px;
+        top: -70px;
+        z-index: 1;
+    }
+
+    .footer-phone {
+        font-family: FontButton;
+        font-size: 20px;
+        color: #fff;
+        vertical-align: middle;
+    }
+
+    .pointer-wheel {
+        position: absolute;
+        top: 0px;
+        left: calc(50% - 25px);
+        z-index: 1;
+    }
+
+        .pointer-wheel > img {
+            max-width: 70%;
+        }
+
+    .center-circle {
+        position: absolute;
+        top: 38%;
+        left: 28%;
+        z-index: 10;
+    }
+
+        .center-circle > img {
+            max-width: 70%;
+        }
+
+    .actor-women {
+        position: absolute;
+        left: -130px;
+        z-index: 1;
+        top: -45px;
+    }
+
+    .actor-blue {
+        position: absolute;
+        left: -270px;
+        bottom: 30px;
+    }
+
+    .dice {
+        position: absolute;
+        right: -40px;
+        bottom: -5px;
+    }
+
+    .card-blue {
+        position: absolute;
+        right: -50px;
+        bottom: 100px;
+    }
+
+    .card-red {
+        position: absolute;
+        left: -120px;
+        top: -25px;
+        z-index: 1;
+    }
+
+    .card-page {
+        position: absolute;
+        left: -210px;
+        bottom: 130px;
+    }
+
+    .page-wheel {
+        text-align: center;
+        width: 100%;
+        margin-top: 5px
+    }
+
+    .text-lucky-wheel {
+        text-align: center;
+        width: 100%;
+        margin: 10px 0px;
+    }
+
+    .light-wheel {
+        width: 450px;
+        height: 430px;
+        margin: auto;
+        background: url("/images/vong_xoay/tia-sang.png") no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .flash-wheel {
+        /*width: 385px;
+        height: 385px;*/
+        margin: auto;
+        background: url("/images/vong_xoay/den-nhay.png") no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .elipse-wheel {
+        width: 420px;
+        height: 435px;
+        margin: auto;
+        background: url("/images/vong_xoay/elipse.png") no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+    }
+
+    .border-wheel {
+        width: 390px;
+        height: 420px;
+        margin: auto;
+        position: relative;
+        z-index: 10;
+    }
+    /*sâs*/
+    .page-bar-content_img {
+        z-index: 2;
+    }
+
+        .page-bar-content_img > img {
+            float: left;
+        }
+
+    @@media (min-width: 991px) {
+        .page-bar-content_img > img {
+            float: right;
+            max-width: 150%;
+        }
+
+        .page-bar-content_text {
+            width: 75%;
+            position: absolute;
+            text-align: left;
+            top: 12px;
+            left: calc(25% - 20px);
+        }
+
+        .text-lucky-wheel > img {
+            max-width: 18%;
+        }
+    }
+
+    @@media (max-width: 991px) {
+        .page-bar-content_img > img {
+            float: right;
+            max-width: 100%;
+        }
+
+        .page-bar-content_text {
+            width: 75%;
+            position: absolute;
+            text-align: left;
+            left: calc(25% - 24px);
+        }
+
+        .text-lucky-wheel > img {
+            max-width: 25%;
+        }
+    }
+
+    .page-bar-content {
+        position: absolute;
+        top: -135px;
+    }
+
+    .page-bar-content_text__top {
+        font-family: ObelixPro;
+        color: #f6cf2e;
+        font-size: 18px;
+        width: 100px;
+        background-color: #1d0052;
+        border-radius: 6px;
+        padding-left: 21px;
+    }
+
+    .page-bar-content_text__bot {
+        font-family: ObelixPro;
+        color: #fff;
+        font-size: 18px;
+        width: 230px;
+        background-color: #1d0052;
+        border-radius: 6px;
+        padding-left: 21px;
+        margin-top: -4px;
+    }
+
+    .img-wheel {
+    }
+
+        .img-wheel > img {
+            max-width: 50%;
+        }
+
+    .text-info-login {
+        font-family: UTMAVOBOLD;
+        color: #fff;
+        font-size: 15px;
+        padding-top: 10px;
+    }
+
+    .input-info-login {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        height: 34px;
+        min-width: 200px;
+        border-radius: 17px 17px;
+        display: flex;
+    }
+
+    .input-info-login_text {
+        font-family: UTMAVO;
+        font-size: 13px;
+        padding: 6px 8px;
+        color: black;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .input-info-login_input {
+        font-family: UTMAVO;
+        font-size: 13px;
+        padding-right: 10px;
+    }
+
+        .input-info-login_input > input {
+            border: none;
+            padding: 6px;
+        }
+
+            .input-info-login_input > input:focus {
+                outline: none;
+            }
+
+    .pading-7 {
+        padding: 7px;
+    }
+
+    .button-login {
+        height: 34px;
+        font-family: UTMAVOBOLD;
+        font-size: 14px;
+        color: white;
+        background: url(/images/login/background-button.png) no-repeat;
+        background-size: 100% 100%;
+        padding-top: 6px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 13px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .img-login-footer {
+        position: absolute;
+        right: -1px;
+        top: -10px;
+        right: -80px;
+    }
+
+    .page-container-login_shadow {
+        background: url("/images/login/backgound-nen.png") no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .page-container-login {
+        background: url("/images/login/background-login.png") no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .page-content {
+        text-align: center;
+        padding-top: 20px;
+        padding-left: 10%;
+        padding-right: 10%;
+        margin: auto;
+    }
+
+    .modal-dialog {
+        margin-top: 10rem !important;
+        width: 370px;
+    }
+
+    .text-info-receive {
+        padding-top: 6px;
+        font-size: 12px;
+        font-family: UTMAVO;
+        color: #ffc600;
+    }
+
+    .img-gift {
+        margin-top: 10px;
+    }
+
+    .header-help {
+        background-color: #122db4;
+    }
+
+    .header-help {
+        color: white;
+        font-family: ObelixPro;
+        font-size: 16px;
+        z-index: 2;
+    }
+
+    .title-help {
+        text-align: center;
+        width: 100%;
+    }
+
+    .image-girl {
+        position: absolute;
+        left: -25px;
+        top: -25px;
+    }
+
+        .image-girl > img {
+            max-width: 50%;
+        }
+
+    .image-wheel {
+        position: absolute;
+        width: 100%;
+        left: calc(50% - 70px);
+        top: -105px;
+        z-index: 1;
+    }
+
+        .image-wheel > img {
+            max-width: 35%;
+        }
+
+    .img-close-popup {
+        position: absolute;
+        right: -30px;
+        top: -12px;
+        -webkit-appearance: none;
+        opacity: 1 !important;
+        padding: 0px !important;
+        margin: 0px !important;
+    }
+
+        .img-close-popup > img {
+            max-width: 50%;
+        }
+
+    .text-info-help {
+        font-size: 10px;
+        font-family: UTMAVOBOLD;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    .modal-body-help {
+        border: 2px solid #216ae7;
+        border-radius: 4px;
+        background-color: #091a6d;
+        padding-top: 15px
+    }
+
+    .modal-dialog-help {
+        margin-top: 8rem !important;
+    }
+
+    .img-footer-left-help {
+        position: absolute;
+        top: -105px;
+        left: -50px;
+    }
+
+    .img-footer-right-help {
+        position: absolute;
+        right: -100px;
+        top: -60px;
+    }
+
+    .hide-flash {
+        -webkit-animation: FLASH-ANIMATION 1s infinite; /* Safari 4+ */
+        -moz-animation: FLASH-ANIMATION 1s infinite; /* Fx 5+ */
+        -o-animation: FLASH-ANIMATION 1s infinite; /* Opera 12+ */
+        animation: FLASH-ANIMATION 1s infinite; /* IE 10+, Fx 29+ */
+    }
+
+    @@-webkit-keyframes FLASH-ANIMATION {
+        0%, 49% {
+            /*width: 385px;
+            height: 385px;*/
+            margin: auto;
+            background: url("/images/vong_xoay/den-nhay.png") no-repeat;
+            background-size: 100% 100%;
+        }
+
+        50%, 100% {
+            /*width: 385px;
+            height: 385px;*/
+            margin: auto;
+            background: none;
+        }
+    }
+    /* ----------- iPhone 5 and 5S ----------- */
+    @@media only screen and (min-device-width: 375px) and (max-device-width: 736px) {
+        .btn-wheel {
+            margin-left: 0px;
+            min-width: 85px;
+            margin-top: 5px;
+        }
+        .img-1 {
+            position: absolute;
+            top: -30px;
+            left: -10px;
+        }
+        .img-2 {
+            position: absolute;
+            top: 0px;
+            left: 100px;
+        }
+        .img-3 {
+            position: absolute;
+            top: 20px;
+            left: 170px;
+        }
+        .img-4 {
+            position: absolute;
+            top: 0px;
+            left: 230px;
+        }
+        .img-5 {
+            position: absolute;
+            left: 300px;
+            top: -20px;
+        }
+        .img-6 {
+            position: absolute;
+            left: 300px;
+            top: 70px;
+        }
+        .text-lucky-wheel > img {
+            max-width: 50%;
+        }
+
+        .light-wheel {
+            width: 360px;
+            height: 360px;
+            margin: auto;
+            background: url(/images/vong_xoay/tia-sang.png) no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .flash-wheel {
+            width: 340px;
+            height: 340px;
+            margin: auto;
+            background: url(/images/vong_xoay/den-nhay.png) no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .elipse-wheel {
+            width: 340px;
+            height: 350px;
+            margin: auto;
+            background: url(/images/vong_xoay/elipse.png) no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .border-wheel {
+            width: 310px;
+            height: 335px;
+            margin: auto;
+            position: relative;
+        }
+
+        #chart {
+            position: absolute;
+            top: 25px;
+            left: 0px;
+            z-index: 10;
+            width: 300px;
+            height: 300px;
+            -webkit-transition: -webkit-transform 3s ease-out;
+        }
+
+        .center-circle {
+            position: absolute;
+            top: calc(50% - 30px);
+            left: calc(50% - 88px);
+            z-index: 10;
+        }
+
+            .center-circle > img {
+                max-width: 45%;
+            }
+
+        .pointer-wheel {
+            position: absolute;
+            top: -10px;
+            left: calc(50% - 30px);
+            z-index: 1;
+        }
+
+            .pointer-wheel > img {
+                max-width: 60%;
+            }
+
+        .hide-flash {
+            -webkit-animation: none; /* Safari 4+ */
+            -moz-animation: none; /* Fx 5+ */
+            -o-animation: none; /* Opera 12+ */
+            animation: none; /* IE 10+, Fx 29+ */
+        }
+
+        .dice {
+            position: absolute;
+            right: -40px;
+            bottom: 0px;
+        }
+
+            .dice > img {
+                max-width: 40% !important
+            }
+
+        .actor-men {
+            position: absolute;
+            right: -225px;
+            z-index: 1;
+        }
+
+            .actor-men > img {
+                max-width: 20% !important
+            }
+
+        .actor-women {
+            position: absolute;
+            left: -160px;
+            z-index: 1;
+        }
+
+            .actor-women > img {
+                max-width: 25% !important;
+            }
+
+        .actor-blue {
+            position: absolute;
+            left: -190px;
+            bottom: 0px;
+        }
+
+            .actor-blue > img {
+                max-width: 20% !important;
+            }
+    }
+    /*@@media only screen and (min-device-width: 320px) and (max-device-width: 568px){
+        .modal-dialog {
+            width: 270px;
+        }
+        .page-container-login_shadow > .page-content > .page-info > div:first-child {
+            left: 15px !important;
+        }
+    }*/
+    /*@@media only screen and (min-device-width: 414px) and (max-device-width: 736px) {
+        .modal-dialog {
+            width: 320px;
+        }
+
+        .page-container-login_shadow > .page-content > .page-info > div:first-child {
+            left: 40px !important;
+        }
+    }*/
+</style>
+<script>
+    //var padding = { top: 40, right: 0, bottom: 0, left: 0 },
+    //    w = 350 - padding.left - padding.right,
+    //    h = 350 - padding.top - padding.bottom,
+    //    r = Math.min(w, h) / 2,
+    //    rotation = 0,
+    //    oldrotation = 0,
+    //    picked = 100000,
+    //    oldpick = [];
+    //var data = [
+    //    { "label": "SỔ TAY", "value": 1, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 2, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 3, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 4, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 5, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 6, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 7, "url": "/images/item/item-gift.png" },
+    //    { "label": "SỔ TAY", "value": 8, "url": "/images/item/item-gift.png" },
+    //];
+    //var svg = d3.select('#chart')
+    //    .append("svg")
+    //    .data([data])
+    //    .attr("width", w + padding.left + padding.right)
+    //    .attr("height", h + padding.top + padding.bottom);
+    ////add kim quay
+    //var imgArrow = svg.selectAll("image").data([0]);
+    //imgArrow.enter()
+    //    .append("svg:image")
+    //    .attr("x", "145")
+    //    .attr("y", "-7")
+    //    .attr("width", "60")
+    //    .attr("height", "60")
+    //    .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    //    .attr("href", "/images/kim/kim-quay.png");
+    ////add vòng xoay
+    //var container = svg.append("g")
+    //    .attr("class", "chartholder")
+    //    .attr("transform", "translate(" + (w / 2 + padding.left) + "," + (h / 2 + padding.top) + ")");
+    //var vis = container
+    //    .append("g");
+    //var pie = d3.layout.pie().sort(null).value(function (d) { return 1; });
+    //var arc = d3.svg.arc().outerRadius(r);
+    //var arcs = vis.selectAll("g.slice")
+    //    .data(pie)
+    //    .enter()
+    //    .append("g")
+    //    .attr("class", "slice");
+    //arcs.append("path")
+    //    .attr("fill", function (d, i) {
+    //        if (d.data.value % 2 == 0)
+    //            return "#572468";
+    //        else {
+    //            return "#6e2e84";
+    //        }
+    //    })
+    //    .attr("d", function (d) { return arc(d); });
+    // //add text item
+    //arcs.append("text").attr("transform", function (d) {
+    //    d.innerRadius = 0;
+    //    d.outerRadius = r;
+    //    d.angle = (d.startAngle + d.endAngle) / 2;
+    //    return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius - 10) + ")";
+    //})
+    //    .attr("text-anchor", "end")
+    //    .attr("fill", "#fff")
+    //    .attr("x", "-60")
+    //    .attr("y", "0")
+    //    .style({ "font-weight": "bold", "font-size": "10px", "fill": "#fff","cursor": "pointer" })
+    //    .text(function (d, i) {
+    //        return data[i].label;
+    //    });
+    ////add img item
+    //arcs.append("svg:image")
+    //    .attr("x", "-45")
+    //    .attr("y", "-45")
+    //    .attr("width", "45")
+    //    .attr("height", "90")
+    //    .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    //    .attr("href", "images/item/item-gift.png")
+    //    .attr("transform", function (d) {
+    //        d.innerRadius = 0;
+    //        d.outerRadius = r;
+    //        d.angle = (d.startAngle + d.endAngle) / 2;
+    //        return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius - 10) + ")";
+    //    });
+    ////add buttun quay
+    //container.append("circle")
+    //    .attr("class", "circle-wheel")
+    //    .attr("cx", 0)
+    //    .attr("cy", 0)
+    //    .attr("r", 40)
+    //    .style({ "fill": "white", "cursor": "pointer" });
+    //container.append("svg:image")
+    //    .attr("class", "circle-wheel")
+    //    .attr("x", "-45")
+    //    .attr("y", "-46")
+    //    .attr("width", "90")
+    //    .attr("height", "90")
+    //    .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    //    .attr("href", "/images/kim/button-quay.png")
+    //    .style({"cursor": "pointer" });
+    ////add text spin
+    //container.append("text")
+    //    .attr("class", "circle-text")
+    //    .attr("x", 0)
+    //    .attr("y", 6)
+    //    .attr("text-anchor", "middle")
+    //    .text("QUAY")
+    //    .style({ "font-weight": "bold", "font-size": "13px", "fill": "#f6cf2e", "text-shadow": "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black","cursor" :"pointer" });
+    //$(".circle-wheel").on("click", spin);
+    //$(".circle-text").on("click", spin);
+    //var count = 0;
+    //function spin(d) {
+
+    //    $(".circle-wheel").on("click", null);
+    //    if (count > 0) {
+    //        $(".circle-wheel").on("click", null);
+    //        $("#out-of-turn-modal").modal();
+    //        return;
+    //    }
+    //    $(".flash-wheel").addClass("hide-flash");
+    //    var ps = 360 / data.length
+    //     picked = 4;
+    //     rotation = (data.length - picked) * ps + 3 * 360;
+    //    rotation = rotation - Math.round(ps / 2);
+    //    vis.transition()
+    //        .duration(5000)
+    //        .attrTween("transform", rotTween)
+    //        .each("end", function () { // kết thúc vòng quay
+    //            $(".flash-wheel").removeClass("hide-flash");
+    //            d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+    //                .attr("fill", "#481253");
+    //            oldrotation = rotation;
+    //            $(".circle-wheel").on("click", spin);
+    //            $("#popup-success-modal").modal();
+    //            var itemSuccess = data[picked];
+    //            $(".text-info-receive > i").text(itemSuccess.label);
+    //            $(".img-gift > img").attr("src", itemSuccess.url);
+    //        });
+    //    count++;
+    //}
+
+    //function rotTween(to) {
+    //    var i = d3.interpolate(oldrotation % 360, rotation);
+    //    return function (t) {
+    //        return "rotate(" + i(t) + ")";
+    //    };
+    //}
+    $(function () {
+        $("#popup-help").click(function () {
+            $("#popup-help-modal").modal();
+        });
+        $("#button-login").click(function () {
+            $("#popup-login-modal").modal('show');
+        });
+        var dataLength = @Model.Rewards.Count;
+        var count = 0;
+        $(".center-circle > img").click(function () {
+            var cookieReward = getCookie("cookieReward");
+            if (cookieReward == null || cookieReward == undefined || cookieReward == "") {
+                if (count > 0) {
+                    $("#out-of-turn-modal").modal('show');
+                    return;
+                }
+                else {
+                    window.location.href = "/reward";
+                    return;
+                }
+            }
+             $.ajax({
+                url: "/PostInfo",
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                data: cookieReward,
+                success: function (data) {
+                    var picked = data.roll.rewardOrdinal - 1;
+                    var ps = 360 / dataLength
+                    var rotation = (dataLength - picked) * ps + 3 * 360;
+                    var style = $("#chart").attr("style") == null ? "" : $("#chart").attr("style")
+                    var css = '-webkit-transform: rotate(' + rotation + 'deg);' + style;
+                    $("#chart").removeAttr('style');
+                    $("#chart").attr("style", css);
+                    deleteCookie("cookieReward");
+                    count++;
+                    setTimeout(function () {
+                        $("#popup-success-modal").modal();
+                        var imgReward = data.roll.reward.imageSrc;
+                        var nameReward = "x1 <i>" + data.roll.reward.name + "</i>";
+                        $(".img-gift >img").attr("src", imgReward);
+                        $("#name-reward").html(nameReward);
+                    }, 3000)
+                },
+                 error: function (data) {
+                     deleteCookie("cookieReward");
+                     var n = new Noty({
+                         type: 'error',
+                         layout: 'topCenter',
+                         text: 'Hãy nhập mã voucher!',
+                         theme: 'mint',
+                         animation: {
+                             open: 'animated fadeInRight',
+                             close: 'animated fadeOutRight'
+                         }
+                     });
+                     n.setText("Có lỗi xảy ra!", true)
+                     n.show();
+                     n.setTimeout(2000);
+                },
+                complete: function () {
+
+                }
+            });
+
+        });
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return null;
+        }
+        function deleteCookie(name) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+
+    });
+</script>

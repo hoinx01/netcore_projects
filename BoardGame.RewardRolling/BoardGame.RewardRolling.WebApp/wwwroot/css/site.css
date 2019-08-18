@@ -22,6 +22,10 @@ a.navbar-brand {
     font-family: UTMAVO;
     src: url("/lib/font/utm-avo.ttf");
 }
+@font-face {
+    font-family: HELVETICA;
+    src: url("/lib/font/Helvetica-Neue-Condensed-Black_22499.ttf");
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

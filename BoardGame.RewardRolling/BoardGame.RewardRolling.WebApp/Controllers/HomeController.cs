@@ -37,6 +37,22 @@ namespace BoardGame.RewardRolling.WebApp.Controllers
             try
             {
                 var model = await campaignQueryService.GetCurrentCampaign();
+                model.Cities = await administrativeUnitService.GetAllCityAsync();
+                return View(model);
+            }
+            catch (BaseCustomException e)
+            {
+                Response.StatusCode = (int)e.StatusCode;
+                return View(new CampaignModel());
+            }
+        }
+        public async Task<ActionResult> Test()
+        {
+            ViewData["Title"] = "Trang chủ";
+            try
+            {
+                var model = await campaignQueryService.GetCurrentCampaign();
+                model.Cities = await administrativeUnitService.GetAllCityAsync();
                 return View(model);
             }
             catch (BaseCustomException e)
