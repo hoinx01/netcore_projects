@@ -9,5 +9,6 @@ namespace BoardGame.RewardRolling.WebApp.Services.Interfaces
     public interface ICustomerService
     {
         Task<CustomerFilterResponse> Filter(CustomerFilterRequest filterModel);
+        Task<CustomerModel> GetById(string id);
     }
 }

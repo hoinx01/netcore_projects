@@ -12,8 +12,7 @@
                 <div class="col-index">STT</div>
                 <div class="col-name">Tên</div>
                 <div class="col-date">Ngày tạo</div>
-                <div class="col-date">Giới tính</div>
-                <div class="col-date">Địa chỉ</div>
+                <div class="col-reward_name">Quà tặng</div>
 
             </b-list-group-item>
             <b-list-group-item class="item-row"
@@ -22,8 +21,7 @@
                 <div class="col-index">{{index + 1}}</div>
                 <div class="col-name"><router-link :to="'/admin/customers/' + item.id + '/detail'">{{item.fullName}}</router-link></div>
                 <div class="col-date">{{item.displayedCreatedAt}}</div>
-                <div class="col-gender">{{item.genderId}}</div>
-                <div class="col-address">{{item.address.detail}}</div>
+                <div class="col-reward_name">{{item.reward.name}}</div>
 
             </b-list-group-item>
 
@@ -116,10 +114,18 @@
         }
 
         .item-row .col-name {
-            width: 30%;
+            width: 200px;
         }
 
         .item-row .col-date {
             width: 10%;
         }
+        .item-row .col-address{
+
+            max-width: 200px;
+        }
+        .item-row .col-reward_name{
+            max-height:200px;
+        }
+
 </style>

@@ -31,10 +31,13 @@
                               v-model="reward.cost"
                               :state="validateCost">
                 </b-form-input>
+
+
                 <b-form-invalid-feedback :state="validateCost">
                     {{validationMessages.cost.invalidRange}}
                 </b-form-invalid-feedback>
             </b-form-group>
+            <upload-file label="Chọn ảnh" fileGroup="reward-image" @success="changeImage"></upload-file>
         </b-form>
         <div slot="modal-footer" class="w-100">
             <b-button variant="primary"
@@ -49,9 +52,13 @@
 <script>
     import cloneDeep from 'lodash/cloneDeep';
     import rewardRepository from '../../Repositories/RewardRepository';
+    import UploadFile from '../../Components/Shared/UploadFile.vue';
 
     export default {
         name: 'popup-update-reward',
+        components: {
+            UploadFile
+        },
         props: {
             visible: {
                 type: Boolean,
@@ -107,6 +114,9 @@
                     console.log(error)
                     this.$emit('failed', error);
                 }
+            },
+            changeImage(image) {
+                this.reward.imageSrc = image.path;
             },
             complete() {
                 this.$emit('completed');

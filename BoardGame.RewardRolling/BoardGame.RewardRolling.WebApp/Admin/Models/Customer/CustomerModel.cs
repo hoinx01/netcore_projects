@@ -18,5 +18,14 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Models.Customer
         public Address Address { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public CustomerRewardModel Reward { get; set; }
+        public string DisplayedAddress { get; set; }
+        public string GenderName { get; set; }
+    }
+    public class CustomerRewardModel
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

@@ -43,6 +43,15 @@ namespace BoardGame.RewardRolling.WebApp.Admin.Controllers
             return result;
         }
 
+        [HttpGet("{id}")]
+        public async Task<CustomerModel> GetById([FromRoute] string id)
+        {
+            var customer = await customerService.GetById(id);
+            if (customer == null)
+                throw new NotFoundException();
+            return customer;
+        }
+
         [HttpGet]
         [Route("excel_files")]
         public async Task<object> Export([FromQuery] ExportCustomerFilterRequest exportFilterModel)

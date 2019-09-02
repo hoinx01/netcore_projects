@@ -90,7 +90,8 @@ namespace BoardGame.RewardRolling.WebApp.Registrations
                 Cost = source.Cost,
                 CreatedAt = source.CreatedAt,
                 ModifiedAt = source.ModifiedAt,
-                Status = source.Status.Id
+                Status = source.Status.Id,
+                ImageSrc = source.ImageSrc
             };
             if (string.IsNullOrWhiteSpace(source.Id))
                 destination.Id = ObjectId.GenerateNewId();

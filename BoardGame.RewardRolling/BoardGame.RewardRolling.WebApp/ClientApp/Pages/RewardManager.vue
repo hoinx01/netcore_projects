@@ -10,6 +10,7 @@
             <b-list-group-item class="item-row">
                 <div class="col-index">STT</div>
                 <div class="col-name">Tên</div>
+                <div class="col-image">Ảnh</div>
                 <div class="col-name">Giá</div>
                 <div class="col-control"></div>
             </b-list-group-item>
@@ -18,6 +19,7 @@
                                :key="item.id">
                 <div class="col-index">{{index + 1}}</div>
                 <div class="col-name">{{item.name}}</div>
+                <div class="col-image"><img :src="item.imageSrc" class="reward-img"/></div>
                 <div class="col-name">{{item.cost}}</div>
                 <div class="col-control">
                     <font-awesome-icon :icon="['fa', 'trash-alt']"
@@ -147,10 +149,10 @@
         },
         methods: {
             changePageIndex(pageIndex) {
-
+                this.$store.dispatch('reward/CHANGE_FILTER_PAGEINDEX', pageIndex);
             },
             changePageSize(pageSize) {
-
+                this.$store.dispatch('reward/CHANGE_FILTER_PAGESIZE', pageSize);
             },
             deaction() {
                 this.currentAction.name = null;
@@ -225,6 +227,13 @@
         }
 
         .item-row .col-name {
-            width: 30%;
+            width: 300px;
         }
+        .item-row .col-image{
+            width:75px;
+        }    
+    .reward-img{
+        width:50px;
+        height: 50px;
+    }
 </style>
